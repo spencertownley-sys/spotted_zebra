@@ -1,0 +1,49 @@
+---
+layout: default
+title: Videos
+description: Watch Spotted Zebra play. Clips of our covers of Kings of Leon, The Clash, AC/DC, No Doubt, Blondie and more, from the Seattle cover band.
+permalink: /videos/
+---
+{%- assign vids = site.data.videos.videos | where: "show", true -%}
+{%- assign shorts = site.data.videos.shorts | where: "show", true -%}
+<section class="page-head">
+  <p class="eyebrow">Watch</p>
+  <h1>Videos</h1>
+  <p>{{ vids.size }} clips from gigs, practice sessions and the occasional bit of chaos. Tap one to play it right here.</p>
+</section>
+<section class="page-body">
+  <div class="vfilter">
+    <label for="vsearch" class="sr">Search videos</label>
+    <input type="search" id="vsearch" placeholder="Search songs or artists…" autocomplete="off">
+    <span id="vcount" aria-live="polite"></span>
+  </div>
+  <ul class="vgrid" id="vgrid">
+    {%- for v in vids %}
+    <li data-search="{{ v.song | downcase | escape }} {{ v.artist | downcase | escape }}">
+      <button type="button" class="vcard" data-yt-modal="{{ v.id }}" aria-label="Play {{ v.song | escape }}">
+        <span class="vcard__thumb"><img src="https://i.ytimg.com/vi/{{ v.id }}/hqdefault.jpg" alt="" loading="lazy"><span class="yt__play" aria-hidden="true"></span></span>
+        <span class="vcard__title">{% include yt-label.html v=v %}</span>
+      </button>
+    </li>
+    {%- endfor %}
+  </ul>
+  <p class="vgrid__empty" id="vempty" hidden>No clips match that. Maybe it's on the <a href="/#jukebox">jukebox</a>?</p>
+
+  {%- if shorts.size > 0 %}
+  <h2 class="shorts__head">Shorts</h2>
+  <ul class="shorts shorts--wrap">
+    {%- for s in shorts %}
+    <li><button type="button" class="short" data-yt-modal="{{ s.id }}" data-vertical aria-label="Play short: {{ s.title | escape }}">
+      <img src="https://i.ytimg.com/vi/{{ s.id }}/hqdefault.jpg" alt="" loading="lazy">
+      <span class="yt__play" aria-hidden="true"></span>
+      <span class="short__title">{{ s.title }}</span>
+    </button></li>
+    {%- endfor %}
+  </ul>
+  {%- endif %}
+
+  <p class="vchannel"><a class="btn btn--spot" href="{{ site.data.videos.channel }}" target="_blank" rel="noopener">Subscribe on YouTube</a></p>
+</section>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"ItemList","name":"Spotted Zebra videos","itemListElement":[{%- for v in vids -%}{"@type":"ListItem","position":{{ forloop.index }},"url":"https://www.youtube.com/watch?v={{ v.id }}","name":{{ v.song | append: " - Spotted Zebra" | jsonify }}}{% unless forloop.last %},{% endunless %}{%- endfor -%}]}
+</script>

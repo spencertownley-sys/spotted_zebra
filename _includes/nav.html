@@ -10,6 +10,10 @@
       {%- if site.data.music.enabled and live_songs.size > 0 %}
       <li><a href="/#listen">Listen</a></li>
       {%- endif %}
+      {%- assign shown_videos = site.data.videos.videos | where: "show", true -%}
+      {%- if site.data.videos.enabled and shown_videos.size > 0 %}
+      <li><a href="/videos/"{% if page.url == "/videos/" %} aria-current="page"{% endif %}>Videos</a></li>
+      {%- endif %}
       <li><a href="/#jukebox">Jukebox</a></li>
       <li><a href="/photos/"{% if page.url == "/photos/" %} aria-current="page"{% endif %}>Photos</a></li>
       <li><a href="/#shows">Shows</a></li>

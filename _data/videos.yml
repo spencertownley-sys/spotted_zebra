@@ -1,0 +1,63 @@
+# ─── WATCH: your YouTube clips ────────────────────────────────────────
+#
+# Add a video: copy the ID from its YouTube link and add an entry below.
+#   https://www.youtube.com/watch?v=yqAKQAtSMLo   → id: yqAKQAtSMLo
+#   https://youtube.com/shorts/k2abLonj4Bo         → id: k2abLonj4Bo
+#
+# show: false      hides a clip from the site (it stays on YouTube)
+# featured: true   puts a clip on the homepage (the first one plays big)
+# Newest first reads best: add new clips at the top of each list.
+#
+# Master switch: set  enabled: false  to hide the whole video section.
+# ───────────────────────────────────────────────────────────────────────
+
+enabled: true
+channel: https://www.youtube.com/@SpottedZebraMusic
+
+videos:
+  - { id: yqAKQAtSMLo, song: "Sex on Fire", artist: "Kings of Leon", featured: true, show: true }
+  - { id: o0kJWJ4sjnw, song: "Should I Stay or Should I Go", artist: "The Clash", featured: true, show: true }
+  - { id: knw_B5gZYzk, song: "abcdefu", artist: "Gayle", featured: true, show: true }
+  - { id: s-XQlZWeMeM, song: "You Shook Me All Night Long", artist: "AC/DC", featured: true, show: true }
+  - { id: 8zX0w-uO2iM, song: "She Sells Sanctuary", artist: "The Cult", featured: true, show: true }
+  - { id: bieJ__ebdds, song: "Rock and Roll", artist: "Led Zeppelin", note: "Old footage", show: true }
+  - { id: 6vpuNEFdDaQ, song: "One Way or Another", artist: "Blondie", featured: true, show: true }
+  - { id: fEm53F-5kG4, song: "Own Worst Enemy", artist: "Lit", show: true }
+  - { id: kPxmXKnPico, song: "Flagpole Sitta", artist: "Harvey Danger", featured: true, show: true }
+  - { id: -2fcZ-MbiZc, song: "Just a Girl", artist: "No Doubt", featured: true, show: true }
+  - { id: mSCY4f2GPr0, song: "Drum Show", artist: "Twenty One Pilots", show: true }
+  - { id: RVlfVm-uO_o, song: "Are You Gonna Be My Girl", artist: "Jet", show: true }
+  - { id: HxooD4Eu_io, song: "Bassist proves he's actually a rapper", show: true }
+  - { id: J3bG76gZ7CM, song: "Live at Retro Emporium", show: true }
+  - { id: lEYze4neGn4, song: "(You Gotta) Fight for Your Right", artist: "Beastie Boys", show: true }
+  - { id: v1XksP0Ge98, song: "The Encore", show: true }
+  - { id: u9auXeTyPWE, song: "d£aler", artist: "Lola Young", show: true }
+  - { id: 3sN1RoTRcy4, song: "Stay", artist: "The Kid LAROI & Justin Bieber", show: true }
+  - { id: WZGlTMmjfzo, song: "Blow", artist: "Ed Sheeran", show: true }
+  - { id: IyX7nA9ryz4, song: "The Door", artist: "Teddy Swims", show: true }
+  - { id: XcHt0yC4YpE, song: "Wet Dream", artist: "Wet Leg", show: true }
+  - { id: L1Vjc2Sbn1E, song: "New Band Rocks Seattle Before Super Bowl LX", show: true }
+  # Earlier uploads of songs that have a newer version above. Flip to true to show them too.
+  - { id: JZ3rsIYk-0Y, song: "Flagpole Sitta", artist: "Harvey Danger", show: false }
+  - { id: LUyhYVIzavI, song: "Are You Gonna Be My Girl", artist: "Jet", show: false }
+  - { id: Gne5i3zmK6E, song: "Just a Girl", artist: "No Doubt", show: false }
+  - { id: As18FJNoc6A, song: "Own Worst Enemy", artist: "Lit", show: false }
+  - { id: MEwoGzGMipE, song: "Drum Show", artist: "Twenty One Pilots", show: false }
+  - { id: _tqwCcxdS8g, song: "Sex on Fire", artist: "Kings of Leon", show: false }
+  - { id: usXbdWvhnOQ, song: "She Sells Sanctuary", artist: "The Cult", show: false }
+  - { id: HPIdSVqiSM8, song: "abcdefu", artist: "Gayle", show: false }
+
+shorts:
+  - { id: k2abLonj4Bo, title: "Sex on Fire", show: true }
+  - { id: gt-HSDDTIu4, title: "Can you name this song?", show: true }
+  - { id: aS8zjqWDKDE, title: "Did he nail it?", show: true }
+  - { id: fq2BEHPNjIM, title: "What do you think of the start?", show: true }
+  - { id: Bl96Ix9-H98, title: "So much easier on bass than guitar", show: true }
+  - { id: Qn1_nYM0F-E, title: "I'm really bad at rapping", show: true }
+  - { id: I21s5-Bu_ew, title: "He's puttin' on a drum show", show: true }
+  - { id: S_lYHCZ_bWE, title: "Bridge to Just a Girl", show: true }
+  - { id: oeQWsp6oRjU, title: "Meet the band!", show: true }
+  - { id: LhlUKlkI5gs, title: "Bassists always live in their own world", show: true }
+  - { id: HWmskTFhzYY, title: "Every band has them", show: true }
+  # Promotes a past show (Feb 6, 2026 at Jules Maes Saloon).
+  - { id: WU-DYBd0jtE, title: "How would you describe our music?", show: false }

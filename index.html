@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Spotted Zebra | Playing All the Hits</title>
+  <meta name="description" content="Spotted Zebra plays all the hits you love in the Pacific Northwest: 80s hits, 90s rock, 2000s alternative and modern bangers. Book the band for your bar, party or event in the greater Seattle area.">
+  <link rel="canonical" href="https://spottedzebra.party/">
+  <meta name="theme-color" content="#0a0a0a">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Spotted Zebra | Playing All the Hits">
+  <meta property="og:description" content="80s hits, 90s rock, 2000s alternative and modern bangers. Seattle's party cover band.">
+  <meta property="og:url" content="https://spottedzebra.party/">
+  <meta property="og:image" content="https://spottedzebra.party/assets/img/og.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="assets/img/icon.png">
+  <link rel="apple-touch-icon" href="assets/img/icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Permanent+Marker&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MusicGroup",
+    "name": "Spotted Zebra",
+    "url": "https://spottedzebra.party/",
+    "genre": ["Rock", "Pop", "Cover band"],
+    "foundingDate": "2021",
+    "location": "Seattle, WA",
+    "email": "SpottedZebraMusic@gmail.com",
+    "sameAs": [
+      "https://www.instagram.com/spottedzebramusic",
+      "https://www.facebook.com/spottedzebramusic/",
+      "https://www.youtube.com/@SpottedZebraMusic"
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="cursor" aria-hidden="true"></div>
+
+  <header class="nav">
+    <a href="#top" class="nav__logo" aria-label="Spotted Zebra home"><img src="assets/img/logo.png" alt="" width="44" height="44"></a>
+    <nav aria-label="Main">
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#jukebox">Jukebox</a></li>
+        <li><a href="#play">Play</a></li>
+        <li><a href="#shows">Shows</a></li>
+        <li><a href="#book" class="nav__cta">Book us</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <!-- HERO: generative stripes. Click to drop spots. -->
+    <section class="hero" id="top">
+      <canvas id="stripes" aria-hidden="true"></canvas>
+      <div class="hero__inner">
+        <img class="hero__logo" src="assets/img/logo.png" alt="Spotted Zebra" width="420" height="420">
+        <h1 class="hero__title">Playing <span>all</span> the hits</h1>
+        <p class="hero__sub">80s · 90s · 2000s · Now &mdash; Seattle &amp; the Pacific Northwest</p>
+        <div class="hero__btns">
+          <a href="#book" class="btn btn--spot">Book the band</a>
+          <a href="#jukebox" class="btn btn--ghost">Open the jukebox</a>
+        </div>
+      </div>
+      <p class="hero__hint" aria-hidden="true">tap anywhere to spot the zebra</p>
+    </section>
+
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track">
+        <span>80s hits</span><i></i><span>90s rock</span><i></i><span>2000s alternative</span><i></i><span>modern bangers</span><i></i>
+        <span>80s hits</span><i></i><span>90s rock</span><i></i><span>2000s alternative</span><i></i><span>modern bangers</span><i></i>
+      </div>
+    </div>
+
+    <!-- ABOUT: spotlight photo -->
+    <section class="about" id="about">
+      <div class="spotlight" id="spotlight">
+        <img src="assets/img/band.webp" alt="The five members of Spotted Zebra leaning against a weathered cinder-block wall with the band name painted on it" width="1080" height="1080" loading="lazy">
+        <div class="spotlight__shade" aria-hidden="true"></div>
+        <span class="spotlight__tag" aria-hidden="true">move to find us</span>
+      </div>
+      <div class="about__text">
+        <p class="eyebrow">Our story</p>
+        <h2>Five people.<br>One very unusual zebra.</h2>
+        <p>Spotted Zebra started in late 2021 but didn&rsquo;t find its current form until early 2024. Since then, SZ has played bars and parties all around the greater Seattle area.</p>
+        <p>From 80s hits and 90s rock to 2000s alternative and modern bangers, SZ has a song for anyone and everyone. If the dance floor is empty, we take it personally.</p>
+        <ul class="stats">
+          <li><b data-count="2021">2021</b><span>formed</span></li>
+          <li><b data-count="5">5</b><span>members</span></li>
+          <li><b data-count="4">4</b><span>decades of hits</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- JUKEBOX -->
+    <section class="jukebox" id="jukebox">
+      <div class="section-head">
+        <p class="eyebrow">The Jukebox</p>
+        <h2>Pick a decade. Make a request.</h2>
+        <p>Tick the songs you want to hear at your event and send them straight to the band.</p>
+      </div>
+      <div class="jukebox__body">
+        <div class="vinyl-wrap">
+          <div class="vinyl" id="vinyl"><img src="assets/img/logo.png" alt="" width="120" height="120"></div>
+          <button class="btn btn--ghost" id="shuffle" type="button">Shuffle me a song</button>
+          <p class="now" id="now" aria-live="polite">&nbsp;</p>
+        </div>
+        <div class="jukebox__panel">
+          <div class="decades" role="tablist" aria-label="Decade"></div>
+          <ol class="songs" id="songs"></ol>
+          <div class="jukebox__foot">
+            <span id="reqCount">0 requests</span>
+            <a class="btn btn--spot" id="sendReq" href="#">Send requests</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PLAY THE ZEBRA -->
+    <section class="play" id="play">
+      <div class="section-head">
+        <p class="eyebrow">Play the Zebra</p>
+        <h2>Every stripe is a note.</h2>
+        <p>Click, tap or use your keyboard (<kbd>A</kbd>&ndash;<kbd>K</kbd>, plus <kbd>W</kbd> <kbd>E</kbd> <kbd>T</kbd> <kbd>Y</kbd> <kbd>U</kbd>). Turn on the beat and jam with us.</p>
+      </div>
+      <div class="play__controls">
+        <div class="seg" role="radiogroup" aria-label="Sound">
+          <button type="button" role="radio" aria-checked="true" data-voice="synth">80s Synth</button>
+          <button type="button" role="radio" aria-checked="false" data-voice="organ">Organ</button>
+          <button type="button" role="radio" aria-checked="false" data-voice="bass">Bass</button>
+        </div>
+        <button type="button" class="btn btn--ghost" id="beat" aria-pressed="false">Beat: off</button>
+      </div>
+      <div class="keys" id="keys" aria-label="Zebra keyboard"></div>
+    </section>
+
+    <!-- SHOWS -->
+    <section class="shows" id="shows">
+      <div class="section-head">
+        <p class="eyebrow">Shows</p>
+        <h2>Catch us live.</h2>
+      </div>
+      <ul class="shows__list" id="showList"></ul>
+    </section>
+
+    <!-- BOOKING / GIG BUILDER -->
+    <section class="book" id="book">
+      <div class="section-head">
+        <p class="eyebrow">Ready to rock?</p>
+        <h2>Build your gig.</h2>
+        <p>Tell us what you&rsquo;re planning and watch your ticket print. Hit send and it lands in our inbox.</p>
+      </div>
+      <div class="book__grid">
+        <form class="gig" id="gig" novalidate>
+          <fieldset>
+            <legend>What&rsquo;s the occasion?</legend>
+            <div class="chips" data-name="event">
+              <button type="button" class="chip" aria-pressed="false">Bar / venue</button>
+              <button type="button" class="chip" aria-pressed="false">Private party</button>
+              <button type="button" class="chip" aria-pressed="false">Wedding</button>
+              <button type="button" class="chip" aria-pressed="false">Corporate</button>
+              <button type="button" class="chip" aria-pressed="false">Festival</button>
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend>Which decades? <small>(pick any)</small></legend>
+            <div class="chips" data-name="decades" data-multi>
+              <button type="button" class="chip" aria-pressed="false">80s</button>
+              <button type="button" class="chip" aria-pressed="false">90s</button>
+              <button type="button" class="chip" aria-pressed="false">2000s</button>
+              <button type="button" class="chip" aria-pressed="false">Now</button>
+            </div>
+          </fieldset>
+          <div class="row">
+            <label>Date<input type="date" name="date"></label>
+            <label>Crowd size<input type="range" name="crowd" min="10" max="500" step="10" value="100"><output id="crowdOut">100 people</output></label>
+          </div>
+          <div class="row">
+            <label>Your name<input type="text" name="name" autocomplete="name" required></label>
+            <label>Email<input type="email" name="email" autocomplete="email" required></label>
+          </div>
+          <label>Anything else?<textarea name="message" rows="3" placeholder="Venue, city, set length, must-play songs..."></textarea></label>
+          <p class="form-error" id="formError" role="alert"></p>
+          <button type="submit" class="btn btn--spot">Send it</button>
+        </form>
+
+        <div class="ticket" id="ticket" aria-hidden="true">
+          <div class="ticket__main">
+            <img src="assets/img/logo.png" alt="" width="64" height="64">
+            <p class="ticket__admit">Admit everyone</p>
+            <p class="ticket__band">Spotted Zebra</p>
+            <p class="ticket__event" data-t="event">Your event</p>
+            <dl>
+              <div><dt>Date</dt><dd data-t="date">TBD</dd></div>
+              <div><dt>Crowd</dt><dd data-t="crowd">100</dd></div>
+              <div><dt>Decades</dt><dd data-t="decades">All of them</dd></div>
+              <div><dt>Host</dt><dd data-t="name">You</dd></div>
+            </dl>
+          </div>
+          <div class="ticket__stub"><span>No. <b id="ticketNo">0001</b></span></div>
+        </div>
+      </div>
+      <p class="book__direct">Prefer email? <a data-email href="mailto:SpottedZebraMusic@gmail.com">SpottedZebraMusic@gmail.com</a></p>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <img src="assets/img/logo.png" alt="" width="80" height="80">
+    <ul class="socials">
+      <li><a data-social="instagram" href="https://www.instagram.com/spottedzebramusic" target="_blank" rel="noopener">Instagram</a></li>
+      <li><a data-social="facebook" href="https://www.facebook.com/spottedzebramusic/" target="_blank" rel="noopener">Facebook</a></li>
+      <li><a data-social="youtube" href="https://www.youtube.com/@SpottedZebraMusic" target="_blank" rel="noopener">YouTube</a></li>
+    </ul>
+    <p>&copy; <span id="year">2026</span> Spotted Zebra &middot; Seattle, WA</p>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

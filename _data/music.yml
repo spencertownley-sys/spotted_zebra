@@ -1,0 +1,21 @@
+# ─── LISTEN: your recordings ──────────────────────────────────────────
+#
+# 1. Upload the audio file (mp3 or m4a) into the  assets/music/  folder.
+# 2. Add an entry below. "file" is just the file name.
+# 3. Set "show" to true or false to show or hide a single song.
+#
+# Master switch: set  enabled: false  to hide the whole Listen section.
+#
+# Heads up: "show: false" hides a song from the site, but the file is still
+# reachable by its direct link. To take a recording down completely,
+# delete the file from assets/music/.
+# ───────────────────────────────────────────────────────────────────────
+
+enabled: true
+
+songs:
+  # - title: "Mr. Brightside"
+  #   original_artist: "The Killers"
+  #   file: mr-brightside.mp3
+  #   recorded: "Live at The Some Bar, 2025"   # optional
+  #   show: true

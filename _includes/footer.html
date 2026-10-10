@@ -1,0 +1,18 @@
+<footer class="foot">
+  <img src="/assets/img/logo.png" alt="" width="80" height="80" loading="lazy">
+  <ul class="socials">
+    <li><a data-social="instagram" href="https://www.instagram.com/spottedzebramusic" target="_blank" rel="noopener">Instagram</a></li>
+    <li><a data-social="facebook" href="https://www.facebook.com/spottedzebramusic/" target="_blank" rel="noopener">Facebook</a></li>
+    <li><a data-social="youtube" href="https://www.youtube.com/@SpottedZebraMusic" target="_blank" rel="noopener">YouTube</a></li>
+  </ul>
+  <p class="foot__links"><a href="/blog/">Blog</a> · <a href="/photos/">Photos</a> · <a href="/#book">Book the band</a></p>
+  <p>&copy; <span id="year">{{ site.time | date: "%Y" }}</span> Spotted Zebra &middot; Seattle, WA</p>
+</footer>
+<div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true" aria-label="Photo viewer">
+  <button class="lightbox__close" type="button" aria-label="Close">&times;</button>
+  <button class="lightbox__nav lightbox__prev" type="button" aria-label="Previous photo">&lsaquo;</button>
+  <img alt="">
+  <button class="lightbox__nav lightbox__next" type="button" aria-label="Next photo">&rsaquo;</button>
+</div>
+<script src="/js/data.js"></script>
+<script src="/js/site.js"></script>

@@ -1,0 +1,25 @@
+---
+layout: default
+title: Blog
+description: News, gig stories and planning tips from Spotted Zebra, a Seattle cover band playing 80s, 90s, 2000s and modern hits.
+---
+<section class="page-head">
+  <p class="eyebrow">The Zebra Blog</p>
+  <h1>Notes from the stage</h1>
+  <p>Gig stories, band news, and tips for planning a party people actually dance at.</p>
+</section>
+<section class="page-body">
+  <ul class="post-list">
+    {%- for post in site.posts %}
+    <li>
+      <a href="{{ post.url }}">
+        <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time>
+        <h2>{{ post.title }}</h2>
+        <p>{{ post.description | default: post.excerpt | strip_html | truncate: 170 }}</p>
+        <span class="post-list__more">Read it &rarr;</span>
+      </a>
+    </li>
+    {%- endfor %}
+  </ul>
+  <p class="post-list__feed"><a href="/blog/feed.xml">RSS feed</a></p>
+</section>

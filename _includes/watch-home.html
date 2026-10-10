@@ -1,0 +1,55 @@
+{%- assign vids = site.data.videos.videos | where: "show", true -%}
+{%- assign feat = vids | where: "featured", true -%}
+{%- if feat.size == 0 %}{% assign feat = vids %}{% endif -%}
+{%- assign shorts = site.data.videos.shorts | where: "show", true -%}
+{%- if site.data.videos.enabled and vids.size > 0 %}
+<!-- WATCH: YouTube clips from _data/videos.yml -->
+<section class="watch" id="watch">
+  <div class="section-head section-head--row">
+    <div>
+      <p class="eyebrow">Watch</p>
+      <h2>See us play.</h2>
+      <p>Clips from the stage, the practice space and everywhere in between. Pick a song.</p>
+    </div>
+    <a href="/videos/" class="btn btn--ghost">All videos</a>
+  </div>
+
+  {%- assign first = feat.first %}
+  <div class="theater" data-theater>
+    <div class="theater__screen">
+      <button type="button" class="yt" data-yt="{{ first.id }}" aria-label="Play {{ first.song | escape }}">
+        <img src="https://i.ytimg.com/vi/{{ first.id }}/hqdefault.jpg" alt="" loading="lazy">
+        <span class="yt__play" aria-hidden="true"></span>
+      </button>
+    </div>
+    <div class="theater__meta">
+      <p class="theater__label">Now showing</p>
+      <h3 class="theater__title" data-theater-title>{{ first.song }}</h3>
+      <p class="theater__artist" data-theater-artist>{% if first.artist %}Originally by {{ first.artist }}{% endif %}</p>
+      <a class="theater__yt" data-theater-link href="https://www.youtube.com/watch?v={{ first.id }}" target="_blank" rel="noopener">Watch on YouTube &nearr;</a>
+    </div>
+  </div>
+
+  <ul class="filmstrip" aria-label="Choose a video">
+    {%- for v in feat limit: 8 %}
+    <li><button type="button" class="filmstrip__item{% if forloop.first %} is-current{% endif %}" data-pick="{{ v.id }}" data-song="{{ v.song | escape }}" data-artist="{{ v.artist | escape }}">
+      <span class="filmstrip__thumb"><img src="https://i.ytimg.com/vi/{{ v.id }}/hqdefault.jpg" alt="" loading="lazy"></span>
+      <span class="filmstrip__label">{{ v.song }}</span>
+    </button></li>
+    {%- endfor %}
+  </ul>
+
+  {%- if shorts.size > 0 %}
+  <h3 class="shorts__head">Shorts</h3>
+  <ul class="shorts">
+    {%- for s in shorts limit: 8 %}
+    <li><button type="button" class="short" data-yt-modal="{{ s.id }}" data-vertical aria-label="Play short: {{ s.title | escape }}">
+      <img src="https://i.ytimg.com/vi/{{ s.id }}/hqdefault.jpg" alt="" loading="lazy">
+      <span class="yt__play" aria-hidden="true"></span>
+      <span class="short__title">{{ s.title }}</span>
+    </button></li>
+    {%- endfor %}
+  </ul>
+  {%- endif %}
+</section>
+{%- endif %}

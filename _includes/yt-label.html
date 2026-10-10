@@ -1,0 +1,1 @@
+{{ include.v.song }}{% if include.v.artist %} <small>Originally by {{ include.v.artist }}{% if include.v.note %} · {{ include.v.note }}{% endif %}</small>{% elsif include.v.note %} <small>{{ include.v.note }}</small>{% endif %}

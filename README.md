@@ -15,6 +15,7 @@ It's a static site built by GitHub Pages' built-in Jekyll. There's nothing to in
 | **Play the Zebra** | A playable zebra-stripe keyboard (mouse, touch drag, or keys `A`–`K`) with three sounds and a built-in drum beat. Runs on the Web Audio API with no audio files. |
 | **Gig Builder** | The booking form prints a live ticket as you fill it in. Sending opens a pre-written email to the band, including any jukebox requests. |
 | **Shows** | Upcoming gigs come from one list, and past dates drop off on their own. |
+| **Watch** | YouTube clips on the homepage in a "theater" with a film-strip picker, Shorts in a phone-sized player, and a searchable `/videos/` page. Nothing from YouTube loads until someone presses play. |
 | **Listen** | A music player for your own recordings, with a zebra-stripe visualizer that moves with the music and controls on the phone lock screen. Each song can be shown or hidden. |
 | **Photos** | A gallery on the homepage plus a full `/photos/` page with a swipeable lightbox. Fills itself from a folder. |
 | **Blog** | Posts at `/blog/`, with an RSS feed, a sitemap and search-engine tags generated automatically. |
@@ -34,6 +35,22 @@ Every change below can be made on github.com: open the file or folder, use the p
   ],
   ```
 - **Set list:** the jukebox songs are **samples**. Replace them with your real set list.
+
+### Videos: `_data/videos.yml`
+
+Each clip is one line with its YouTube ID: the part after `watch?v=` (or after `shorts/`).
+
+```yaml
+videos:
+  - { id: yqAKQAtSMLo, song: "Sex on Fire", artist: "Kings of Leon", featured: true, show: true }
+shorts:
+  - { id: k2abLonj4Bo, title: "Sex on Fire", show: true }
+```
+
+- `show: false` hides a clip from the site. It stays on YouTube.
+- `featured: true` puts it on the homepage. The first featured clip is the one that plays big.
+- Add new clips at the top of each list.
+- `enabled: false` hides the video section and its menu link.
 
 ### Music: `_data/music.yml` + `assets/music/`
 

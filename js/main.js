@@ -188,7 +188,7 @@
   }
 
   /* ── Count-up stats + reveal on scroll ──────────────────────────────── */
-  $$(".section-head, .about__text, .spotlight, .jukebox__body, .keys, .shows__list, .book__grid, .player, .gallery, .post-cards").forEach((el) => el.classList.add("reveal"));
+  $$(".section-head, .about__text, .spotlight, .jukebox__body, .keys, .shows__list, .book__grid, .player, .gallery, .post-cards, .theater, .filmstrip, .shorts").forEach((el) => el.classList.add("reveal"));
   const io = new IntersectionObserver((entries) => {
     entries.forEach((en) => {
       if (!en.isIntersecting) return;

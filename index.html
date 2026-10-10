@@ -78,6 +78,8 @@ layout: null
       </div>
     </section>
 
+    {% include watch-home.html %}
+
     <!-- LISTEN: recordings from _data/music.yml -->
     {%- assign live_songs = site.data.music.songs | where: "show", true -%}
     {%- if site.data.music.enabled and live_songs.size > 0 %}

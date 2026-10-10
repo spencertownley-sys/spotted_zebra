@@ -452,6 +452,8 @@ section:not(.hero) { padding: clamp(72px, 12vw, 140px) var(--pad); }
 .foot { padding: 56px var(--pad) 40px; text-align: center; border-top: 1px solid var(--line); display: grid; justify-items: center; gap: 18px; color: var(--muted); }
 .foot img { width: 80px; }
 .foot__links a { color: var(--bone); }
+.foot__credit { font-size: .8rem; letter-spacing: .12em; text-transform: uppercase; opacity: .7; margin: 0; }
+.foot__credit span { font-family: var(--marker); text-transform: none; letter-spacing: 0; font-size: 1rem; color: var(--spot); }
 .socials { display: flex; gap: 10px; list-style: none; padding: 0; margin: 0; flex-wrap: wrap; justify-content: center; }
 .socials a { display: inline-block; text-decoration: none; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; font-size: .85rem; color: var(--bone); border: 2px solid var(--line); border-radius: 999px; padding: 10px 18px; transition: all .2s; }
 .socials a:hover { background: var(--spot); border-color: var(--spot); }

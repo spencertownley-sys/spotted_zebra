@@ -1,7 +1,7 @@
 (() => {
   "use strict";
   const SZ = window.SZ || {};
-  const EMAIL = SZ.email || "SpottedZebraMusic@gmail.com";
+  const EMAIL = SZ.email || "booking@spottedzebra.party";
   const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const $ = (s, el = document) => el.querySelector(s);
   const $$ = (s, el = document) => [...el.querySelectorAll(s)];
@@ -476,27 +476,105 @@
   }
   updateTicket(false);
 
-  form.addEventListener("submit", (e) => {
+  const sendBtn = $("#gigSend");
+  const done = $("#gigDone");
+  const err = $("#formError");
+
+  function bookingDetails() {
+    const f = form.elements;
+    return {
+      name: f.name.value.trim(),
+      email: f.email.value.trim(),
+      event: chosen("event")[0] || "Not specified",
+      date: f.date.value || "TBD",
+      crowd: T("crowd").textContent,
+      decades: T("decades").textContent,
+      requests: [...picked],
+      message: f.message.value.trim(),
+    };
+  }
+
+  function bookingSubject(d) {
+    return `Booking request: ${d.event === "Not specified" ? "event" : d.event}${d.date !== "TBD" ? " on " + d.date : ""}`;
+  }
+
+  // Old-school fallback: open the visitor's email app with everything filled in.
+  function bookingMailto(d) {
+    const body = [
+      `Name: ${d.name}`, `Email: ${d.email}`, `Event: ${d.event}`, `Date: ${d.date}`,
+      `Crowd size: ${d.crowd}`, `Decades: ${d.decades}`,
+      d.requests.length ? `Song requests:\n${d.requests.map((s) => "  • " + s).join("\n")}` : null,
+      "", d.message,
+    ].filter((l) => l !== null).join("\n");
+    return mailto(bookingSubject(d), body);
+  }
+
+  function celebrate() {
+    for (let i = 0; i < 5; i++) setTimeout(() => playNote([0, 4, 7, 12, 16][i], VOICES.synth, 0.12), i * 90);
+    ticket.classList.remove("is-printed"); void ticket.offsetWidth; ticket.classList.add("is-printed");
+  }
+
+  form.addEventListener("submit", async (e) => {
     e.preventDefault();
     const f = form.elements;
-    const err = $("#formError");
     if (!f.name.value.trim()) { err.textContent = "Tell us your name so we know who to rock for."; f.name.focus(); return; }
     if (!f.email.value.trim() || !f.email.checkValidity()) { err.textContent = "We need a valid email to get back to you."; f.email.focus(); return; }
     err.textContent = "";
-    const body = [
-      `Name: ${f.name.value.trim()}`,
-      `Email: ${f.email.value.trim()}`,
-      `Event: ${chosen("event")[0] || "Not specified"}`,
-      `Date: ${f.date.value || "TBD"}`,
-      `Crowd size: ${T("crowd").textContent}`,
-      `Decades: ${T("decades").textContent}`,
-      picked.size ? `Song requests:\n${[...picked].map((s) => "  • " + s).join("\n")}` : null,
-      "",
-      f.message.value.trim(),
-    ].filter((l) => l !== null).join("\n");
-    location.href = mailto(`Booking request: ${chosen("event")[0] || "event"} ${f.date.value ? "on " + f.date.value : ""}`.trim(), body);
-    // little celebration
-    for (let i = 0; i < 5; i++) setTimeout(() => playNote([0, 4, 7, 12, 16][i], VOICES.synth, 0.12), i * 90);
-    ticket.classList.remove("is-printed"); void ticket.offsetWidth; ticket.classList.add("is-printed");
+    const d = bookingDetails();
+
+    if (!SZ.formEndpoint) { location.href = bookingMailto(d); celebrate(); return; }
+
+    sendBtn.disabled = true;
+    sendBtn.textContent = "Sending…";
+    try {
+      const res = await fetch(SZ.formEndpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          _subject: bookingSubject(d),
+          _template: "table",
+          _honey: f._honey.value,
+          name: d.name,
+          email: d.email,
+          event: d.event,
+          date: d.date,
+          "crowd size": d.crowd,
+          decades: d.decades,
+          "song requests": d.requests.join(", ") || "None",
+          message: d.message || "(none)",
+        }),
+      });
+      const json = await res.json().catch(() => ({}));
+      if (!res.ok || String(json.success) !== "true") throw new Error(json.message || `HTTP ${res.status}`);
+
+      celebrate();
+      ticket.classList.add("is-sent");
+      $("#gigDoneName").textContent = d.name.split(" ")[0];
+      $("#gigDoneEmail").textContent = d.email;
+      form.hidden = true;
+      done.hidden = false;
+      done.focus();
+    } catch (ex) {
+      err.innerHTML = "";
+      err.append("Hmm, that didn't go through. ");
+      const a = document.createElement("a");
+      a.href = bookingMailto(d);
+      a.textContent = "Send it by email instead";
+      err.append(a, ".");
+    } finally {
+      sendBtn.disabled = false;
+      sendBtn.textContent = "Send it";
+    }
+  });
+
+  $("#gigAgain").addEventListener("click", () => {
+    form.reset();
+    $$(".chip", form).forEach((c) => c.setAttribute("aria-pressed", "false"));
+    $("#ticketNo").textContent = String(Math.floor(Math.random() * 9000) + 1000);
+    ticket.classList.remove("is-sent");
+    updateTicket(false);
+    done.hidden = true;
+    form.hidden = false;
+    form.elements.name.focus();
   });
 })();

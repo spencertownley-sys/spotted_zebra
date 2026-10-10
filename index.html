@@ -23,7 +23,7 @@ layout: null
     "genre": ["Rock", "Pop", "Cover band"],
     "foundingDate": "2021",
     "location": "Seattle, WA",
-    "email": "SpottedZebraMusic@gmail.com",
+    "email": "booking@spottedzebra.party",
     "sameAs": [
       "https://www.instagram.com/spottedzebramusic",
       "https://www.facebook.com/spottedzebramusic/",
@@ -213,7 +213,7 @@ layout: null
       <div class="section-head">
         <p class="eyebrow">Ready to rock?</p>
         <h2>Build your gig.</h2>
-        <p>Tell us what you&rsquo;re planning and watch your ticket print. Hit send and it lands in our inbox.</p>
+        <p>Tell us what you&rsquo;re planning and watch your ticket print. Hit send and it goes straight to the band.</p>
       </div>
       <div class="book__grid">
         <form class="gig" id="gig" novalidate>
@@ -245,9 +245,15 @@ layout: null
             <label>Email<input type="email" name="email" autocomplete="email" required></label>
           </div>
           <label>Anything else?<textarea name="message" rows="3" placeholder="Venue, city, set length, must-play songs..."></textarea></label>
+          <label class="hp" aria-hidden="true">Leave this empty<input type="text" name="_honey" tabindex="-1" autocomplete="off"></label>
           <p class="form-error" id="formError" role="alert"></p>
-          <button type="submit" class="btn btn--spot">Send it</button>
+          <button type="submit" class="btn btn--spot" id="gigSend">Send it</button>
         </form>
+        <div class="gig-done" id="gigDone" hidden tabindex="-1">
+          <p class="gig-done__big">Ticket sent!</p>
+          <p>Thanks, <span id="gigDoneName">friend</span>. Your request is in our inbox and we'll get back to you at <b id="gigDoneEmail"></b> soon.</p>
+          <button type="button" class="btn btn--ghost" id="gigAgain">Book another</button>
+        </div>
 
         <div class="ticket" id="ticket" aria-hidden="true">
           <div class="ticket__main">
@@ -263,9 +269,10 @@ layout: null
             </dl>
           </div>
           <div class="ticket__stub"><span>No. <b id="ticketNo">0001</b></span></div>
+          <div class="ticket__stamp" aria-hidden="true">Sent</div>
         </div>
       </div>
-      <p class="book__direct">Prefer email? <a data-email href="mailto:SpottedZebraMusic@gmail.com">SpottedZebraMusic@gmail.com</a></p>
+      <p class="book__direct">Prefer email? <a data-email href="mailto:booking@spottedzebra.party">booking@spottedzebra.party</a></p>
     </section>
   </main>
 

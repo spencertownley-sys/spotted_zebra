@@ -13,7 +13,7 @@ It's a static site built by GitHub Pages' built-in Jekyll. There's nothing to in
 | **Spotlight photo** | The band photo sits in the dark. A spotlight follows your cursor, and drifts across the band on its own when nobody's steering. |
 | **The Jukebox** | Choose a decade (80s, 90s, 2000s, Now), tick songs, and send them to the band as requests. "Shuffle" spins the record and picks a random song. |
 | **Play the Zebra** | A playable zebra-stripe keyboard (mouse, touch drag, or keys `A`–`K`) with three sounds and a built-in drum beat. Runs on the Web Audio API with no audio files. |
-| **Gig Builder** | The booking form prints a live ticket as you fill it in. Sending opens a pre-written email to the band, including any jukebox requests. |
+| **Gig Builder** | The booking form prints a live ticket as you fill it in, then sends itself to the band's inbox (with any jukebox requests) and stamps the ticket "SENT". If sending ever fails, it offers a pre-written email instead. |
 | **Shows** | Upcoming gigs come from one list, and past dates drop off on their own. |
 | **Watch** | YouTube clips on the homepage in a "theater" with a film-strip picker, Shorts in a phone-sized player, and a searchable `/videos/` page. Nothing from YouTube loads until someone presses play. |
 | **Listen** | A music player for your own recordings, with a zebra-stripe visualizer that moves with the music and controls on the phone lock screen. Each song can be shown or hidden. |
@@ -99,6 +99,23 @@ Posts with a future date won't appear until that day.
 **SEO tips:** post regularly (even one short post a month helps), mention places people search for ("Seattle", "Bellevue", "wedding band", "cover band"), link to your other posts, and write a real `description` for each one. The three starter posts are written in the band's voice but are generic, so edit them to sound like you.
 
 Images live in `assets/img/`. To swap the main band photo, replace `band.webp` (keep it square, about 1080px).
+
+## Email: booking@spottedzebra.party
+
+The site's address is **booking@spottedzebra.party**. Cloudflare Email Routing (free) forwards it to the band's Gmail.
+
+**Receiving (Cloudflare):**
+1. In Cloudflare, open **spottedzebra.party → Email → Email Routing** and click **Get started** / **Enable**. Let it add the MX and TXT records it asks for.
+2. Under **Destination addresses**, add `SpottedZebraMusic@gmail.com` and click the verification link Cloudflare emails there.
+3. Under **Routing rules → Custom addresses**, create `booking` → *Send to an email* → `SpottedZebraMusic@gmail.com`. Optionally turn on **Catch-all** so anything@spottedzebra.party also arrives.
+
+**Replying as booking@ from Gmail (optional):**
+1. Turn on 2-Step Verification for the Gmail account, then create an **App password** (Google Account → Security → App passwords).
+2. In Gmail: **Settings → Accounts and Import → Send mail as → Add another email address**. Name: *Spotted Zebra*, address `booking@spottedzebra.party`, untick "Treat as an alias".
+3. SMTP server `smtp.gmail.com`, port `587`, username = the full Gmail address, password = the app password, TLS. Confirm with the code Gmail sends (it arrives through the routing above).
+4. Back in Cloudflare DNS, edit the TXT record that starts with `v=spf1` so it includes Google: `v=spf1 include:_spf.mx.cloudflare.net include:_spf.google.com ~all`.
+
+**Booking form:** it posts to FormSubmit (`formEndpoint` in `js/data.js`), which emails each booking to booking@spottedzebra.party. The **first** booking ever sent triggers an "Activate form" email from FormSubmit instead. Click **Activate Form** in that email once, and every booking after that arrives normally. Spam bots are filtered out by a hidden "honeypot" field.
 
 ## Hosting on GitHub Pages + spottedzebra.party
 

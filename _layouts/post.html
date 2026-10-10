@@ -1,0 +1,22 @@
+---
+layout: default
+---
+<article class="post">
+  <header class="post__head">
+    <p class="eyebrow"><a href="/blog/">The Zebra Blog</a></p>
+    <h1>{{ page.title }}</h1>
+    <p class="post__meta"><time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %-d, %Y" }}</time> · {{ content | number_of_words | divided_by: 200 | plus: 1 }} min read</p>
+  </header>
+  {% if page.cover %}<img class="post__cover" src="{{ page.cover }}" alt="{{ page.cover_alt | default: '' }}">{% endif %}
+  <div class="post__body">
+    {{ content }}
+  </div>
+  <aside class="post__cta">
+    <p>Want this kind of night at your event?</p>
+    <a href="/#book" class="btn btn--spot">Book Spotted Zebra</a>
+  </aside>
+  <nav class="post__more" aria-label="More posts">
+    {% if page.previous %}<a href="{{ page.previous.url }}">&larr; {{ page.previous.title }}</a>{% else %}<span></span>{% endif %}
+    {% if page.next %}<a href="{{ page.next.url }}">{{ page.next.title }} &rarr;</a>{% endif %}
+  </nav>
+</article>

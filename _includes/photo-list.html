@@ -1,0 +1,2 @@
+{%- comment -%} Every image in assets/photos/, newest file name first. {%- endcomment -%}
+{%- assign photos = site.static_files | where_exp: "f", "f.path contains '/assets/photos/'" | sort: "name" | reverse -%}

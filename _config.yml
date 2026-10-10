@@ -1,0 +1,41 @@
+# Site settings. GitHub Pages builds the site with Jekyll automatically.
+title: Spotted Zebra
+tagline: Playing all the hits
+description: >-
+  Spotted Zebra plays all the hits you love in the Pacific Northwest: 80s hits,
+  90s rock, 2000s alternative and modern bangers. Book Seattle's party cover band
+  for your bar, party, wedding or event.
+url: https://spottedzebra.party
+lang: en_US
+timezone: America/Los_Angeles
+logo: /assets/img/icon.png
+author: Spotted Zebra
+
+social:
+  name: Spotted Zebra
+  links:
+    - https://www.instagram.com/spottedzebramusic
+    - https://www.facebook.com/spottedzebramusic/
+    - https://www.youtube.com/@SpottedZebraMusic
+
+defaults:
+  - scope: { path: "", type: posts }
+    values: { layout: post, image: /assets/img/og.jpg }
+  - scope: { path: "" }
+    values: { image: /assets/img/og.jpg }
+
+permalink: /blog/:title/
+
+plugins:
+  - jekyll-sitemap
+  - jekyll-feed
+  - jekyll-seo-tag
+
+feed:
+  path: blog/feed.xml
+
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor

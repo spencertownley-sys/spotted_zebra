@@ -1,24 +1,19 @@
+---
+layout: null
+---
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% include head-common.html %}
   <title>Spotted Zebra | Playing All the Hits</title>
   <meta name="description" content="Spotted Zebra plays all the hits you love in the Pacific Northwest: 80s hits, 90s rock, 2000s alternative and modern bangers. Book the band for your bar, party or event in the greater Seattle area.">
   <link rel="canonical" href="https://spottedzebra.party/">
-  <meta name="theme-color" content="#0a0a0a">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Spotted Zebra | Playing All the Hits">
   <meta property="og:description" content="80s hits, 90s rock, 2000s alternative and modern bangers. Seattle's party cover band.">
   <meta property="og:url" content="https://spottedzebra.party/">
   <meta property="og:image" content="https://spottedzebra.party/assets/img/og.jpg">
   <meta name="twitter:card" content="summary_large_image">
-  <link rel="icon" href="assets/img/icon.png">
-  <link rel="apple-touch-icon" href="assets/img/icon.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Permanent+Marker&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -38,28 +33,14 @@
   </script>
 </head>
 <body>
-  <a class="skip" href="#main">Skip to content</a>
-  <div class="cursor" aria-hidden="true"></div>
-
-  <header class="nav">
-    <a href="#top" class="nav__logo" aria-label="Spotted Zebra home"><img src="assets/img/logo.png" alt="" width="44" height="44"></a>
-    <nav aria-label="Main">
-      <ul>
-        <li><a href="#about">About</a></li>
-        <li><a href="#jukebox">Jukebox</a></li>
-        <li><a href="#play">Play</a></li>
-        <li><a href="#shows">Shows</a></li>
-        <li><a href="#book" class="nav__cta">Book us</a></li>
-      </ul>
-    </nav>
-  </header>
+  {% include nav.html %}
 
   <main id="main">
     <!-- HERO: generative stripes. Click to drop spots. -->
     <section class="hero" id="top">
       <canvas id="stripes" aria-hidden="true"></canvas>
       <div class="hero__inner">
-        <img class="hero__logo" src="assets/img/logo.png" alt="Spotted Zebra" width="420" height="420">
+        <img class="hero__logo" src="/assets/img/logo.png" alt="Spotted Zebra" width="420" height="420">
         <h1 class="hero__title">Playing <span>all</span> the hits</h1>
         <p class="hero__sub">80s · 90s · 2000s · Now &mdash; Seattle &amp; the Pacific Northwest</p>
         <div class="hero__btns">
@@ -80,7 +61,7 @@
     <!-- ABOUT: spotlight photo -->
     <section class="about" id="about">
       <div class="spotlight" id="spotlight">
-        <img src="assets/img/band.webp" alt="The five members of Spotted Zebra leaning against a weathered cinder-block wall with the band name painted on it" width="1080" height="1080" loading="lazy">
+        <img src="/assets/img/band.webp" alt="The five members of Spotted Zebra leaning against a weathered cinder-block wall with the band name painted on it" width="1080" height="1080" loading="lazy">
         <div class="spotlight__shade" aria-hidden="true"></div>
         <span class="spotlight__tag" aria-hidden="true">move to find us</span>
       </div>
@@ -97,6 +78,49 @@
       </div>
     </section>
 
+    <!-- LISTEN: recordings from _data/music.yml -->
+    {%- assign live_songs = site.data.music.songs | where: "show", true -%}
+    {%- if site.data.music.enabled and live_songs.size > 0 %}
+    <section class="listen" id="listen">
+      <div class="section-head">
+        <p class="eyebrow">Listen</p>
+        <h2>Hear the zebra.</h2>
+        <p>A few of our favorite covers, recorded by us. Turn it up.</p>
+      </div>
+      <div class="player" id="player">
+        <div class="player__deck">
+          <canvas class="player__viz" id="viz" aria-hidden="true"></canvas>
+          <div class="player__now">
+            <button class="player__play" id="playBtn" type="button" aria-label="Play">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path class="i-play" d="M8 5v14l11-7z"/><path class="i-pause" d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
+            </button>
+            <div class="player__meta">
+              <p class="player__title" id="npTitle">{{ live_songs[0].title }}</p>
+              <p class="player__artist" id="npArtist">Originally by {{ live_songs[0].original_artist }}</p>
+            </div>
+          </div>
+          <div class="player__bar">
+            <span id="tCur">0:00</span>
+            <input type="range" id="seek" min="0" max="1000" value="0" aria-label="Seek">
+            <span id="tDur">0:00</span>
+          </div>
+        </div>
+        <ol class="tracks" id="tracks">
+          {%- for song in live_songs %}
+          <li>
+            <button type="button" data-src="/assets/music/{{ song.file | uri_escape }}" data-title="{{ song.title | escape }}" data-artist="{{ song.original_artist | escape }}">
+              <span class="tracks__n">{{ forloop.index | prepend: "0" | slice: -2, 2 }}</span>
+              <span class="tracks__t">{{ song.title }}<small>Originally by {{ song.original_artist }}{% if song.recorded %} · {{ song.recorded }}{% endif %}</small></span>
+              <span class="tracks__eq" aria-hidden="true"><i></i><i></i><i></i></span>
+            </button>
+          </li>
+          {%- endfor %}
+        </ol>
+        <audio id="audio" preload="none"></audio>
+      </div>
+    </section>
+    {%- endif %}
+
     <!-- JUKEBOX -->
     <section class="jukebox" id="jukebox">
       <div class="section-head">
@@ -106,7 +130,7 @@
       </div>
       <div class="jukebox__body">
         <div class="vinyl-wrap">
-          <div class="vinyl" id="vinyl"><img src="assets/img/logo.png" alt="" width="120" height="120"></div>
+          <div class="vinyl" id="vinyl"><img src="/assets/img/logo.png" alt="" width="120" height="120"></div>
           <button class="btn btn--ghost" id="shuffle" type="button">Shuffle me a song</button>
           <p class="now" id="now" aria-live="polite">&nbsp;</p>
         </div>
@@ -147,6 +171,40 @@
       </div>
       <ul class="shows__list" id="showList"></ul>
     </section>
+
+    <!-- PHOTOS: everything in assets/photos/ -->
+    <section class="photos" id="photos">
+      <div class="section-head section-head--row">
+        <div>
+          <p class="eyebrow">Photos</p>
+          <h2>Spotted in the wild.</h2>
+        </div>
+        <a href="/photos/" class="btn btn--ghost">See all photos</a>
+      </div>
+      {% include photo-grid.html limit=8 compact=true %}
+    </section>
+
+    <!-- BLOG: latest posts -->
+    {%- if site.posts.size > 0 %}
+    <section class="latest" id="blog">
+      <div class="section-head section-head--row">
+        <div>
+          <p class="eyebrow">The Zebra Blog</p>
+          <h2>Fresh from the blog.</h2>
+        </div>
+        <a href="/blog/" class="btn btn--ghost">All posts</a>
+      </div>
+      <ul class="post-cards">
+        {%- for post in site.posts limit:3 %}
+        <li><a href="{{ post.url }}">
+          <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time>
+          <h3>{{ post.title }}</h3>
+          <p>{{ post.description | default: post.excerpt | strip_html | truncate: 120 }}</p>
+        </a></li>
+        {%- endfor %}
+      </ul>
+    </section>
+    {%- endif %}
 
     <!-- BOOKING / GIG BUILDER -->
     <section class="book" id="book">
@@ -191,7 +249,7 @@
 
         <div class="ticket" id="ticket" aria-hidden="true">
           <div class="ticket__main">
-            <img src="assets/img/logo.png" alt="" width="64" height="64">
+            <img src="/assets/img/logo.png" alt="" width="64" height="64">
             <p class="ticket__admit">Admit everyone</p>
             <p class="ticket__band">Spotted Zebra</p>
             <p class="ticket__event" data-t="event">Your event</p>
@@ -209,17 +267,8 @@
     </section>
   </main>
 
-  <footer class="foot">
-    <img src="assets/img/logo.png" alt="" width="80" height="80">
-    <ul class="socials">
-      <li><a data-social="instagram" href="https://www.instagram.com/spottedzebramusic" target="_blank" rel="noopener">Instagram</a></li>
-      <li><a data-social="facebook" href="https://www.facebook.com/spottedzebramusic/" target="_blank" rel="noopener">Facebook</a></li>
-      <li><a data-social="youtube" href="https://www.youtube.com/@SpottedZebraMusic" target="_blank" rel="noopener">YouTube</a></li>
-    </ul>
-    <p>&copy; <span id="year">2026</span> Spotted Zebra &middot; Seattle, WA</p>
-  </footer>
-
-  <script src="js/data.js"></script>
-  <script src="js/main.js"></script>
+  {% include footer.html %}
+  <script src="/js/main.js"></script>
+  <script src="/js/player.js"></script>
 </body>
 </html>

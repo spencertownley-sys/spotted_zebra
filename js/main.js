@@ -57,23 +57,6 @@
     });
   }
 
-  /* ── Custom cursor ──────────────────────────────────────────────────── */
-  const cursor = $(".cursor");
-  if (cursor && matchMedia("(pointer: fine)").matches) {
-    addEventListener("pointermove", (e) => {
-      cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
-    }, { passive: true });
-    document.addEventListener("pointerover", (e) => {
-      cursor.classList.toggle("is-big", !!e.target.closest("a, button, label, input, .key"));
-    });
-  }
-
-  /* ── Nav background on scroll ───────────────────────────────────────── */
-  const nav = $(".nav");
-  const onScroll = () => nav.classList.toggle("is-solid", scrollY > 40);
-  addEventListener("scroll", onScroll, { passive: true });
-  onScroll();
-
   /* ── HERO: living zebra stripes + droppable spots ───────────────────── */
   const canvas = $("#stripes");
   const g = canvas.getContext("2d");
@@ -205,7 +188,7 @@
   }
 
   /* ── Count-up stats + reveal on scroll ──────────────────────────────── */
-  $$(".section-head, .about__text, .spotlight, .jukebox__body, .keys, .shows__list, .book__grid").forEach((el) => el.classList.add("reveal"));
+  $$(".section-head, .about__text, .spotlight, .jukebox__body, .keys, .shows__list, .book__grid, .player, .gallery, .post-cards").forEach((el) => el.classList.add("reveal"));
   const io = new IntersectionObserver((entries) => {
     entries.forEach((en) => {
       if (!en.isIntersecting) return;
@@ -516,9 +499,4 @@
     for (let i = 0; i < 5; i++) setTimeout(() => playNote([0, 4, 7, 12, 16][i], VOICES.synth, 0.12), i * 90);
     ticket.classList.remove("is-printed"); void ticket.offsetWidth; ticket.classList.add("is-printed");
   });
-
-  /* ── Footer bits ────────────────────────────────────────────────────── */
-  $("#year").textContent = new Date().getFullYear();
-  $$("[data-email]").forEach((a) => { a.href = `mailto:${EMAIL}`; a.textContent = EMAIL; });
-  $$("[data-social]").forEach((a) => { const u = SZ.socials?.[a.dataset.social]; if (u) a.href = u; });
 })();

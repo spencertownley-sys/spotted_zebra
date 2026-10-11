@@ -16,7 +16,7 @@ It's a static site built by GitHub Pages' built-in Jekyll. There's nothing to in
 | **Gig Builder** | The booking form prints a live ticket as you fill it in, then sends itself to the band's inbox (with any jukebox requests) and stamps the ticket "SENT". If sending ever fails, it offers a pre-written email instead. |
 | **Shows** | Upcoming gigs come from one list, and past dates drop off on their own. |
 | **Watch** | YouTube clips on the homepage in a "theater" with a film-strip picker, Shorts in a phone-sized player, and a searchable `/videos/` page. Nothing from YouTube loads until someone presses play. |
-| **Listen** | A music player for your own recordings, with a zebra-stripe visualizer that moves with the music and controls on the phone lock screen. Each song can be shown or hidden. |
+| **Listen** | A music player for your own recordings, with a zebra-stripe visualizer that moves with the music and controls on the phone lock screen. Originals and covers are labeled, and each song can be shown or hidden. |
 | **Photos** | A gallery on the homepage plus a full `/photos/` page with a swipeable lightbox. Fills itself from a folder. |
 | **Blog** | Posts at `/blog/`, with an RSS feed, a sitemap and search-engine tags generated automatically. |
 
@@ -58,12 +58,16 @@ shorts:
 2. Add it to `_data/music.yml`:
    ```yaml
    songs:
-     - title: "Mr. Brightside"
-       original_artist: "The Killers"
+     - title: "Runnin' Hot"
+       file: runnin-hot.mp3
+       note: "Demo"                      # optional: short label under the title
+       show: true
+     - title: "Mr. Brightside"           # a cover
+       original_artist: "The Killers"    # leave out for originals
        file: mr-brightside.mp3
-       recorded: "Live at The Some Bar, 2025"   # optional
        show: true
    ```
+   Originals are labeled "Spotted Zebra original". Covers say "Originally by …".
 3. `show: false` hides one song. `enabled: false` at the top hides the whole Listen section. With no songs showing, the section and its menu link disappear on their own.
 
 `show: false` only hides the song from the site. The file can still be reached by its direct link, so delete it from `assets/music/` to take it down completely.

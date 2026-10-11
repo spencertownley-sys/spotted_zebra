@@ -1,0 +1,4 @@
+{%- assign s = include.song -%}
+{%- if s.original_artist -%}Originally by {{ s.original_artist }}{%- else -%}Spotted Zebra original{%- endif -%}
+{%- assign extra = s.note | default: s.recorded -%}
+{%- if extra %} · {{ extra }}{% endif -%}

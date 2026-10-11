@@ -29,7 +29,7 @@
     const b = tracks[idx];
     audio.src = b.dataset.src;
     npTitle.textContent = b.dataset.title;
-    npArtist.textContent = `Originally by ${b.dataset.artist}`;
+    npArtist.textContent = b.dataset.sub;
     tracks.forEach((t, i) => t.classList.toggle("is-current", i === idx));
     seek.value = 0;
     tCur.textContent = "0:00";
@@ -37,7 +37,7 @@
       navigator.mediaSession.metadata = new MediaMetadata({
         title: b.dataset.title,
         artist: "Spotted Zebra",
-        album: `Originally by ${b.dataset.artist}`,
+        album: b.dataset.sub,
         artwork: [{ src: "/assets/img/icon.png", sizes: "256x256", type: "image/png" }],
       });
     }

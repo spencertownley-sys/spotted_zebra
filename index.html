@@ -87,7 +87,7 @@ layout: null
       <div class="section-head">
         <p class="eyebrow">Listen</p>
         <h2>Hear the zebra.</h2>
-        <p>A few of our favorite covers, recorded by us. Turn it up.</p>
+        <p>Originals, demos and the odd cover, recorded by us. Turn it up.</p>
       </div>
       <div class="player" id="player">
         <div class="player__deck">
@@ -98,7 +98,7 @@ layout: null
             </button>
             <div class="player__meta">
               <p class="player__title" id="npTitle">{{ live_songs[0].title }}</p>
-              <p class="player__artist" id="npArtist">Originally by {{ live_songs[0].original_artist }}</p>
+              <p class="player__artist" id="npArtist">{% assign first_song = live_songs.first %}{% include song-sub.html song=first_song %}</p>
             </div>
           </div>
           <div class="player__bar">
@@ -110,9 +110,9 @@ layout: null
         <ol class="tracks" id="tracks">
           {%- for song in live_songs %}
           <li>
-            <button type="button" data-src="/assets/music/{{ song.file | uri_escape }}" data-title="{{ song.title | escape }}" data-artist="{{ song.original_artist | escape }}">
+            <button type="button" data-src="/assets/music/{{ song.file | uri_escape }}" data-title="{{ song.title | escape }}" data-sub="{% capture sub %}{% include song-sub.html song=song %}{% endcapture %}{{ sub | strip | escape }}">
               <span class="tracks__n">{{ forloop.index | prepend: "0" | slice: -2, 2 }}</span>
-              <span class="tracks__t">{{ song.title }}<small>Originally by {{ song.original_artist }}{% if song.recorded %} · {{ song.recorded }}{% endif %}</small></span>
+              <span class="tracks__t">{{ song.title }}<small>{{ sub | strip }}</small></span>
               <span class="tracks__eq" aria-hidden="true"><i></i><i></i><i></i></span>
             </button>
           </li>

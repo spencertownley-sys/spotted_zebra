@@ -23,9 +23,11 @@ window.SZ = {
 
   /*
    * Upcoming shows. Past dates are hidden automatically.
-   * date: "YYYY-MM-DD"   time: free text   link: optional (tickets / event page)
+   * date: "YYYY-MM-DD"   time: like "9 PM" or "8:30 PM"   link: optional (tickets / event page)
+   * address: optional street address. Fill it in when you can: it helps the
+   * show appear in Google's event listings.
    * Example:
-   * { date: "2026-11-14", time: "9 PM", venue: "The Some Bar", city: "Seattle, WA", link: "" },
+   * { date: "2026-11-14", time: "9 PM", venue: "The Some Bar", address: "123 Main St", city: "Seattle, WA", link: "" },
    */
   shows: [],
 

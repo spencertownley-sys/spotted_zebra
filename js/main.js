@@ -436,6 +436,36 @@
         ${s.link ? `<a class="btn btn--ghost" href="${esc(s.link)}" target="_blank" rel="noopener">Details</a>` : ""}`;
       showList.appendChild(li);
     });
+
+    // Tell Google about each show (Event rich results / "live music near me").
+    const toTime = (t) => {
+      const m = String(t || "").trim().match(/^(\d{1,2})(?::(\d{2}))?\s*(am|pm)?$/i);
+      if (!m) return "";
+      let h = +m[1];
+      if (m[3]) h = (h % 12) + (/pm/i.test(m[3]) ? 12 : 0);
+      return `T${String(h).padStart(2, "0")}:${m[2] || "00"}`;
+    };
+    const ld = document.createElement("script");
+    ld.type = "application/ld+json";
+    ld.textContent = JSON.stringify(upcoming.map((s) => ({
+      "@context": "https://schema.org",
+      "@type": "MusicEvent",
+      name: `Spotted Zebra live at ${s.venue}`,
+      startDate: s.date + toTime(s.time),
+      eventStatus: "https://schema.org/EventScheduled",
+      eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+      location: {
+        "@type": "Place",
+        name: s.venue,
+        address: { "@type": "PostalAddress", streetAddress: s.address || undefined, addressLocality: (s.city || "Seattle, WA").split(",")[0].trim(), addressRegion: "WA", addressCountry: "US" },
+      },
+      performer: { "@type": "MusicGroup", name: "Spotted Zebra", url: "https://spottedzebra.party/" },
+      organizer: { "@type": "Organization", name: s.venue },
+      image: "https://spottedzebra.party/assets/img/og.jpg",
+      description: `Spotted Zebra, a Seattle cover band, plays 80s, 90s, 2000s and modern hits live at ${s.venue}.`,
+      url: s.link || "https://spottedzebra.party/#shows",
+    })));
+    document.head.appendChild(ld);
   }
 
   /* ── Gig builder + live ticket ──────────────────────────────────────── */

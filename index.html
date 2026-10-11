@@ -5,29 +5,48 @@ layout: null
 <html lang="en">
 <head>
   {% include head-common.html %}
-  <title>Spotted Zebra | Playing All the Hits</title>
-  <meta name="description" content="Spotted Zebra plays all the hits you love in the Pacific Northwest: 80s hits, 90s rock, 2000s alternative and modern bangers. Book the band for your bar, party or event in the greater Seattle area.">
+  <title>Spotted Zebra | Seattle Cover Band for Parties, Bars &amp; Weddings</title>
+  <meta name="description" content="Spotted Zebra is a five-piece Seattle cover band playing 80s hits, 90s rock, 2000s alternative and today's bangers. Book us for your bar, private party, wedding or event in the greater Seattle area.">
   <link rel="canonical" href="https://spottedzebra.party/">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Spotted Zebra | Playing All the Hits">
-  <meta property="og:description" content="80s hits, 90s rock, 2000s alternative and modern bangers. Seattle's party cover band.">
+  <meta property="og:site_name" content="Spotted Zebra">
+  <meta property="og:title" content="Spotted Zebra | Seattle Cover Band">
+  <meta property="og:description" content="A five-piece Seattle cover band playing 80s hits, 90s rock, 2000s alternative and today's bangers. Book us for your next party.">
   <meta property="og:url" content="https://spottedzebra.party/">
   <meta property="og:image" content="https://spottedzebra.party/assets/img/og.jpg">
   <meta name="twitter:card" content="summary_large_image">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "MusicGroup",
-    "name": "Spotted Zebra",
-    "url": "https://spottedzebra.party/",
-    "genre": ["Rock", "Pop", "Cover band"],
-    "foundingDate": "2021",
-    "location": "Seattle, WA",
-    "email": "booking@spottedzebra.party",
-    "sameAs": [
-      "https://www.instagram.com/spottedzebramusic",
-      "https://www.facebook.com/spottedzebramusic/",
-      "https://www.youtube.com/@SpottedZebraMusic"
+    "@graph": [
+      {
+        "@type": "MusicGroup",
+        "@id": "https://spottedzebra.party/#band",
+        "name": "Spotted Zebra",
+        "alternateName": "SZ",
+        "description": "Five-piece Seattle cover band playing 80s hits, 90s rock, 2000s alternative and modern hits for bars, private parties, weddings and events.",
+        "url": "https://spottedzebra.party/",
+        "logo": "https://spottedzebra.party/assets/img/logo.png",
+        "image": "https://spottedzebra.party/assets/img/og.jpg",
+        "genre": ["Cover band", "Rock", "Pop rock", "Alternative rock", "Party band"],
+        "foundingDate": "2021",
+        "foundingLocation": { "@type": "Place", "name": "Seattle, Washington" },
+        "location": { "@type": "Place", "name": "Seattle, WA", "address": { "@type": "PostalAddress", "addressLocality": "Seattle", "addressRegion": "WA", "addressCountry": "US" } },
+        "areaServed": [{ "@type": "City", "name": "Seattle" }, { "@type": "Place", "name": "Greater Seattle area" }, { "@type": "Place", "name": "Pacific Northwest" }],
+        "email": "booking@spottedzebra.party",
+        "sameAs": [
+          "https://www.instagram.com/spottedzebramusic",
+          "https://www.facebook.com/spottedzebramusic/",
+          "https://www.youtube.com/@SpottedZebraMusic"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://spottedzebra.party/#website",
+        "url": "https://spottedzebra.party/",
+        "name": "Spotted Zebra",
+        "publisher": { "@id": "https://spottedzebra.party/#band" }
+      }
     ]
   }
   </script>
@@ -41,8 +60,8 @@ layout: null
       <canvas id="stripes" aria-hidden="true"></canvas>
       <div class="hero__inner">
         <img class="hero__logo" src="/assets/img/logo.png" alt="Spotted Zebra" width="420" height="420">
-        <h1 class="hero__title">Playing <span>all</span> the hits</h1>
-        <p class="hero__sub">80s · 90s · 2000s · Now &mdash; Seattle &amp; the Pacific Northwest</p>
+        <h1 class="hero__title"><span class="hero__kicker">Spotted Zebra &middot; Seattle cover band</span>Playing <span>all</span> the hits</h1>
+        <p class="hero__sub">80s hits, 90s rock, 2000s alternative &amp; today&rsquo;s bangers for bars, parties and weddings across the greater Seattle area</p>
         <div class="hero__btns">
           <a href="#book" class="btn btn--spot">Book the band</a>
           <a href="#jukebox" class="btn btn--ghost">Open the jukebox</a>
@@ -66,9 +85,9 @@ layout: null
         <span class="spotlight__tag" aria-hidden="true">move to find us</span>
       </div>
       <div class="about__text">
-        <p class="eyebrow">Our story</p>
+        <p class="eyebrow">About the band</p>
         <h2>Five people.<br>One very unusual zebra.</h2>
-        <p>Spotted Zebra started in late 2021 but didn&rsquo;t find its current form until early 2024. Since then, SZ has played bars and parties all around the greater Seattle area.</p>
+        <p>Spotted Zebra is a five-piece cover band from Seattle. We started in late 2021, found our current lineup in early 2024, and have been playing bars and parties all around the greater Seattle area ever since.</p>
         <p>From 80s hits and 90s rock to 2000s alternative and modern bangers, SZ has a song for anyone and everyone. If the dance floor is empty, we take it personally.</p>
         <ul class="stats">
           <li><b data-count="2021">2021</b><span>formed</span></li>
@@ -207,6 +226,41 @@ layout: null
       </ul>
     </section>
     {%- endif %}
+
+    <!-- FAQ: plain answers to what people search for -->
+    <section class="faq" id="faq">
+      <div class="section-head">
+        <p class="eyebrow">Good questions</p>
+        <h2>Hiring a Seattle cover band? Start here.</h2>
+      </div>
+      <div class="faq__list">
+        <details>
+          <summary><h3>What kind of band is Spotted Zebra?</h3></summary>
+          <p>A five-piece cover band from Seattle. We play the songs people actually want to hear: 80s hits, 90s rock, 2000s alternative and today&rsquo;s bangers, plus a few originals of our own.</p>
+        </details>
+        <details>
+          <summary><h3>Where do you play?</h3></summary>
+          <p>Bars, private parties and events around the greater Seattle area and the Pacific Northwest. Planning something further away? <a href="#book">Tell us about it</a>.</p>
+        </details>
+        <details>
+          <summary><h3>What kinds of events do you play?</h3></summary>
+          <p>Bar and venue gigs, private parties, weddings, corporate events and festivals. If there&rsquo;s a dance floor (or there should be), we&rsquo;re interested.</p>
+        </details>
+        <details>
+          <summary><h3>Can we request songs?</h3></summary>
+          <p>Yes. Pick songs from our <a href="#jukebox">jukebox</a> and send them over, or list your must-plays when you book.</p>
+        </details>
+        <details>
+          <summary><h3>How do we book Spotted Zebra?</h3></summary>
+          <p>Fill in the <a href="#book">Gig Builder</a> below and it lands straight in our inbox, or email <a data-email href="mailto:booking@spottedzebra.party">booking@spottedzebra.party</a>. Tell us the date, the venue and roughly how many people are coming.</p>
+        </details>
+        <details>
+          <summary><h3>Where can we see you play first?</h3></summary>
+          <p>Check <a href="#shows">upcoming shows</a>, watch <a href="/videos/">our videos</a>, or follow us on <a href="https://www.instagram.com/spottedzebramusic" target="_blank" rel="noopener">Instagram</a> for the next gig.</p>
+        </details>
+      </div>
+      <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What kind of band is Spotted Zebra?", "acceptedAnswer": {"@type": "Answer", "text": "A five-piece cover band from Seattle. We play the songs people actually want to hear: 80s hits, 90s rock, 2000s alternative and today’s bangers, plus a few originals of our own."}}, {"@type": "Question", "name": "Where do you play?", "acceptedAnswer": {"@type": "Answer", "text": "Bars, private parties and events around the greater Seattle area and the Pacific Northwest. Planning something further away? Tell us about it."}}, {"@type": "Question", "name": "What kinds of events do you play?", "acceptedAnswer": {"@type": "Answer", "text": "Bar and venue gigs, private parties, weddings, corporate events and festivals. If there’s a dance floor (or there should be), we’re interested."}}, {"@type": "Question", "name": "Can we request songs?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Pick songs from our jukebox and send them over, or list your must-plays when you book."}}, {"@type": "Question", "name": "How do we book Spotted Zebra?", "acceptedAnswer": {"@type": "Answer", "text": "Fill in the Gig Builder below and it lands straight in our inbox, or email booking@spottedzebra.party. Tell us the date, the venue and roughly how many people are coming."}}, {"@type": "Question", "name": "Where can we see you play first?", "acceptedAnswer": {"@type": "Answer", "text": "Check upcoming shows, watch our videos, or follow us on Instagram for the next gig."}}]}</script>
+    </section>
 
     <!-- BOOKING / GIG BUILDER -->
     <section class="book" id="book">

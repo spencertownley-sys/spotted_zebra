@@ -104,6 +104,22 @@ Posts with a future date won't appear until that day.
 
 Images live in `assets/img/`. To swap the main band photo, replace `band.webp` (keep it square, about 1080px).
 
+## Getting found on Google
+
+Already built into the site:
+- **Page titles and descriptions:** each page has its own, aimed at searches like "Seattle cover band".
+- **Structured data** that tells Google who the band is (MusicGroup), answers common questions (FAQPage), and lists shows as events (MusicEvent).
+- **Sitemap** at `/sitemap.xml`, plus a robots.txt that points to it.
+- **Blog** with an RSS feed, a FAQ section, and a 404 page.
+
+The things that move rankings most happen off the site:
+1. **Google Search Console.** At search.google.com/search-console, add a *Domain* property for `spottedzebra.party`, verify it with the TXT record Google gives you (in Cloudflare DNS), then submit `https://spottedzebra.party/sitemap.xml`.
+2. **Google Business Profile.** Create one at business.google.com as a "Band" or "Musician" in Seattle, set as a *service-area business* so no street address is shown. Link the website and ask happy hosts and venues for reviews. This is what puts you in the map results for "cover band near me".
+3. **Point everything at the new site:** the Instagram, Facebook and YouTube bios and links, any venue or event listings, and Bandsintown or Songkick if you use them.
+4. **Retire the old Wix site.** Unpublish it, or replace it with a single "We've moved → spottedzebra.party" page, so Google doesn't split your name between two sites.
+5. **Keep it fresh:** add every show with its venue's street address, and post on the blog after gigs. Name the venue and neighborhood in each post.
+6. **Get listed:** ask venues you play to link to the site from their event pages. Add the band to local directories, such as wedding vendor sites (The Knot, WeddingWire), GigSalad, and Seattle music calendars.
+
 ## Email: booking@spottedzebra.party
 
 The site's address is **booking@spottedzebra.party**. Cloudflare Email Routing (free) forwards it to the band's Gmail.

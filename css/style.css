@@ -113,7 +113,12 @@ body::after {
 @keyframes wobble { 0%,100%{transform:rotate(-3deg) scale(1)} 50%{transform:rotate(3deg) scale(1.03)} }
 .hero__title { font-size: clamp(3rem, 11vw, 9rem); text-shadow: 0 6px 30px rgba(0,0,0,.6); }
 .hero__title span { font-family: var(--marker); color: var(--spot); text-transform: lowercase; display: inline-block; transform: rotate(-6deg); }
-.hero__sub { font-size: clamp(1rem, 2.2vw, 1.25rem); color: var(--bone); margin-top: 14px; letter-spacing: .04em; }
+.hero__title .hero__kicker {
+  display: block; font: 700 clamp(.8rem, 1.6vw, 1rem) var(--body); color: var(--spot-2); text-transform: uppercase;
+  letter-spacing: .28em; transform: none; margin-bottom: 14px; text-shadow: 0 2px 12px rgba(0,0,0,.8);
+}
+@media (max-width: 480px) { .hero__title .hero__kicker { letter-spacing: .1em; font-size: .72rem; } }
+.hero__sub { font-size: clamp(1rem, 2.2vw, 1.2rem); color: var(--bone); margin: 14px auto 0; letter-spacing: .02em; max-width: 680px; }
 .hero__btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 26px; }
 .hero__hint { position: absolute; bottom: 18px; left: 0; right: 0; text-align: center; font-family: var(--marker); color: var(--spot-2); font-size: 1rem; opacity: .85; pointer-events: none; animation: bob 2.4s ease-in-out infinite; }
 @keyframes bob { 50% { transform: translateY(-6px); } }
@@ -447,6 +452,23 @@ section:not(.hero) { padding: clamp(72px, 12vw, 140px) var(--pad); }
 .post__more { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; border-top: 1px solid var(--line); padding-top: 20px; }
 .post__more a { color: var(--bone); font-weight: 700; text-decoration: none; }
 .post__more a:hover { color: var(--spot); }
+
+.lost { min-height: 60vh; }
+.lost__links { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
+
+/* faq */
+.faq__list { max-width: 900px; border-top: 1px solid var(--line); }
+.faq details { border-bottom: 1px solid var(--line); }
+.faq summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 22px 4px; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary h3 { margin: 0; font: 700 clamp(1.05rem, 2vw, 1.3rem) var(--body); transition: color .2s; }
+.faq summary::after { content: ""; flex: none; width: 30px; height: 30px; border-radius: 50%; background: var(--ink-3); border: 2px solid var(--line);
+  background-image: linear-gradient(var(--bone), var(--bone)), linear-gradient(var(--bone), var(--bone));
+  background-size: 12px 2px, 2px 12px; background-position: center; background-repeat: no-repeat; transition: transform .25s, background-color .2s; }
+.faq details[open] summary::after { transform: rotate(45deg); background-color: var(--spot); border-color: var(--spot); }
+.faq summary:hover h3, .faq details[open] summary h3 { color: var(--spot); }
+.faq details p { margin: 0 4px 22px; color: #d8d4cb; max-width: 720px; }
+.faq details a { color: var(--spot-2); }
 
 /* footer */
 .foot { padding: 56px var(--pad) 40px; text-align: center; border-top: 1px solid var(--line); display: grid; justify-items: center; gap: 18px; color: var(--muted); }

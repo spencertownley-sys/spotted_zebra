@@ -5,7 +5,15 @@
  * ───────────────────────────────────────────────────────────────────────
  */
 window.SZ = {
-  email: "SpottedZebraMusic@gmail.com",
+  email: "booking@spottedzebra.party",
+
+  /*
+   * Where the booking form sends. FormSubmit (free, no account) emails each
+   * booking to the address at the end. The very first booking sends an
+   * "Activate form" email there instead; click it once and you're set.
+   * Leave it as "" to fall back to opening the visitor's email app.
+   */
+  formEndpoint: "https://formsubmit.co/ajax/booking@spottedzebra.party",
 
   socials: {
     instagram: "https://www.instagram.com/spottedzebramusic",
@@ -15,9 +23,11 @@ window.SZ = {
 
   /*
    * Upcoming shows. Past dates are hidden automatically.
-   * date: "YYYY-MM-DD"   time: free text   link: optional (tickets / event page)
+   * date: "YYYY-MM-DD"   time: like "9 PM" or "8:30 PM"   link: optional (tickets / event page)
+   * address: optional street address. Fill it in when you can: it helps the
+   * show appear in Google's event listings.
    * Example:
-   * { date: "2026-11-14", time: "9 PM", venue: "The Some Bar", city: "Seattle, WA", link: "" },
+   * { date: "2026-11-14", time: "9 PM", venue: "The Some Bar", address: "123 Main St", city: "Seattle, WA", link: "" },
    */
   shows: [],
 

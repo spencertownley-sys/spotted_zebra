@@ -430,6 +430,42 @@
       const mon = s.d.toLocaleString("en-US", { month: "short" });
       const dow = s.d.toLocaleString("en-US", { weekday: "long" });
       const esc = (v) => String(v ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+      if (s.flyer) {
+        // Featured layout: flyer on one side, the details on the other.
+        li.className = "show show--featured";
+        const full = new Date(s.date + "T00:00:00").toLocaleString("en-US", { weekday: "long", month: "long", day: "numeric" });
+        const where = [s.address, s.city].filter(Boolean).join(", ");
+        const maps = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent([s.venue, where].filter(Boolean).join(", "))}`;
+        const times = [s.doors && `Doors ${s.doors}`, s.time && `Music ${s.time}${s.end ? "–" + s.end : ""}`].filter(Boolean).join(" · ");
+        const bill = (s.with || []).length ? `<p class="show__with">with ${s.with.map(esc).join(" &amp; ")}</p>` : "";
+        li.innerHTML = `
+          <a class="show__flyer" href="${esc(s.flyer)}" target="_blank" rel="noopener" aria-label="Open the full-size flyer">
+            <img src="${esc(s.flyerSmall || s.flyer)}" alt="Flyer: ${esc(s.title || "Spotted Zebra live")} at ${esc(s.venue)}, ${esc(full)}" width="800" height="1035" loading="lazy" decoding="async">
+          </a>
+          <div class="show__body">
+            <p class="show__tag">Next show</p>
+            <div class="show__head">
+              <div class="show__date">${mon}<b>${s.d.getDate()}</b></div>
+              <div>
+                ${s.title ? `<h3 class="show__title">${esc(s.title)}</h3>` : ""}
+                <div class="show__venue">${esc(s.venue)}</div>
+              </div>
+            </div>
+            ${bill}
+            <ul class="show__facts">
+              <li><span>When</span>${esc(full)}${times ? `<br>${esc(times)}` : ""}</li>
+              ${where ? `<li><span>Where</span>${esc(s.venue)}<br>${esc(where)}</li>` : ""}
+              ${s.price ? `<li><span>Tickets</span>${esc(s.price)}</li>` : ""}
+            </ul>
+            <div class="show__actions">
+              ${s.link ? `<a class="btn" href="${esc(s.link)}" target="_blank" rel="noopener">Get tickets</a>` : ""}
+              <a class="btn btn--ghost" href="${esc(maps)}" target="_blank" rel="noopener">Directions</a>
+              <a class="btn btn--ghost" href="${esc(s.flyer)}" target="_blank" rel="noopener">View flyer</a>
+            </div>
+          </div>`;
+        showList.appendChild(li);
+        return;
+      }
       li.innerHTML = `
         <div class="show__date">${mon}<b>${s.d.getDate()}</b></div>
         <div><div class="show__venue">${esc(s.venue)}</div><div class="show__meta">${esc(dow)}${s.time ? " · " + esc(s.time) : ""}${s.city ? " · " + esc(s.city) : ""}</div></div>
@@ -450,8 +486,10 @@
     ld.textContent = JSON.stringify(upcoming.map((s) => ({
       "@context": "https://schema.org",
       "@type": "MusicEvent",
-      name: `Spotted Zebra live at ${s.venue}`,
+      name: s.title ? `${s.title}: Spotted Zebra live at ${s.venue}` : `Spotted Zebra live at ${s.venue}`,
       startDate: s.date + toTime(s.time),
+      endDate: s.end ? s.date + toTime(s.end) : undefined,
+      doorTime: s.doors ? s.date + toTime(s.doors) : undefined,
       eventStatus: "https://schema.org/EventScheduled",
       eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
       location: {
@@ -459,9 +497,17 @@
         name: s.venue,
         address: { "@type": "PostalAddress", streetAddress: s.address || undefined, addressLocality: (s.city || "Seattle, WA").split(",")[0].trim(), addressRegion: "WA", addressCountry: "US" },
       },
-      performer: { "@type": "MusicGroup", name: "Spotted Zebra", url: "https://spottedzebra.party/" },
+      performer: [{ "@type": "MusicGroup", name: "Spotted Zebra", url: "https://spottedzebra.party/" }]
+        .concat((s.with || []).map((name) => ({ "@type": "MusicGroup", name }))),
       organizer: { "@type": "Organization", name: s.venue },
-      image: "https://spottedzebra.party/assets/img/og.jpg",
+      image: s.flyer ? new URL(s.flyer, location.origin).href : "https://spottedzebra.party/assets/img/og.jpg",
+      offers: s.price ? {
+        "@type": "Offer",
+        price: (String(s.price).match(/\$(\d+(?:\.\d+)?)/) || [])[1],
+        priceCurrency: "USD",
+        url: s.link || "https://spottedzebra.party/#shows",
+        availability: "https://schema.org/InStock",
+      } : undefined,
       description: `Spotted Zebra, a Seattle cover band, plays 80s, 90s, 2000s and modern hits live at ${s.venue}.`,
       url: s.link || "https://spottedzebra.party/#shows",
     })));

@@ -224,6 +224,29 @@ section:not(.hero) { padding: clamp(72px, 12vw, 140px) var(--pad); }
 .shows__empty p:first-child { font-family: var(--marker); font-size: 1.6rem; color: var(--spot-2); }
 @media (max-width: 640px) { .show { grid-template-columns: 76px 1fr; } .show .btn { grid-column: 1 / -1; } }
 
+/* featured show (one with a flyer) */
+.show--featured { grid-template-columns: minmax(0, 340px) 1fr; gap: clamp(24px, 4vw, 48px); align-items: start; padding: clamp(24px, 4vw, 40px) 0; }
+.show__flyer { display: block; border-radius: var(--radius); overflow: hidden; transform: rotate(-2deg); box-shadow: 0 18px 40px rgba(0,0,0,.5); transition: transform .3s; }
+.show__flyer:hover, .show__flyer:focus-visible { transform: rotate(0) scale(1.02); }
+.show__flyer img { display: block; width: 100%; height: auto; }
+.show__body { display: grid; gap: 18px; }
+.show__tag { margin: 0; font-family: var(--marker); font-size: 1.5rem; color: var(--spot-2); transform: rotate(-2deg); justify-self: start; }
+.show__head { display: grid; grid-template-columns: 96px 1fr; gap: 20px; align-items: center; }
+.show__title { margin: 0 0 4px; font-family: var(--display); font-weight: 400; font-size: clamp(1.8rem, 4vw, 2.6rem); line-height: 1; text-transform: uppercase; }
+.show--featured .show__venue { color: var(--muted); font-size: 1.25rem; }
+.show__with { margin: 0; font-size: 1.1rem; }
+.show__facts { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; border-top: 1px solid var(--line); padding-top: 18px; }
+.show__facts li { display: grid; grid-template-columns: 90px 1fr; gap: 12px; line-height: 1.45; }
+.show__facts span { font-weight: 700; font-size: .8rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); padding-top: 3px; }
+.show__actions { display: flex; flex-wrap: wrap; gap: 10px; }
+@media (max-width: 760px) {
+  .show--featured { grid-template-columns: 1fr; }
+  .show--featured .show__flyer { max-width: 360px; justify-self: center; width: 100%; }
+  .show--featured .btn { grid-column: auto; }
+}
+@media (max-width: 420px) { .show__head { grid-template-columns: 76px 1fr; gap: 14px; } .show__facts li { grid-template-columns: 1fr; gap: 2px; } }
+@media (prefers-reduced-motion: reduce) { .show__flyer, .show__tag { transform: none; } }
+
 /* booking */
 .book__grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: clamp(28px, 5vw, 64px); align-items: start; }
 .gig { display: grid; gap: 22px; }

@@ -28,8 +28,29 @@ window.SZ = {
    * show appear in Google's event listings.
    * Example:
    * { date: "2026-11-14", time: "9 PM", venue: "The Some Bar", address: "123 Main St", city: "Seattle, WA", link: "" },
+   *
+   * Optional extras (a show with a flyer gets the big featured layout):
+   *   title: event name · with: other bands on the bill · doors: door time
+   *   end: end time · price: ticket line · flyer: image path (full size)
+   *   flyerSmall: smaller copy for the page (falls back to flyer)
    */
-  shows: [],
+  shows: [
+    {
+      date: "2026-11-28",
+      time: "8 PM",
+      end: "11 PM",
+      doors: "7 PM",
+      title: "Second Serving Saturday",
+      venue: "Jules Maes Saloon",
+      address: "5919 Airport Way S",
+      city: "Seattle, WA",
+      with: ["Lark vs Owl", "Pink-182"],
+      price: "$10 advance · $15 at the door",
+      flyer: "/assets/shows/2026-11-28-second-serving-saturday.jpg",
+      flyerSmall: "/assets/shows/2026-11-28-second-serving-saturday-800.webp",
+      link: "",
+    },
+  ],
 
   /*
    * The Jukebox. SAMPLE SONGS — swap these for your real set list.

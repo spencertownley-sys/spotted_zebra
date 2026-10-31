@@ -34,6 +34,7 @@ Every change below can be made on github.com: open the file or folder, use the p
     { date: "2026-11-14", time: "9 PM", venue: "The Some Bar", city: "Seattle, WA", link: "" },
   ],
   ```
+  Add `flyer: "/assets/shows/your-flyer.jpg"` (put the image in `assets/shows/`) and the show gets a big featured card with the flyer. Optional extras: `title`, `with` (other bands), `doors`, `end`, `price`, `address`. Put a ticket URL in `link` and a **Get tickets** button appears.
 - **Set list:** the jukebox songs are **samples**. Replace them with your real set list.
 
 ### Videos: `_data/videos.yml`

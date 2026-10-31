@@ -48,7 +48,7 @@ window.SZ = {
       price: "$10 advance · $15 at the door",
       flyer: "/assets/shows/2026-11-28-second-serving-saturday.jpg",
       flyerSmall: "/assets/shows/2026-11-28-second-serving-saturday-800.webp",
-      link: "",
+      link: "https://tickets.venuepilot.com/e/spotted-zebra-pink-182-lark-v-owl-2026-11-28-jules-maes-seattle-acaacf",
     },
   ],
 

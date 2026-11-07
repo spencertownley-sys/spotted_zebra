@@ -25,7 +25,7 @@ A set that jumps from an 80s anthem to a 2000s singalong to something from this 
 
 ## Let your guests vote
 
-Not sure what your crowd wants? Ask them. Send people to our [jukebox](/#jukebox) before the party, have them tick their favorites, and send the requests our way.
+Not sure what your crowd wants? Ask them. Have guests vote on their favorites before the party, then drop the winners into the notes when you [book us](/#book).
 
 ## The short version
 

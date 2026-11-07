@@ -64,7 +64,7 @@ layout: null
         <p class="hero__sub">80s hits, 90s rock, 2000s alternative &amp; today&rsquo;s bangers for bars, parties and weddings across the greater Seattle area</p>
         <div class="hero__btns">
           <a href="#book" class="btn btn--spot">Book the band</a>
-          <a href="#jukebox" class="btn btn--ghost">Open the jukebox</a>
+          <a href="#shows" class="btn btn--ghost">Upcoming shows</a>
         </div>
       </div>
       <p class="hero__hint" aria-hidden="true">tap anywhere to spot the zebra</p>
@@ -95,9 +95,9 @@ layout: null
       </div>
       <div class="about__text">
         <p class="eyebrow">About the band</p>
-        <h2>Five people.<br>One very unusual zebra.</h2>
-        <p>Spotted Zebra is a five-piece cover band from Seattle. We started in late 2021, found our current lineup in early 2024, and have been playing bars and parties all around the greater Seattle area ever since.</p>
-        <p>From 80s hits and 90s rock to 2000s alternative and modern bangers, SZ has a song for anyone and everyone. If the dance floor is empty, we take it personally.</p>
+        <h2>Five people.<br>One party.</h2>
+        <p>Spotted Zebra is a five-piece cover band from Seattle. We started in 2021, found our current lineup in 2024, and have been playing bars and parties all around the greater Seattle area ever since.</p>
+        <p>We play songs for anyone and everyone, from classic rock, to 80s hits, 90s grunge, 2000s alternative, and modern bangers. If the dance floor is empty, we take it personally.</p>
         <ul class="stats">
           <li><b data-count="2021">2021</b><span>formed</span></li>
           <li><b data-count="5">5</b><span>members</span></li>
@@ -150,30 +150,6 @@ layout: null
       </div>
     </section>
     {%- endif %}
-
-    <!-- JUKEBOX -->
-    <section class="jukebox" id="jukebox">
-      <div class="section-head">
-        <p class="eyebrow">The Jukebox</p>
-        <h2>Pick a decade. Make a request.</h2>
-        <p>Tick the songs you want to hear at your event and send them straight to the band.</p>
-      </div>
-      <div class="jukebox__body">
-        <div class="vinyl-wrap">
-          <div class="vinyl" id="vinyl"><img src="/assets/img/logo.png" alt="" width="120" height="120"></div>
-          <button class="btn btn--ghost" id="shuffle" type="button">Shuffle me a song</button>
-          <p class="now" id="now" aria-live="polite">&nbsp;</p>
-        </div>
-        <div class="jukebox__panel">
-          <div class="decades" role="tablist" aria-label="Decade"></div>
-          <ol class="songs" id="songs"></ol>
-          <div class="jukebox__foot">
-            <span id="reqCount">0 requests</span>
-            <a class="btn btn--spot" id="sendReq" href="#">Send requests</a>
-          </div>
-        </div>
-      </div>
-    </section>
 
     <!-- PLAY THE ZEBRA -->
     <section class="play" id="play">
@@ -248,7 +224,7 @@ layout: null
         </details>
         <details>
           <summary><h3>Can we request songs?</h3></summary>
-          <p>Yes. Pick songs from our <a href="#jukebox">jukebox</a> and send them over, or list your must-plays when you book.</p>
+          <p>Yes. List your must-plays in the <a href="#book">Gig Builder</a> when you book and we&rsquo;ll work them into the night.</p>
         </details>
         <details>
           <summary><h3>How do we book Spotted Zebra?</h3></summary>
@@ -259,7 +235,7 @@ layout: null
           <p>Check <a href="#shows">upcoming shows</a>, watch <a href="/videos/">our videos</a>, or follow us on <a href="https://www.instagram.com/spottedzebramusic" target="_blank" rel="noopener">Instagram</a> for the next gig.</p>
         </details>
       </div>
-      <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What kind of band is Spotted Zebra?", "acceptedAnswer": {"@type": "Answer", "text": "A five-piece cover band from Seattle. We play the songs people actually want to hear: 80s hits, 90s rock, 2000s alternative and today’s bangers, plus a few originals of our own."}}, {"@type": "Question", "name": "Where do you play?", "acceptedAnswer": {"@type": "Answer", "text": "Bars, private parties and events around the greater Seattle area and the Pacific Northwest. Planning something further away? Tell us about it."}}, {"@type": "Question", "name": "What kinds of events do you play?", "acceptedAnswer": {"@type": "Answer", "text": "Bar and venue gigs, private parties, weddings, corporate events and festivals. If there’s a dance floor (or there should be), we’re interested."}}, {"@type": "Question", "name": "Can we request songs?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Pick songs from our jukebox and send them over, or list your must-plays when you book."}}, {"@type": "Question", "name": "How do we book Spotted Zebra?", "acceptedAnswer": {"@type": "Answer", "text": "Fill in the Gig Builder below and it lands straight in our inbox, or email booking@spottedzebra.party. Tell us the date, the venue and roughly how many people are coming."}}, {"@type": "Question", "name": "Where can we see you play first?", "acceptedAnswer": {"@type": "Answer", "text": "Check upcoming shows, watch our videos, or follow us on Instagram for the next gig."}}]}</script>
+      <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What kind of band is Spotted Zebra?", "acceptedAnswer": {"@type": "Answer", "text": "A five-piece cover band from Seattle. We play the songs people actually want to hear: 80s hits, 90s rock, 2000s alternative and today’s bangers, plus a few originals of our own."}}, {"@type": "Question", "name": "Where do you play?", "acceptedAnswer": {"@type": "Answer", "text": "Bars, private parties and events around the greater Seattle area and the Pacific Northwest. Planning something further away? Tell us about it."}}, {"@type": "Question", "name": "What kinds of events do you play?", "acceptedAnswer": {"@type": "Answer", "text": "Bar and venue gigs, private parties, weddings, corporate events and festivals. If there’s a dance floor (or there should be), we’re interested."}}, {"@type": "Question", "name": "Can we request songs?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. List your must-plays in the Gig Builder when you book and we’ll work them into the night."}}, {"@type": "Question", "name": "How do we book Spotted Zebra?", "acceptedAnswer": {"@type": "Answer", "text": "Fill in the Gig Builder below and it lands straight in our inbox, or email booking@spottedzebra.party. Tell us the date, the venue and roughly how many people are coming."}}, {"@type": "Question", "name": "Where can we see you play first?", "acceptedAnswer": {"@type": "Answer", "text": "Check upcoming shows, watch our videos, or follow us on Instagram for the next gig."}}]}</script>
     </section>
 
     <!-- BOOKING / GIG BUILDER -->

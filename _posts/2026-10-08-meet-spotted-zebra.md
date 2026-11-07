@@ -18,7 +18,7 @@ Our whole idea is simple: **play the songs people actually want to hear.** That 
 - **2000s alternative**, the stuff you blasted in the car with the windows down
 - **Modern bangers**, so the younger crowd doesn't feel left out
 
-We'd rather see a packed dance floor than play something obscure to impress other musicians. If you've got a request, tell us. Our [jukebox](/#jukebox) is a good place to start.
+We'd rather see a packed dance floor than play something obscure to impress other musicians. If you've got a request, tell us when you [book](/#book).
 
 ## Where to find us
 

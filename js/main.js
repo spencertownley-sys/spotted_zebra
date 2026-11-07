@@ -188,7 +188,7 @@
   }
 
   /* ── Count-up stats + reveal on scroll ──────────────────────────────── */
-  $$(".section-head, .about__text, .spotlight, .jukebox__body, .keys, .shows__list, .book__grid, .player, .gallery, .post-cards, .theater, .filmstrip, .shorts").forEach((el) => el.classList.add("reveal"));
+  $$(".section-head, .about__text, .spotlight, .keys, .shows__list, .book__grid, .player, .gallery, .post-cards, .theater, .filmstrip, .shorts").forEach((el) => el.classList.add("reveal"));
   const io = new IntersectionObserver((entries) => {
     entries.forEach((en) => {
       if (!en.isIntersecting) return;
@@ -210,80 +210,6 @@
       if (p < 1) requestAnimationFrame(tick);
     })(t0);
   }
-
-  /* ── Jukebox ────────────────────────────────────────────────────────── */
-  const setlist = SZ.setlist || {};
-  const decades = Object.keys(setlist);
-  const decadesEl = $(".decades");
-  const songsEl = $("#songs");
-  const picked = new Set();
-  let current = decades[0];
-
-  decades.forEach((d, i) => {
-    const b = document.createElement("button");
-    b.type = "button";
-    b.role = "tab";
-    b.innerHTML = `${d}<small>${String.fromCharCode(65 + i)}${i + 1}</small>`;
-    b.setAttribute("aria-selected", String(d === current));
-    b.addEventListener("click", () => { current = d; renderSongs(); click(); });
-    decadesEl.appendChild(b);
-  });
-
-  function click() { playNote(19, VOICES.organ, 0.08); }
-
-  function renderSongs() {
-    $$("button", decadesEl).forEach((b, i) => b.setAttribute("aria-selected", String(decades[i] === current)));
-    songsEl.innerHTML = "";
-    (setlist[current] || []).forEach((song) => {
-      const key = `${current} — ${song}`;
-      const li = document.createElement("li");
-      const label = document.createElement("label");
-      const box = document.createElement("input");
-      box.type = "checkbox";
-      box.checked = picked.has(key);
-      box.addEventListener("change", () => {
-        box.checked ? picked.add(key) : picked.delete(key);
-        if (box.checked) { li.classList.remove("is-pop"); void li.offsetWidth; li.classList.add("is-pop"); playNote(24, VOICES.synth, 0.1); }
-        updateReq();
-      });
-      label.append(document.createTextNode(song), box);
-      li.appendChild(label);
-      songsEl.appendChild(li);
-    });
-  }
-
-  const reqCount = $("#reqCount");
-  const sendReq = $("#sendReq");
-  function updateReq() {
-    const n = picked.size;
-    reqCount.textContent = `${n} request${n === 1 ? "" : "s"}`;
-    sendReq.setAttribute("aria-disabled", String(n === 0));
-    sendReq.href = n ? mailto("Song requests for Spotted Zebra", `Hey Spotted Zebra! Please play:\n\n${[...picked].map((s) => "• " + s).join("\n")}\n\nThanks!`) : "#";
-  }
-
-  const vinyl = $("#vinyl");
-  const now = $("#now");
-  $("#shuffle").addEventListener("click", () => {
-    vinyl.classList.add("is-spinning");
-    const all = decades.flatMap((d) => (setlist[d] || []).map((s) => [d, s]));
-    if (!all.length) return;
-    let n = 0;
-    const roll = setInterval(() => {
-      const [d, s] = all[Math.floor(Math.random() * all.length)];
-      now.textContent = s;
-      playNote(PENTA[n % PENTA.length], VOICES.organ, 0.05);
-      if (++n > 12) {
-        clearInterval(roll);
-        current = d;
-        renderSongs();
-        now.textContent = `♫ ${s} (${d})`;
-        setTimeout(() => vinyl.classList.remove("is-spinning"), 2500);
-      }
-    }, reduceMotion ? 1 : 90);
-  });
-
-  renderSongs();
-  updateReq();
 
   /* ── Play the Zebra ─────────────────────────────────────────────────── */
   const keysEl = $("#keys");
@@ -606,7 +532,6 @@
       date: f.date.value || "TBD",
       crowd: T("crowd").textContent,
       decades: T("decades").textContent,
-      requests: [...picked],
       message: f.message.value.trim(),
     };
   }
@@ -620,7 +545,6 @@
     const body = [
       `Name: ${d.name}`, `Email: ${d.email}`, `Event: ${d.event}`, `Date: ${d.date}`,
       `Crowd size: ${d.crowd}`, `Decades: ${d.decades}`,
-      d.requests.length ? `Song requests:\n${d.requests.map((s) => "  • " + s).join("\n")}` : null,
       "", d.message,
     ].filter((l) => l !== null).join("\n");
     return mailto(bookingSubject(d), body);
@@ -657,7 +581,6 @@
           date: d.date,
           "crowd size": d.crowd,
           decades: d.decades,
-          "song requests": d.requests.join(", ") || "None",
           message: d.message || "(none)",
         }),
       });

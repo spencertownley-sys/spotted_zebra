@@ -35,7 +35,7 @@ Live drums are loud. If you're in a neighborhood with noise rules, or the venue 
 
 Tell the band who's coming and what they love. Is it a crowd of 80s kids? A wedding with three generations on the dance floor? A bar that wants 90s rock all night?
 
-On our site you can [pick songs from our jukebox](/#jukebox) and send them right over, and our [Gig Builder](/#book) lets you tell us which decades you want.
+On our site, the [Gig Builder](/#book) lets you tell us which decades you want and list your must-play songs.
 
 ## 6. Get the details in writing
 

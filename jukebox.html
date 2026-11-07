@@ -1,0 +1,106 @@
+---
+layout: default
+title: "Song List: The Jukebox"
+description: "The full Spotted Zebra song list: classic rock, 80s hits, 90s grunge and alternative, 2000s indie and today's bangers, plus our originals. Seattle's party cover band."
+permalink: /jukebox/
+---
+{%- assign total = 0 -%}
+{%- for d in site.data.songs.decades -%}{%- assign live = d.songs | where: "show", true -%}{%- assign total = total | plus: live.size -%}{%- endfor -%}
+{%- assign originals = site.data.music.songs | where: "show", true | where_exp: "s", "s.original_artist == nil" -%}
+<section class="page-head">
+  <p class="eyebrow">The Jukebox</p>
+  <h1>Every song we play.</h1>
+  <p>{{ total }} covers from classic rock to right now, plus {{ originals.size }} originals. Want one at your party? Put it in your <a href="/#book">booking request</a>.</p>
+</section>
+
+<section class="page-body jbox" data-jbox>
+  <div class="jbox__tools">
+    <label for="jsearch" class="sr">Search songs</label>
+    <input type="search" id="jsearch" placeholder="Search songs or artists…" autocomplete="off">
+    <div class="jbox__chips" role="group" aria-label="Filter by decade">
+      <button type="button" class="chip" aria-pressed="true" data-dec="all">All</button>
+      {%- for d in site.data.songs.decades %}
+      <button type="button" class="chip" aria-pressed="false" data-dec="{{ d.name | slugify }}">{{ d.name }}</button>
+      {%- endfor %}
+      <button type="button" class="chip" aria-pressed="false" data-dec="originals">Originals</button>
+    </div>
+    <p class="jbox__count" id="jcount" aria-live="polite"></p>
+  </div>
+
+  {%- for d in site.data.songs.decades %}
+  {%- assign live = d.songs | where: "show", true %}
+  <div class="jbox__group" data-group="{{ d.name | slugify }}">
+    <div class="jbox__head">
+      <h2>{{ d.name }}</h2>
+      <p>{{ d.blurb }}</p>
+    </div>
+    <ol class="jbox__list">
+      {%- for s in live %}
+      <li data-q="{{ s.title | append: ' ' | append: s.artist | downcase | escape }}">
+        <span class="jbox__t">{{ s.title }}</span>
+        <span class="jbox__a">{{ s.artist }}</span>
+        {%- if s.yt %}<button type="button" class="jbox__watch" data-yt-modal="{{ s.yt }}" aria-label="Watch us play {{ s.title | escape }}">&#9654; Watch</button>{% endif %}
+      </li>
+      {%- endfor %}
+    </ol>
+  </div>
+  {%- endfor %}
+
+  <div class="jbox__group" data-group="originals">
+    <div class="jbox__head">
+      <h2>Originals</h2>
+      <p>Written and recorded by us. <a href="/#listen">Hear them on the homepage.</a></p>
+    </div>
+    <ol class="jbox__list">
+      {%- for s in originals %}
+      <li data-q="{{ s.title | downcase | escape }} spotted zebra original">
+        <span class="jbox__t">{{ s.title }}</span>
+        <span class="jbox__a">Spotted Zebra{% if s.note %} · {{ s.note }}{% endif %}</span>
+      </li>
+      {%- endfor %}
+    </ol>
+  </div>
+
+  <p class="jbox__empty" id="jempty" hidden>Nothing matches that. If it&rsquo;s a song you&rsquo;d love to hear, <a href="/#book">ask us</a> &mdash; we learn new ones all the time.</p>
+
+  <aside class="post__cta jbox__cta">
+    <p>Don&rsquo;t see your song? Ask. We add new ones all the time.</p>
+    <a href="/#book" class="btn btn--spot">Request songs when you book</a>
+  </aside>
+</section>
+
+<script>
+(() => {
+  const root = document.querySelector("[data-jbox]");
+  const input = document.getElementById("jsearch");
+  const count = document.getElementById("jcount");
+  const empty = document.getElementById("jempty");
+  const chips = [...root.querySelectorAll("[data-dec]")];
+  const groups = [...root.querySelectorAll("[data-group]")];
+  let dec = "all";
+  function apply() {
+    const q = input.value.trim().toLowerCase();
+    let n = 0;
+    groups.forEach((g) => {
+      const on = dec === "all" || g.dataset.group === dec;
+      let shown = 0;
+      g.querySelectorAll("li").forEach((li) => {
+        const hit = on && (!q || li.dataset.q.includes(q));
+        li.hidden = !hit;
+        if (hit) shown++;
+      });
+      g.hidden = !shown;
+      n += shown;
+    });
+    count.textContent = `${n} song${n === 1 ? "" : "s"}`;
+    empty.hidden = n > 0;
+  }
+  input.addEventListener("input", apply);
+  chips.forEach((c) => c.addEventListener("click", () => {
+    dec = c.dataset.dec;
+    chips.forEach((x) => x.setAttribute("aria-pressed", String(x === c)));
+    apply();
+  }));
+  apply();
+})();
+</script>

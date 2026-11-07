@@ -1,0 +1,71 @@
+---
+layout: default
+title: "Press Kit (EPK)"
+description: "Spotted Zebra electronic press kit: bio, quick facts, live videos, song list, photos, logo and booking contact for the Seattle party cover band."
+permalink: /press/
+---
+{%- assign total = 0 -%}
+{%- for d in site.data.songs.decades -%}{%- assign live = d.songs | where: "show", true -%}{%- assign total = total | plus: live.size -%}{%- endfor -%}
+{%- assign vids = site.data.videos.videos | where: "featured", true | where: "show", true -%}
+<section class="page-head">
+  <p class="eyebrow">Press kit</p>
+  <h1>Spotted Zebra EPK</h1>
+  <p>Everything a venue, planner or promoter needs in one place. <button type="button" class="linkish" onclick="print()">Print or save it as a PDF</button>.</p>
+</section>
+
+<section class="page-body epk">
+  <div class="epk__grid">
+    <div class="epk__bio">
+      <h2>The short version</h2>
+      <p class="epk__lede">Spotted Zebra is a five-piece cover band from Seattle playing classic rock, 80s hits, 90s grunge, 2000s alternative and modern bangers for bars, private parties and events.</p>
+      <h2>Bio</h2>
+      <p>Spotted Zebra is a five-piece cover band from Seattle. We started in 2021, found our current lineup in 2024, and have been playing bars and parties all around the greater Seattle area ever since.</p>
+      <p>We play songs for anyone and everyone, from classic rock, to 80s hits, 90s grunge, 2000s alternative, and modern bangers. If the dance floor is empty, we take it personally.</p>
+    </div>
+    <dl class="epk__facts">
+      <div><dt>Based in</dt><dd>Seattle, WA</dd></div>
+      <div><dt>Formed</dt><dd>2021 &middot; current lineup since 2024</dd></div>
+      <div><dt>Lineup</dt><dd>Five-piece band</dd></div>
+      <div><dt>Genre</dt><dd>Party cover band: classic rock to today&rsquo;s hits</dd></div>
+      <div><dt>Repertoire</dt><dd>{{ total }} covers + originals &middot; <a href="/jukebox/">full song list</a></dd></div>
+      <div><dt>Sets</dt><dd>Up to three 40-minute sets</dd></div>
+      <div><dt>Played at</dt><dd>{% for v in site.data.venues %}{{ v }}{% unless forloop.last %} &middot; {% endunless %}{% endfor %}</dd></div>
+      <div><dt>Booking</dt><dd><a data-email href="mailto:booking@spottedzebra.party">booking@spottedzebra.party</a></dd></div>
+    </dl>
+  </div>
+
+  <h2 class="epk__h">Watch us live</h2>
+  <ul class="epk__vids">
+    {%- for v in vids limit: 4 %}
+    <li><button type="button" class="vcard" data-yt-modal="{{ v.id }}" aria-label="Play {{ v.song | escape }}">
+      <span class="vcard__thumb"><img src="https://i.ytimg.com/vi/{{ v.id }}/hqdefault.jpg" alt="" loading="lazy" width="480" height="360"><span class="yt__play" aria-hidden="true"></span></span>
+      <span class="vcard__title">{{ v.song }}</span>
+      {% if v.artist %}<span class="vcard__artist">{{ v.artist }}</span>{% endif %}
+    </button></li>
+    {%- endfor %}
+  </ul>
+  <p><a href="/videos/">All videos</a> &middot; <a href="{{ site.data.videos.channel }}" target="_blank" rel="noopener">YouTube channel</a></p>
+
+  <h2 class="epk__h">Photos &amp; logo</h2>
+  <ul class="epk__assets">
+    <li>
+      <img src="/assets/img/band.webp" alt="The five members of Spotted Zebra in front of a cinder-block wall" width="1080" height="1080" loading="lazy">
+      <a class="btn btn--ghost" href="/assets/img/band.jpg" download="spotted-zebra-band-photo.jpg">Download band photo</a>
+    </li>
+    <li class="epk__logo">
+      <img src="/assets/img/logo.png" alt="Spotted Zebra logo" width="800" height="800" loading="lazy">
+      <a class="btn btn--ghost" href="/assets/img/logo.png" download="spotted-zebra-logo.png">Download logo (PNG)</a>
+    </li>
+  </ul>
+
+  <h2 class="epk__h">Tech &amp; stage</h2>
+  <p>Stage plot and input list available on request. Tell us about your room and sound system when you <a href="/#book">book</a> and we&rsquo;ll make it work.</p>
+
+  <h2 class="epk__h">Follow</h2>
+  <p><a href="https://www.instagram.com/spottedzebramusic" target="_blank" rel="noopener">Instagram</a> &middot; <a href="https://www.facebook.com/spottedzebramusic/" target="_blank" rel="noopener">Facebook</a> &middot; <a href="https://www.youtube.com/@SpottedZebraMusic" target="_blank" rel="noopener">YouTube</a> &middot; <a href="https://spottedzebra.party">spottedzebra.party</a></p>
+
+  <aside class="post__cta">
+    <p>Want us on your bill?</p>
+    <a href="/#book" class="btn btn--spot">Book Spotted Zebra</a>
+  </aside>
+</section>

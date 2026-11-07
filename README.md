@@ -11,7 +11,10 @@ It's a static site built by GitHub Pages' built-in Jekyll. There's nothing to in
 | --- | --- |
 | **Living zebra hero** | Animated, wavy zebra stripes bend away from your cursor. Click or tap anywhere to drop a "spot" that plays a note. |
 | **Spotlight photo** | The band photo sits in the dark. A spotlight follows your cursor, and drifts across the band on its own when nobody's steering. |
-| **Play the Zebra** | A playable zebra-stripe keyboard (mouse, touch drag, or keys `A`–`K`) with three sounds and a built-in drum beat. Runs on the Web Audio API with no audio files. |
+| **Play the Zebra** | At `/play/`: a playable zebra-stripe keyboard (mouse, touch drag, or keys `A`–`K`) with three sounds and a built-in drum beat. Runs on the Web Audio API with no audio files. |
+| **The Jukebox** | At `/jukebox/`: the full song list, grouped by decade, searchable, with a "Watch" button on every song we have a video of. |
+| **Press kit** | At `/press/`: bio, quick facts, venues, live videos, downloadable photo and logo. Prints cleanly to PDF. |
+| **Mailing list** | "Get first dibs on show tickets" signup on the homepage and in the footer. Each signup lands in the booking inbox. |
 | **Gig Builder** | The booking form prints a live ticket as you fill it in, then sends itself to the band's inbox and stamps the ticket "SENT". If sending ever fails, it offers a pre-written email instead. |
 | **Shows** | Upcoming gigs come from one list, and past dates drop off on their own. Sits right under the hero, and the next show's poster pops up with a ticket button. |
 | **Watch** | YouTube clips on the homepage in a "theater" with a film-strip picker, Shorts in a phone-sized player, and a searchable `/videos/` page. Nothing from YouTube loads until someone presses play. |
@@ -35,6 +38,14 @@ Every change below can be made on github.com: open the file or folder, use the p
   ```
   Add `flyer: "/assets/shows/your-flyer.jpg"` (put the image in `assets/shows/`) and the show gets a big featured card with the flyer. Optional extras: `title`, `with` (other bands), `doors`, `end`, `price`, `address`. Put a ticket URL in `link` and a **Get tickets** button appears.
 - **Pop-up:** the next show with both a `flyer` and a ticket `link` pops up on the homepage (once per visit) with its poster and a **Buy tickets** button. Add `popup: false` to a show to skip it, or set `popup: false` near the top of the shows list to turn the pop-up off.
+
+### Song list: `_data/songs.yml`
+
+One line per song, grouped by decade. Add `yt:` with a YouTube ID to show a **Watch** button, or `show: false` to hide a song.
+
+### Venues we've played: `_data/venues.yml`
+
+One venue per line. Shows up in the "Spotted at" strip on the homepage and on the press kit.
 
 ### Videos: `_data/videos.yml`
 

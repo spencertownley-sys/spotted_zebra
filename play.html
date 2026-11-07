@@ -1,0 +1,25 @@
+---
+layout: default
+title: Play the Zebra
+description: Play a zebra-stripe keyboard in your browser with 80s synth, organ and bass sounds and a built-in drum beat. A little toy from Seattle cover band Spotted Zebra.
+permalink: /play/
+---
+<section class="page-head">
+  <p class="eyebrow">Play the Zebra</p>
+  <h1>Every stripe is a note.</h1>
+  <p>Click, tap or use your keyboard (<kbd>A</kbd>&ndash;<kbd>K</kbd>, plus <kbd>W</kbd> <kbd>E</kbd> <kbd>T</kbd> <kbd>Y</kbd> <kbd>U</kbd>). Turn on the beat and jam with us.</p>
+</section>
+<section class="page-body play" id="play">
+  <div class="play__controls">
+    <div class="seg" role="radiogroup" aria-label="Sound">
+      <button type="button" role="radio" aria-checked="true" data-voice="synth">80s Synth</button>
+      <button type="button" role="radio" aria-checked="false" data-voice="organ">Organ</button>
+      <button type="button" role="radio" aria-checked="false" data-voice="bass">Bass</button>
+    </div>
+    <button type="button" class="btn btn--ghost" id="beat" aria-pressed="false">Beat: off</button>
+  </div>
+  <div class="keys" id="keys" aria-label="Zebra keyboard"></div>
+  <p class="play__more">Sounds better live. <a href="/#shows">Catch a show</a> or <a href="/#book">book the band</a>.</p>
+</section>
+<script src="/js/audio.js"></script>
+<script src="/js/play.js"></script>

@@ -179,7 +179,7 @@
   if (!upcoming.length) {
     showList.outerHTML = `<div class="shows__empty">
       <p>No public shows on the calendar right now.</p>
-      <p>Follow along on <a href="${SZ.socials?.instagram || "#"}" target="_blank" rel="noopener">Instagram</a> or <a href="${SZ.socials?.bandsintown || "#"}" target="_blank" rel="noopener">Bandsintown</a> for the next one &mdash; or <a href="#book">book us</a> and make it yours.</p>
+      <p>Follow along on <a href="${SZ.socials?.instagram || "#"}" target="_blank" rel="noopener">Instagram</a> for the next one &mdash; or <a href="#book">book us</a> and make it yours.</p>
     </div>`;
   } else {
     upcoming.forEach((s) => {

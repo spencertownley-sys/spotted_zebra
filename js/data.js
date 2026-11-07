@@ -22,7 +22,6 @@ window.SZ = {
     instagram: "https://www.instagram.com/spottedzebramusic",
     facebook: "https://www.facebook.com/spottedzebramusic/",
     youtube: "https://www.youtube.com/@SpottedZebraMusic",
-    bandsintown: "https://www.bandsintown.com/a/110650385",
   },
 
   /*

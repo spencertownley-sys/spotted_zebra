@@ -9,7 +9,7 @@ It's a static site built by GitHub Pages' built-in Jekyll. There's nothing to in
 
 | Feature | What it does |
 | --- | --- |
-| **Living zebra hero** | Animated, wavy zebra stripes bend away from your cursor. Click or tap anywhere to drop a "spot" that plays a note. |
+| **Living zebra hero** | Animated, wavy zebra stripes that bend away from your cursor. Swap in a video loop any time (see "Homepage video" below). |
 | **Spotlight photo** | The band photo sits in the dark. A spotlight follows your cursor, and drifts across the band on its own when nobody's steering. |
 | **Play the Zebra** | At `/play/`: a playable zebra-stripe keyboard (mouse, touch drag, or keys `A`–`K`) with three sounds and a built-in drum beat. Runs on the Web Audio API with no audio files. |
 | **The Jukebox** | At `/jukebox/`: the full song list, grouped by decade, searchable, with a "Watch" button on every song we have a video of. |

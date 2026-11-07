@@ -55,7 +55,7 @@ layout: null
   {% include nav.html %}
 
   <main id="main">
-    <!-- HERO: video loop (set hero_video in _config.yml) or generative stripes. Click to drop spots. -->
+    <!-- HERO: video loop (set hero_video in _config.yml) or generative zebra stripes. -->
     {%- assign hero_video = site.hero_video | strip %}
     <section class="hero{% if hero_video != "" %} hero--video{% endif %}" id="top">
       {%- if hero_video != "" %}
@@ -73,9 +73,6 @@ layout: null
           <a href="#shows" class="btn btn--ghost">Upcoming shows</a>
         </div>
       </div>
-      {%- if hero_video == "" %}
-      <p class="hero__hint" aria-hidden="true">tap anywhere to spot the zebra</p>
-      {%- endif %}
     </section>
 
     <div class="marquee" aria-hidden="true">
@@ -306,7 +303,6 @@ layout: null
   </main>
 
   {% include footer.html %}
-  <script src="/js/audio.js"></script>
   <script src="/js/main.js"></script>
   <script src="/js/player.js"></script>
 </body>

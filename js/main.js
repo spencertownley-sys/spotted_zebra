@@ -8,9 +8,7 @@
   const mailto = (subject, body) =>
     `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
-  const { playNote, VOICES } = window.SZAudio;
-
-  /* ── HERO: living zebra stripes + droppable spots ───────────────────── */
+  /* ── HERO: living zebra stripes ─────────────────────────────────────── */
   const canvas = $("#stripes");
   const g = canvas.getContext("2d");
   const hero = $(".hero");
@@ -19,8 +17,6 @@
   if (heroVideo && reduceMotion) { heroVideo.removeAttribute("autoplay"); heroVideo.pause(); }
   let W, H, DPR;
   const mouse = { x: -9999, y: -9999, tx: -9999, ty: -9999 };
-  const spots = [];
-  const PENTA = [0, 2, 4, 7, 9, 12, 14, 16, 19, 21];
 
   function resize() {
     DPR = Math.min(devicePixelRatio || 1, 2);
@@ -38,19 +34,6 @@
     mouse.ty = e.clientY - r.top;
   });
   hero.addEventListener("pointerleave", () => { mouse.tx = mouse.ty = -9999; });
-
-  function dropSpot(x, y, play = true) {
-    const hot = Math.random() < 0.7;
-    spots.push({ x, y, r: 0, max: 30 + Math.random() * 70, life: 1, color: hot ? "255,46,99" : "255,210,63" });
-    if (spots.length > 40) spots.shift();
-    if (play) playNote(PENTA[Math.floor((1 - y / H) * PENTA.length)] ?? 0, VOICES.synth, 0.18);
-  }
-  hero.addEventListener("pointerdown", (e) => {
-    if (heroVideo || e.target.closest("a, button")) return;
-    const r = hero.getBoundingClientRect();
-    dropSpot(e.clientX - r.left, e.clientY - r.top);
-    $(".hero__hint")?.remove();
-  });
 
   let heroVisible = true;
   new IntersectionObserver(([en]) => { heroVisible = en.isIntersecting; }).observe(hero);
@@ -78,18 +61,6 @@
       g.closePath();
       g.fill();
     }
-
-    // spots
-    for (let i = spots.length - 1; i >= 0; i--) {
-      const s = spots[i];
-      s.r += (s.max - s.r) * 0.18;
-      if (s.r > s.max * 0.95) s.life -= 0.004;
-      if (s.life <= 0) { spots.splice(i, 1); continue; }
-      g.fillStyle = `rgba(${s.color},${Math.min(1, s.life * 1.4)})`;
-      g.beginPath();
-      g.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-      g.fill();
-    }
   }
 
   function edgeX(x0, y, t, idx) {
@@ -115,12 +86,6 @@
   }
   if (heroVideo) { /* the video is the background; no stripes to draw */ }
   else if (reduceMotion) drawStripes(0); else requestAnimationFrame(loop);
-
-  // a couple of spots to start with so the idea is obvious
-  if (!reduceMotion && !heroVideo) setTimeout(() => {
-    dropSpot(W * 0.18, H * 0.3, false);
-    dropSpot(W * 0.82, H * 0.7, false);
-  }, 600);
 
   /* ── Spotlight photo ────────────────────────────────────────────────── */
   const spot = $("#spotlight");
@@ -326,7 +291,6 @@
       const on = chip.getAttribute("aria-pressed") !== "true";
       if (!multi) $$(".chip", group).forEach((c) => c.setAttribute("aria-pressed", "false"));
       chip.setAttribute("aria-pressed", String(on));
-      if (on) playNote(12 + Math.floor(Math.random() * 7), VOICES.synth, 0.08);
       updateTicket(true);
     }));
   });
@@ -383,7 +347,6 @@
   }
 
   function celebrate() {
-    for (let i = 0; i < 5; i++) setTimeout(() => playNote([0, 4, 7, 12, 16][i], VOICES.synth, 0.12), i * 90);
     ticket.classList.remove("is-printed"); void ticket.offsetWidth; ticket.classList.add("is-printed");
   }
 

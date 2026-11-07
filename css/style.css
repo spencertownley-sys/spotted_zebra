@@ -81,12 +81,11 @@ kbd { font: 600 0.85em var(--body); border: 1px solid var(--line); border-bottom
 }
 
 /* hero */
-.hero { position: relative; min-height: 100svh; display: grid; place-items: center; overflow: hidden; isolation: isolate; cursor: crosshair; }
+.hero { position: relative; min-height: 100svh; display: grid; place-items: center; overflow: hidden; isolation: isolate; }
 #stripes { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -2; }
 .hero::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
   background: radial-gradient(ellipse 62% 56% at 50% 55%, rgba(10,10,10,.93) 0%, rgba(10,10,10,.86) 55%, rgba(10,10,10,0) 100%); }
 .hero__video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -3; background: var(--ink); }
-.hero--video { cursor: auto; }
 .hero--video #stripes { display: none; }
 .hero--video::before { background: linear-gradient(180deg, rgba(10,10,10,.55) 0%, rgba(10,10,10,.45) 45%, rgba(10,10,10,.8) 100%); }
 @media (max-width: 640px) { .hero:not(.hero--video)::before { background: radial-gradient(ellipse 95% 50% at 50% 52%, rgba(10,10,10,.93) 0%, rgba(10,10,10,.85) 60%, rgba(10,10,10,0) 100%); } }
@@ -104,8 +103,6 @@ kbd { font: 600 0.85em var(--body); border: 1px solid var(--line); border-bottom
 @media (max-width: 480px) { .hero__title .hero__kicker { letter-spacing: .1em; font-size: .72rem; } }
 .hero__sub { font-size: clamp(1rem, 2.2vw, 1.2rem); color: var(--bone); margin: 14px auto 0; letter-spacing: .02em; max-width: 680px; }
 .hero__btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 26px; }
-.hero__hint { position: absolute; bottom: 18px; left: 0; right: 0; text-align: center; font-family: var(--marker); color: var(--spot-2); font-size: 1rem; opacity: .85; pointer-events: none; animation: bob 2.4s ease-in-out infinite; }
-@keyframes bob { 50% { transform: translateY(-6px); } }
 
 /* marquee */
 .marquee { background: var(--spot); color: #fff; overflow: hidden; transform: rotate(-2deg); margin: -18px -10px 0; position: relative; z-index: 2; border-block: 3px solid var(--ink); }

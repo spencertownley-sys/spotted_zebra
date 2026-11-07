@@ -552,3 +552,11 @@ html.has-pop { overflow: hidden; }
   .vcard .yt__play { display: none; }
   a { color: #000; }
 }
+
+/* tables in blog posts */
+.post__body table { width: 100%; border-collapse: collapse; margin: 8px 0 28px; font-size: 1rem; }
+.post__body th, .post__body td { text-align: left; vertical-align: top; padding: 12px 14px 12px 0; border-bottom: 1px solid var(--line); }
+.post__body th { font-weight: 700; font-size: .78rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); border-bottom-width: 2px; }
+.post__body td:first-child { font-weight: 700; white-space: nowrap; }
+.post__body thead:not(:has(th:not(:empty))) { display: none; }
+@media (max-width: 520px) { .post__body td:first-child { white-space: normal; } .post__body th, .post__body td { padding-right: 10px; } }

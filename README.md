@@ -99,7 +99,9 @@ Phone photos are often 3–8 MB. Shrink them to about 2000px wide (under ~500 KB
 
 ### Blog: `_posts/`
 
-Add a file named `YYYY-MM-DD-short-title.md`, for example `_posts/2026-11-15-our-halloween-show.md`:
+Add a file named `YYYY-MM-DD-short-title.md`, for example `_posts/2026-11-15-our-halloween-show.md`. **Scheduling:** give it a future date and it stays hidden until that day. The *Publish scheduled posts* action (`.github/workflows/publish-scheduled-posts.yml`) rebuilds the site every morning, so the post goes live on its date by itself. Tables in posts are styled automatically.
+
+Example:
 
 ```markdown
 ---

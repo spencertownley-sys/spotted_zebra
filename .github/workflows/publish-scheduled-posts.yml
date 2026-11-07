@@ -1,0 +1,24 @@
+# Publishes future-dated blog posts on their date.
+#
+# GitHub Pages skips posts dated in the future and only rebuilds when
+# something is pushed. This asks Pages to rebuild every morning, so a post
+# dated (for example) 2026-11-09 goes live on Nov 9 without anyone pushing.
+# Run it by hand any time from the Actions tab ("Run workflow").
+name: Publish scheduled posts
+
+on:
+  schedule:
+    - cron: "17 15 * * *" # every day at 15:17 UTC (7:17 AM Pacific in winter, 8:17 in summer)
+  workflow_dispatch:
+
+permissions:
+  pages: write
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ask GitHub Pages to rebuild the site
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X POST "repos/${{ github.repository }}/pages/builds" --silent && echo "Rebuild requested."

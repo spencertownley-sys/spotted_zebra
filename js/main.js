@@ -1,7 +1,7 @@
 (() => {
   "use strict";
   const SZ = window.SZ || {};
-  const EMAIL = SZ.email || "booking@spottedzebra.party";
+  const EMAIL = SZ.email || "contact@spottedzebra.party";
   const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const $ = (s, el = document) => el.querySelector(s);
   const $$ = (s, el = document) => [...el.querySelectorAll(s)];
@@ -14,6 +14,9 @@
   const canvas = $("#stripes");
   const g = canvas.getContext("2d");
   const hero = $(".hero");
+  const heroVideo = $(".hero__video");
+  // Respect reduced motion: hold the video on its first frame / poster.
+  if (heroVideo && reduceMotion) { heroVideo.removeAttribute("autoplay"); heroVideo.pause(); }
   let W, H, DPR;
   const mouse = { x: -9999, y: -9999, tx: -9999, ty: -9999 };
   const spots = [];
@@ -43,7 +46,7 @@
     if (play) playNote(PENTA[Math.floor((1 - y / H) * PENTA.length)] ?? 0, VOICES.synth, 0.18);
   }
   hero.addEventListener("pointerdown", (e) => {
-    if (e.target.closest("a, button")) return;
+    if (heroVideo || e.target.closest("a, button")) return;
     const r = hero.getBoundingClientRect();
     dropSpot(e.clientX - r.left, e.clientY - r.top);
     $(".hero__hint")?.remove();
@@ -110,10 +113,11 @@
     if (heroVisible) drawStripes(time);
     requestAnimationFrame(loop);
   }
-  if (reduceMotion) drawStripes(0); else requestAnimationFrame(loop);
+  if (heroVideo) { /* the video is the background; no stripes to draw */ }
+  else if (reduceMotion) drawStripes(0); else requestAnimationFrame(loop);
 
   // a couple of spots to start with so the idea is obvious
-  if (!reduceMotion) setTimeout(() => {
+  if (!reduceMotion && !heroVideo) setTimeout(() => {
     dropSpot(W * 0.18, H * 0.3, false);
     dropSpot(W * 0.82, H * 0.7, false);
   }, 600);

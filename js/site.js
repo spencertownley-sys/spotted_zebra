@@ -2,7 +2,7 @@
 (() => {
   "use strict";
   const SZ = window.SZ || {};
-  const EMAIL = SZ.email || "booking@spottedzebra.party";
+  const EMAIL = SZ.email || "contact@spottedzebra.party";
   const $ = (s, el = document) => el.querySelector(s);
   const $$ = (s, el = document) => [...el.querySelectorAll(s)];
 

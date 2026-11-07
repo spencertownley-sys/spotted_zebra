@@ -11,6 +11,13 @@ timezone: America/Los_Angeles
 logo: /assets/img/icon.png
 author: Spotted Zebra
 
+# Homepage hero video (full screen, behind the logo).
+# Upload a 10-15 second muted loop to assets/video/ and put its path here,
+# e.g. /assets/video/hero.mp4. Leave it empty to show the zebra stripes.
+# hero_poster: a still frame (jpg/webp) shown while the video loads.
+hero_video: ""
+hero_poster: ""
+
 social:
   name: Spotted Zebra
   links:

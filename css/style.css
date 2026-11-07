@@ -496,6 +496,8 @@ html.has-pop { overflow: hidden; }
 .signup__msg { grid-column: 1 / -1; color: var(--spot-2); min-height: 0; }
 .signup__msg:empty { display: none; }
 .signup.is-done .signup__row { display: none; }
+.signup__alt { grid-column: 1 / -1; color: var(--muted); font-size: .9rem; }
+.signup__alt a { color: var(--bone); }
 .foot .signup { max-width: 900px; margin: 0 0 16px; }
 @media (max-width: 760px) { .signup { grid-template-columns: 1fr; } }
 @media (max-width: 420px) { .signup__row { flex-direction: column; } }

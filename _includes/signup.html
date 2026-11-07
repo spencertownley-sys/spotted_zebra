@@ -1,0 +1,13 @@
+<form class="signup" data-signup novalidate>
+  <div class="signup__text">
+    <p class="signup__title">Get first dibs on show tickets</p>
+    <p class="signup__sub">New shows and ticket links, straight to your inbox. No spam, just zebra.</p>
+  </div>
+  <div class="signup__row">
+    <label class="sr" for="signup-{{ include.id }}">Email address</label>
+    <input type="email" id="signup-{{ include.id }}" name="email" placeholder="you@email.com" autocomplete="email" required>
+    <input type="text" name="_honey" tabindex="-1" autocomplete="off" class="hp" aria-hidden="true">
+    <button type="submit" class="btn btn--spot">Sign me up</button>
+  </div>
+  <p class="signup__msg" role="status" aria-live="polite"></p>
+</form>

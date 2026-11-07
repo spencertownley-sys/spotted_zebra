@@ -5,11 +5,14 @@
  * ───────────────────────────────────────────────────────────────────────
  */
 window.SZ = {
-  email: "booking@spottedzebra.party",
+  email: "contact@spottedzebra.party",
 
   /*
-   * Where the booking form sends. FormSubmit (free, no account) emails each
-   * booking to the address at the end. The very first booking sends an
+   * Where the booking form (and mailing list signup) sends. FormSubmit (free,
+   * no account) emails each one to the address at the end. It stays on
+   * booking@ because that address is already activated with FormSubmit;
+   * visitors never see it. Both booking@ and contact@ forward to the band's
+   * Gmail through Cloudflare Email Routing. The very first booking sends an
    * "Activate form" email there instead; click it once and you're set.
    * Leave it as "" to fall back to opening the visitor's email app.
    */

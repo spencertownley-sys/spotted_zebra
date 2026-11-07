@@ -1,0 +1,99 @@
+# ─── THE JUKEBOX: every song Spotted Zebra plays ──────────────────────
+#
+# This list powers the /jukebox/ page. One line per song.
+#   yt: a YouTube video ID of us playing it (adds a "Watch us play it" button)
+#   show: false hides a song without deleting it
+# Move a song between decades by cutting and pasting its line.
+# ───────────────────────────────────────────────────────────────────────
+
+decades:
+  - name: "Classic Rock"
+    blurb: "The 60s and 70s songs your parents (and you) still know every word to."
+    songs:
+      - { title: "Birthday", artist: "The Beatles", show: true }
+      - { title: "Rock and Roll", artist: "Led Zeppelin", yt: bieJ__ebdds, show: true }
+      - { title: "Long Train Runnin'", artist: "The Doobie Brothers", show: true }
+      - { title: "We're an American Band", artist: "Grand Funk Railroad", show: true }
+      - { title: "American Girl", artist: "Tom Petty and the Heartbreakers", show: true }
+      - { title: "Go Your Own Way", artist: "Fleetwood Mac", show: true }
+      - { title: "One Way or Another", artist: "Blondie", yt: 6vpuNEFdDaQ, show: true }
+      - { title: "Just What I Needed", artist: "The Cars", show: true }
+      - { title: "You Really Got Me", artist: "Van Halen", show: true }
+      - { title: "I Want You to Want Me (Live)", artist: "Cheap Trick", show: true }
+      - { title: "Crazy Little Thing Called Love", artist: "Queen", show: true }
+
+  - name: "80s"
+    blurb: "Big choruses, bigger hair."
+    songs:
+      - { title: "You Shook Me All Night Long", artist: "AC/DC", yt: s-XQlZWeMeM, show: true }
+      - { title: "Should I Stay or Should I Go", artist: "The Clash", yt: o0kJWJ4sjnw, show: true }
+      - { title: "Dancing with Myself", artist: "Generation X", show: true }
+      - { title: "Everybody Wants You", artist: "Billy Squier", show: true }
+      - { title: "Don't Change", artist: "INXS", show: true }
+      - { title: "I Ran (So Far Away)", artist: "A Flock of Seagulls", show: true }
+      - { title: "Tainted Love", artist: "Soft Cell (Imelda May version)", show: true }
+      - { title: "Panama", artist: "Van Halen", show: true }
+      - { title: "She Sells Sanctuary", artist: "The Cult", yt: 8zX0w-uO2iM, show: true }
+      - { title: "R.O.C.K. in the U.S.A.", artist: "John Mellencamp", show: true }
+      - { title: "Danger Zone", artist: "Kenny Loggins", show: true }
+      - { title: "Keep Your Hands to Yourself", artist: "The Georgia Satellites", show: true }
+      - { title: "(You Gotta) Fight for Your Right (To Party!)", artist: "Beastie Boys", yt: lEYze4neGn4, show: true }
+      - { title: "Love Shack", artist: "The B-52's", show: true }
+
+  - name: "90s"
+    blurb: "Grunge, alt-rock and the songs that soundtracked high school."
+    songs:
+      - { title: "Enter Sandman", artist: "Metallica", show: true }
+      - { title: "Mary Jane's Last Dance", artist: "Tom Petty and the Heartbreakers", show: true }
+      - { title: "Zombie", artist: "The Cranberries", show: true }
+      - { title: "Come Out and Play", artist: "The Offspring", show: true }
+      - { title: "Just a Girl", artist: "No Doubt", yt: -2fcZ-MbiZc, show: true }
+      - { title: "I Will Survive", artist: "CAKE", show: true }
+      - { title: "Santeria", artist: "Sublime", show: true }
+      - { title: "Flagpole Sitta", artist: "Harvey Danger", yt: kPxmXKnPico, show: true }
+      - { title: "Sex and Candy", artist: "Marcy Playground", show: true }
+      - { title: "Celebrity Skin", artist: "Hole", show: true }
+      - { title: "Inside Out", artist: "Eve 6", show: true }
+      - { title: "Fly Away", artist: "Lenny Kravitz", show: true }
+      - { title: "My Own Worst Enemy", artist: "Lit", yt: fEm53F-5kG4, show: true }
+      - { title: "What's My Age Again?", artist: "blink-182", show: true }
+
+  - name: "2000s"
+    blurb: "Alternative, indie and the stuff you blasted with the windows down."
+    songs:
+      - { title: "Island in the Sun", artist: "Weezer", show: true }
+      - { title: "Murder on the Dancefloor", artist: "Sophie Ellis-Bextor", show: true }
+      - { title: "Times Like These", artist: "Foo Fighters", show: true }
+      - { title: "Are You Gonna Be My Girl", artist: "Jet", yt: RVlfVm-uO_o, show: true }
+      - { title: "The Boys of Summer", artist: "The Ataris", show: true }
+      - { title: "Take Your Mama", artist: "Scissor Sisters", show: true }
+      - { title: "Black Horse and the Cherry Tree", artist: "KT Tunstall", show: true }
+      - { title: "Crazy", artist: "Gnarls Barkley", show: true }
+      - { title: "Valerie", artist: "Mark Ronson ft. Amy Winehouse", show: true }
+      - { title: "Sex on Fire", artist: "Kings of Leon", yt: yqAKQAtSMLo, show: true }
+      - { title: "Party in the U.S.A.", artist: "Miley Cyrus", show: true }
+
+  - name: "Now"
+    blurb: "Modern bangers, so nobody feels left out."
+    songs:
+      - { title: "Lonely Boy", artist: "The Black Keys", show: true }
+      - { title: "Sweet Dreams / Seven Nation Army (mashup)", artist: "Pomplamoose", show: true }
+      - { title: "I Knew You Were Trouble", artist: "Taylor Swift", show: true }
+      - { title: "Drum Show", artist: "Twenty One Pilots", yt: mSCY4f2GPr0, show: true }
+      - { title: "I Was Wrong", artist: "Chris Stapleton", show: true }
+      - { title: "Dream Last Night", artist: "John Mark Nelson", show: true }
+      - { title: "BLOW", artist: "Ed Sheeran, Chris Stapleton & Bruno Mars", yt: WZGlTMmjfzo, show: true }
+      - { title: "abcdefu", artist: "GAYLE", yt: knw_B5gZYzk, show: true }
+      - { title: "Stay", artist: "The Kid LAROI & Justin Bieber", yt: 3sN1RoTRcy4, show: true }
+      - { title: "About Damn Time", artist: "Lizzo", show: true }
+      - { title: "Wet Dream", artist: "Wet Leg", yt: XcHt0yC4YpE, show: true }
+      - { title: "Flowers", artist: "Miley Cyrus", show: true }
+      - { title: "Red Wine Supernova", artist: "Chappell Roan", show: true }
+      - { title: "The Door", artist: "Teddy Swims", yt: IyX7nA9ryz4, show: true }
+      - { title: "Too Sweet", artist: "Hozier", show: true }
+      - { title: "d£aler", artist: "Lola Young", yt: u9auXeTyPWE, show: true }
+
+# Taken off the list in the band's song sheet notes. Flip to true to bring one back.
+retired:
+  - { title: "Soak Up the Sun", artist: "Sheryl Crow", note: "\"Let's remove?\"", show: false }
+  - { title: "Sweet Home Alabama", artist: "Lynyrd Skynyrd", note: "\"Too thin\"", show: false }

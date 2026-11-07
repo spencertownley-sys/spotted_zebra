@@ -1,70 +1,22 @@
 (() => {
   "use strict";
   const SZ = window.SZ || {};
-  const EMAIL = SZ.email || "booking@spottedzebra.party";
+  const EMAIL = SZ.email || "contact@spottedzebra.party";
   const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const $ = (s, el = document) => el.querySelector(s);
   const $$ = (s, el = document) => [...el.querySelectorAll(s)];
   const mailto = (subject, body) =>
     `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
-  /* ── Shared audio (lazy, created on first user gesture) ─────────────── */
-  let ctx, master;
-  function audio() {
-    if (!ctx) {
-      const AC = window.AudioContext || window.webkitAudioContext;
-      if (!AC) return null;
-      ctx = new AC();
-      master = ctx.createDynamicsCompressor();
-      const vol = ctx.createGain();
-      vol.gain.value = 0.6;
-      master.connect(vol).connect(ctx.destination);
-    }
-    if (ctx.state === "suspended") ctx.resume();
-    return ctx;
-  }
-  const freq = (semi) => 261.63 * Math.pow(2, semi / 12); // semitones from middle C
-
-  const VOICES = {
-    synth: { types: ["sawtooth", "square"], detune: 9, attack: 0.01, release: 0.5, cutoff: 2400, oct: 0 },
-    organ: { types: ["sine", "sine"], detune: 1200, attack: 0.02, release: 0.3, cutoff: 5000, oct: 0 },
-    bass: { types: ["triangle", "sawtooth"], detune: 4, attack: 0.005, release: 0.35, cutoff: 700, oct: -2 },
-  };
-  let voice = "synth";
-
-  function playNote(semi, v = VOICES[voice], gain = 0.25) {
-    const ac = audio();
-    if (!ac) return;
-    const t = ac.currentTime;
-    const f = freq(semi + v.oct * 12);
-    const amp = ac.createGain();
-    const lp = ac.createBiquadFilter();
-    lp.type = "lowpass";
-    lp.frequency.setValueAtTime(v.cutoff * 1.6, t);
-    lp.frequency.exponentialRampToValueAtTime(v.cutoff, t + 0.25);
-    amp.gain.setValueAtTime(0.0001, t);
-    amp.gain.exponentialRampToValueAtTime(gain, t + v.attack);
-    amp.gain.exponentialRampToValueAtTime(0.0001, t + v.attack + v.release);
-    lp.connect(amp).connect(master);
-    v.types.forEach((type, i) => {
-      const o = ac.createOscillator();
-      o.type = type;
-      o.frequency.value = f;
-      o.detune.value = i ? v.detune : 0;
-      o.connect(lp);
-      o.start(t);
-      o.stop(t + v.attack + v.release + 0.05);
-    });
-  }
-
-  /* ── HERO: living zebra stripes + droppable spots ───────────────────── */
+  /* ── HERO: living zebra stripes ─────────────────────────────────────── */
   const canvas = $("#stripes");
   const g = canvas.getContext("2d");
   const hero = $(".hero");
+  const heroVideo = $(".hero__video");
+  // Respect reduced motion: hold the video on its first frame / poster.
+  if (heroVideo && reduceMotion) { heroVideo.removeAttribute("autoplay"); heroVideo.pause(); }
   let W, H, DPR;
   const mouse = { x: -9999, y: -9999, tx: -9999, ty: -9999 };
-  const spots = [];
-  const PENTA = [0, 2, 4, 7, 9, 12, 14, 16, 19, 21];
 
   function resize() {
     DPR = Math.min(devicePixelRatio || 1, 2);
@@ -82,19 +34,6 @@
     mouse.ty = e.clientY - r.top;
   });
   hero.addEventListener("pointerleave", () => { mouse.tx = mouse.ty = -9999; });
-
-  function dropSpot(x, y, play = true) {
-    const hot = Math.random() < 0.7;
-    spots.push({ x, y, r: 0, max: 30 + Math.random() * 70, life: 1, color: hot ? "255,46,99" : "255,210,63" });
-    if (spots.length > 40) spots.shift();
-    if (play) playNote(PENTA[Math.floor((1 - y / H) * PENTA.length)] ?? 0, VOICES.synth, 0.18);
-  }
-  hero.addEventListener("pointerdown", (e) => {
-    if (e.target.closest("a, button")) return;
-    const r = hero.getBoundingClientRect();
-    dropSpot(e.clientX - r.left, e.clientY - r.top);
-    $(".hero__hint")?.remove();
-  });
 
   let heroVisible = true;
   new IntersectionObserver(([en]) => { heroVisible = en.isIntersecting; }).observe(hero);
@@ -122,18 +61,6 @@
       g.closePath();
       g.fill();
     }
-
-    // spots
-    for (let i = spots.length - 1; i >= 0; i--) {
-      const s = spots[i];
-      s.r += (s.max - s.r) * 0.18;
-      if (s.r > s.max * 0.95) s.life -= 0.004;
-      if (s.life <= 0) { spots.splice(i, 1); continue; }
-      g.fillStyle = `rgba(${s.color},${Math.min(1, s.life * 1.4)})`;
-      g.beginPath();
-      g.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-      g.fill();
-    }
   }
 
   function edgeX(x0, y, t, idx) {
@@ -157,13 +84,8 @@
     if (heroVisible) drawStripes(time);
     requestAnimationFrame(loop);
   }
-  if (reduceMotion) drawStripes(0); else requestAnimationFrame(loop);
-
-  // a couple of spots to start with so the idea is obvious
-  if (!reduceMotion) setTimeout(() => {
-    dropSpot(W * 0.18, H * 0.3, false);
-    dropSpot(W * 0.82, H * 0.7, false);
-  }, 600);
+  if (heroVideo) { /* the video is the background; no stripes to draw */ }
+  else if (reduceMotion) drawStripes(0); else requestAnimationFrame(loop);
 
   /* ── Spotlight photo ────────────────────────────────────────────────── */
   const spot = $("#spotlight");
@@ -188,7 +110,7 @@
   }
 
   /* ── Count-up stats + reveal on scroll ──────────────────────────────── */
-  $$(".section-head, .about__text, .spotlight, .keys, .shows__list, .book__grid, .player, .gallery, .post-cards, .theater, .filmstrip, .shorts").forEach((el) => el.classList.add("reveal"));
+  $$(".section-head, .about__text, .spotlight, .shows__list, .book__grid, .player, .gallery, .post-cards, .theater, .filmstrip, .shorts").forEach((el) => el.classList.add("reveal"));
   const io = new IntersectionObserver((entries) => {
     entries.forEach((en) => {
       if (!en.isIntersecting) return;
@@ -210,131 +132,6 @@
       if (p < 1) requestAnimationFrame(tick);
     })(t0);
   }
-
-  /* ── Play the Zebra ─────────────────────────────────────────────────── */
-  const keysEl = $("#keys");
-  const KEYMAP = ["a", "w", "s", "e", "d", "f", "t", "g", "y", "h", "u", "j", "k"];
-  const NAMES = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B", "C"];
-  const keyEls = KEYMAP.map((k, i) => {
-    const b = document.createElement("button");
-    b.type = "button";
-    b.className = "key";
-    b.setAttribute("aria-label", `Note ${NAMES[i]} (key ${k.toUpperCase()})`);
-    b.innerHTML = `<i class="dot"></i><span>${k}</span>`;
-    keysEl.appendChild(b);
-    return b;
-  });
-
-  function hit(i) {
-    const k = keyEls[i];
-    if (!k) return;
-    playNote(i);
-    k.classList.remove("is-down");
-    void k.offsetWidth;
-    k.classList.add("is-down");
-    clearTimeout(k._t);
-    k._t = setTimeout(() => k.classList.remove("is-down"), 180);
-  }
-
-  // pointer: allow dragging across stripes like a glissando
-  let dragging = false, lastKey = -1;
-  keysEl.addEventListener("pointerdown", (e) => {
-    const i = keyEls.indexOf(e.target.closest(".key"));
-    if (i < 0) return;
-    dragging = true; lastKey = i; hit(i);
-  });
-  keysEl.addEventListener("pointermove", (e) => {
-    if (!dragging) return;
-    const el = document.elementFromPoint(e.clientX, e.clientY);
-    const i = keyEls.indexOf(el && el.closest(".key"));
-    if (i >= 0 && i !== lastKey) { lastKey = i; hit(i); }
-  });
-  addEventListener("pointerup", () => { dragging = false; lastKey = -1; });
-  // keyboard activation on a focused key (Enter/Space) without double-firing pointer
-  keyEls.forEach((k, i) => k.addEventListener("keydown", (e) => {
-    if (e.key === "Enter" || e.key === " ") { e.preventDefault(); hit(i); }
-  }));
-
-  const held = new Set();
-  addEventListener("keydown", (e) => {
-    if (e.metaKey || e.ctrlKey || e.altKey || e.target.closest("input, textarea")) return;
-    const i = KEYMAP.indexOf(e.key.toLowerCase());
-    if (i < 0 || held.has(i)) return;
-    const r = keysEl.getBoundingClientRect();
-    if (r.bottom < 0 || r.top > innerHeight) return; // only when the keyboard is on screen
-    held.add(i);
-    hit(i);
-  });
-  addEventListener("keyup", (e) => held.delete(KEYMAP.indexOf(e.key.toLowerCase())));
-
-  $$(".seg button").forEach((b) => b.addEventListener("click", () => {
-    voice = b.dataset.voice;
-    $$(".seg button").forEach((x) => x.setAttribute("aria-checked", String(x === b)));
-    playNote(0);
-  }));
-
-  // drum machine: kick / snare / hat at 112 bpm, scheduled ahead for tight timing
-  const beatBtn = $("#beat");
-  let beatOn = false, nextT = 0, stepN = 0, timer;
-  const BPM = 112, SIXTEENTH = 60 / BPM / 4;
-  const PATTERN = {
-    kick:  [1,0,0,0, 0,0,1,0, 1,0,0,0, 0,0,0,0],
-    snare: [0,0,0,0, 1,0,0,0, 0,0,0,0, 1,0,0,1],
-    hat:   [1,0,1,0, 1,0,1,0, 1,0,1,0, 1,0,1,1],
-  };
-  let noiseBuf;
-  function noise() {
-    if (!noiseBuf) {
-      noiseBuf = ctx.createBuffer(1, ctx.sampleRate * 0.5, ctx.sampleRate);
-      const d = noiseBuf.getChannelData(0);
-      for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
-    }
-    const s = ctx.createBufferSource();
-    s.buffer = noiseBuf;
-    return s;
-  }
-  function kick(t) {
-    const o = ctx.createOscillator(), a = ctx.createGain();
-    o.frequency.setValueAtTime(150, t);
-    o.frequency.exponentialRampToValueAtTime(40, t + 0.12);
-    a.gain.setValueAtTime(0.9, t);
-    a.gain.exponentialRampToValueAtTime(0.001, t + 0.35);
-    o.connect(a).connect(master); o.start(t); o.stop(t + 0.36);
-  }
-  function snare(t) {
-    const n = noise(), f = ctx.createBiquadFilter(), a = ctx.createGain();
-    f.type = "highpass"; f.frequency.value = 1200;
-    a.gain.setValueAtTime(0.45, t);
-    a.gain.exponentialRampToValueAtTime(0.001, t + 0.18);
-    n.connect(f).connect(a).connect(master); n.start(t); n.stop(t + 0.2);
-  }
-  function hat(t) {
-    const n = noise(), f = ctx.createBiquadFilter(), a = ctx.createGain();
-    f.type = "highpass"; f.frequency.value = 7000;
-    a.gain.setValueAtTime(0.16, t);
-    a.gain.exponentialRampToValueAtTime(0.001, t + 0.05);
-    n.connect(f).connect(a).connect(master); n.start(t); n.stop(t + 0.06);
-  }
-  function scheduler() {
-    while (nextT < ctx.currentTime + 0.12) {
-      const s = stepN % 16;
-      if (PATTERN.kick[s]) kick(nextT);
-      if (PATTERN.snare[s]) snare(nextT);
-      if (PATTERN.hat[s]) hat(nextT);
-      nextT += SIXTEENTH;
-      stepN++;
-    }
-  }
-  beatBtn.addEventListener("click", () => {
-    if (!audio()) return;
-    beatOn = !beatOn;
-    beatBtn.setAttribute("aria-pressed", String(beatOn));
-    beatBtn.textContent = `Beat: ${beatOn ? "on" : "off"}`;
-    clearInterval(timer);
-    if (beatOn) { nextT = ctx.currentTime + 0.05; stepN = 0; timer = setInterval(scheduler, 25); }
-  });
-  // stop the beat if the tab is hidden
-  document.addEventListener("visibilitychange", () => { if (document.hidden && beatOn) beatBtn.click(); });
 
   /* ── Shows ──────────────────────────────────────────────────────────── */
   const showList = $("#showList");
@@ -494,7 +291,6 @@
       const on = chip.getAttribute("aria-pressed") !== "true";
       if (!multi) $$(".chip", group).forEach((c) => c.setAttribute("aria-pressed", "false"));
       chip.setAttribute("aria-pressed", String(on));
-      if (on) playNote(12 + Math.floor(Math.random() * 7), VOICES.synth, 0.08);
       updateTicket(true);
     }));
   });
@@ -551,7 +347,6 @@
   }
 
   function celebrate() {
-    for (let i = 0; i < 5; i++) setTimeout(() => playNote([0, 4, 7, 12, 16][i], VOICES.synth, 0.12), i * 90);
     ticket.classList.remove("is-printed"); void ticket.offsetWidth; ticket.classList.add("is-printed");
   }
 

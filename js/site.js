@@ -1,21 +1,10 @@
-/* Shared on every page: cursor, nav, mobile menu, photo lightbox, footer links. */
+/* Shared on every page: nav, mobile menu, photo lightbox, footer links. */
 (() => {
   "use strict";
   const SZ = window.SZ || {};
-  const EMAIL = SZ.email || "booking@spottedzebra.party";
+  const EMAIL = SZ.email || "contact@spottedzebra.party";
   const $ = (s, el = document) => el.querySelector(s);
   const $$ = (s, el = document) => [...el.querySelectorAll(s)];
-
-  /* ── Custom cursor ──────────────────────────────────────────────────── */
-  const cursor = $(".cursor");
-  if (cursor && matchMedia("(pointer: fine)").matches) {
-    addEventListener("pointermove", (e) => {
-      cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
-    }, { passive: true });
-    document.addEventListener("pointerover", (e) => {
-      cursor.classList.toggle("is-big", !!e.target.closest("a, button, label, input, .key"));
-    });
-  }
 
   /* ── Nav: solid background on scroll + mobile menu ──────────────────── */
   const nav = $(".nav");
@@ -31,6 +20,41 @@
   toggle.addEventListener("click", () => setMenu(!nav.classList.contains("is-open")));
   $$("#navMenu a").forEach((a) => a.addEventListener("click", () => setMenu(false)));
   addEventListener("keydown", (e) => { if (e.key === "Escape") setMenu(false); });
+
+  /* ── Mailing list signup (emails the band through the booking form service) ── */
+  $$("[data-signup]").forEach((f) => f.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const email = f.elements.email, msg = $(".signup__msg", f), btn = $("button", f);
+    if (!email.value.trim() || !email.checkValidity()) { msg.textContent = "That email doesn't look quite right."; email.focus(); return; }
+    if (!SZ.formEndpoint) {
+      location.href = "mailto:" + EMAIL + "?subject=" + encodeURIComponent("Add me to the Spotted Zebra list") + "&body=" + encodeURIComponent(email.value);
+      return;
+    }
+    btn.disabled = true;
+    msg.textContent = "Signing you up…";
+    try {
+      const res = await fetch(SZ.formEndpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          _subject: "Mailing list signup",
+          _template: "table",
+          _honey: f.elements._honey.value,
+          email: email.value.trim(),
+          "signed up from": location.pathname,
+        }),
+      });
+      const json = await res.json().catch(() => ({}));
+      if (!res.ok || String(json.success) !== "true") throw new Error("signup failed");
+      f.classList.add("is-done");
+      msg.textContent = "You're on the list. See you at the next show!";
+      email.value = "";
+    } catch (err) {
+      msg.innerHTML = 'Couldn\'t sign you up just now. Email <a href="mailto:' + EMAIL + '">' + EMAIL + "</a> and we'll add you.";
+    } finally {
+      btn.disabled = false;
+    }
+  }));
 
   /* ── Lightbox for photo grids ───────────────────────────────────────── */
   const box = $("#lightbox");

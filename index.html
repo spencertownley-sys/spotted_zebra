@@ -33,7 +33,7 @@ layout: null
         "foundingLocation": { "@type": "Place", "name": "Seattle, Washington" },
         "location": { "@type": "Place", "name": "Seattle, WA", "address": { "@type": "PostalAddress", "addressLocality": "Seattle", "addressRegion": "WA", "addressCountry": "US" } },
         "areaServed": [{ "@type": "City", "name": "Seattle" }, { "@type": "Place", "name": "Greater Seattle area" }, { "@type": "Place", "name": "Pacific Northwest" }],
-        "email": "booking@spottedzebra.party",
+        "email": "contact@spottedzebra.party",
         "sameAs": [
           "https://www.instagram.com/spottedzebramusic",
           "https://www.facebook.com/spottedzebramusic/",
@@ -55,8 +55,14 @@ layout: null
   {% include nav.html %}
 
   <main id="main">
-    <!-- HERO: generative stripes. Click to drop spots. -->
-    <section class="hero" id="top">
+    <!-- HERO: video loop (set hero_video in _config.yml) or generative zebra stripes. -->
+    {%- assign hero_video = site.hero_video | strip %}
+    <section class="hero{% if hero_video != "" %} hero--video{% endif %}" id="top">
+      {%- if hero_video != "" %}
+      <video class="hero__video" autoplay muted loop playsinline preload="auto"{% if site.hero_poster != "" %} poster="{{ site.hero_poster }}"{% endif %} aria-hidden="true" tabindex="-1">
+        <source src="{{ hero_video }}" type="{% if hero_video contains '.webm' %}video/webm{% else %}video/mp4{% endif %}">
+      </video>
+      {%- endif %}
       <canvas id="stripes" aria-hidden="true"></canvas>
       <div class="hero__inner">
         <img class="hero__logo" src="/assets/img/logo.png" alt="Spotted Zebra" width="420" height="420">
@@ -67,7 +73,6 @@ layout: null
           <a href="#shows" class="btn btn--ghost">Upcoming shows</a>
         </div>
       </div>
-      <p class="hero__hint" aria-hidden="true">tap anywhere to spot the zebra</p>
     </section>
 
     <div class="marquee" aria-hidden="true">
@@ -84,6 +89,15 @@ layout: null
         <h2>Catch us live.</h2>
       </div>
       <ul class="shows__list" id="showList"></ul>
+      {% include signup.html id="shows" %}
+      <div class="spotted">
+        <p class="spotted__label">Spotted at</p>
+        <ul class="spotted__list">
+          {%- for v in site.data.venues %}
+          <li>{{ v }}</li>
+          {%- endfor %}
+        </ul>
+      </div>
     </section>
 
     <!-- ABOUT: spotlight photo -->
@@ -101,7 +115,7 @@ layout: null
         <ul class="stats">
           <li><b data-count="2021">2021</b><span>formed</span></li>
           <li><b data-count="5">5</b><span>members</span></li>
-          <li><b data-count="4">4</b><span>decades of hits</span></li>
+          <li><b data-count="50">50</b><span>years of hits</span></li>
         </ul>
       </div>
     </section>
@@ -150,24 +164,6 @@ layout: null
       </div>
     </section>
     {%- endif %}
-
-    <!-- PLAY THE ZEBRA -->
-    <section class="play" id="play">
-      <div class="section-head">
-        <p class="eyebrow">Play the Zebra</p>
-        <h2>Every stripe is a note.</h2>
-        <p>Click, tap or use your keyboard (<kbd>A</kbd>&ndash;<kbd>K</kbd>, plus <kbd>W</kbd> <kbd>E</kbd> <kbd>T</kbd> <kbd>Y</kbd> <kbd>U</kbd>). Turn on the beat and jam with us.</p>
-      </div>
-      <div class="play__controls">
-        <div class="seg" role="radiogroup" aria-label="Sound">
-          <button type="button" role="radio" aria-checked="true" data-voice="synth">80s Synth</button>
-          <button type="button" role="radio" aria-checked="false" data-voice="organ">Organ</button>
-          <button type="button" role="radio" aria-checked="false" data-voice="bass">Bass</button>
-        </div>
-        <button type="button" class="btn btn--ghost" id="beat" aria-pressed="false">Beat: off</button>
-      </div>
-      <div class="keys" id="keys" aria-label="Zebra keyboard"></div>
-    </section>
 
     <!-- PHOTOS: everything in assets/photos/ -->
     <section class="photos" id="photos">
@@ -228,14 +224,14 @@ layout: null
         </details>
         <details>
           <summary><h3>How do we book Spotted Zebra?</h3></summary>
-          <p>Fill in the <a href="#book">Gig Builder</a> below and it lands straight in our inbox, or email <a data-email href="mailto:booking@spottedzebra.party">booking@spottedzebra.party</a>. Tell us the date, the venue and roughly how many people are coming.</p>
+          <p>Fill in the <a href="#book">Gig Builder</a> below and it lands straight in our inbox, or email <a data-email href="mailto:contact@spottedzebra.party">contact@spottedzebra.party</a>. Tell us the date, the venue and roughly how many people are coming.</p>
         </details>
         <details>
           <summary><h3>Where can we see you play first?</h3></summary>
           <p>Check <a href="#shows">upcoming shows</a>, watch <a href="/videos/">our videos</a>, or follow us on <a href="https://www.instagram.com/spottedzebramusic" target="_blank" rel="noopener">Instagram</a> for the next gig.</p>
         </details>
       </div>
-      <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What kind of band is Spotted Zebra?", "acceptedAnswer": {"@type": "Answer", "text": "A five-piece cover band from Seattle. We play the songs people actually want to hear: 80s hits, 90s rock, 2000s alternative and today’s bangers, plus a few originals of our own."}}, {"@type": "Question", "name": "Where do you play?", "acceptedAnswer": {"@type": "Answer", "text": "Bars, private parties and events around the greater Seattle area and the Pacific Northwest. Planning something further away? Tell us about it."}}, {"@type": "Question", "name": "What kinds of events do you play?", "acceptedAnswer": {"@type": "Answer", "text": "Bar and venue gigs, private parties, weddings, corporate events and festivals. If there’s a dance floor (or there should be), we’re interested."}}, {"@type": "Question", "name": "Can we request songs?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. List your must-plays in the Gig Builder when you book and we’ll work them into the night."}}, {"@type": "Question", "name": "How do we book Spotted Zebra?", "acceptedAnswer": {"@type": "Answer", "text": "Fill in the Gig Builder below and it lands straight in our inbox, or email booking@spottedzebra.party. Tell us the date, the venue and roughly how many people are coming."}}, {"@type": "Question", "name": "Where can we see you play first?", "acceptedAnswer": {"@type": "Answer", "text": "Check upcoming shows, watch our videos, or follow us on Instagram for the next gig."}}]}</script>
+      <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What kind of band is Spotted Zebra?", "acceptedAnswer": {"@type": "Answer", "text": "A five-piece cover band from Seattle. We play the songs people actually want to hear: 80s hits, 90s rock, 2000s alternative and today’s bangers, plus a few originals of our own."}}, {"@type": "Question", "name": "Where do you play?", "acceptedAnswer": {"@type": "Answer", "text": "Bars, private parties and events around the greater Seattle area and the Pacific Northwest. Planning something further away? Tell us about it."}}, {"@type": "Question", "name": "What kinds of events do you play?", "acceptedAnswer": {"@type": "Answer", "text": "Bar and venue gigs, private parties, weddings, corporate events and festivals. If there’s a dance floor (or there should be), we’re interested."}}, {"@type": "Question", "name": "Can we request songs?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. List your must-plays in the Gig Builder when you book and we’ll work them into the night."}}, {"@type": "Question", "name": "How do we book Spotted Zebra?", "acceptedAnswer": {"@type": "Answer", "text": "Fill in the Gig Builder below and it lands straight in our inbox, or email contact@spottedzebra.party. Tell us the date, the venue and roughly how many people are coming."}}, {"@type": "Question", "name": "Where can we see you play first?", "acceptedAnswer": {"@type": "Answer", "text": "Check upcoming shows, watch our videos, or follow us on Instagram for the next gig."}}]}</script>
     </section>
 
     <!-- BOOKING / GIG BUILDER -->
@@ -274,7 +270,7 @@ layout: null
             <label>Your name<input type="text" name="name" autocomplete="name" required></label>
             <label>Email<input type="email" name="email" autocomplete="email" required></label>
           </div>
-          <label>Anything else?<textarea name="message" rows="3" placeholder="Venue, city, set length, must-play songs..."></textarea></label>
+          <label>Anything else?<textarea name="message" rows="3" placeholder="Venue, city, set length&hellip; Song requests? e.g. &ldquo;Sex on Fire&rdquo;, &ldquo;Zombie&rdquo;, &ldquo;Valerie&rdquo;"></textarea></label>
           <label class="hp" aria-hidden="true">Leave this empty<input type="text" name="_honey" tabindex="-1" autocomplete="off"></label>
           <p class="form-error" id="formError" role="alert"></p>
           <button type="submit" class="btn btn--spot" id="gigSend">Send it</button>
@@ -302,7 +298,7 @@ layout: null
           <div class="ticket__stamp" aria-hidden="true">Sent</div>
         </div>
       </div>
-      <p class="book__direct">Prefer email? <a data-email href="mailto:booking@spottedzebra.party">booking@spottedzebra.party</a></p>
+      <p class="book__direct">Prefer email? <a data-email href="mailto:contact@spottedzebra.party">contact@spottedzebra.party</a></p>
     </section>
   </main>
 

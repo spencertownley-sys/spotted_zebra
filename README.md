@@ -9,9 +9,12 @@ It's a static site built by GitHub Pages' built-in Jekyll. There's nothing to in
 
 | Feature | What it does |
 | --- | --- |
-| **Living zebra hero** | Animated, wavy zebra stripes bend away from your cursor. Click or tap anywhere to drop a "spot" that plays a note. |
+| **Living zebra hero** | Animated, wavy zebra stripes that bend away from your cursor. Swap in a video loop any time (see "Homepage video" below). |
 | **Spotlight photo** | The band photo sits in the dark. A spotlight follows your cursor, and drifts across the band on its own when nobody's steering. |
-| **Play the Zebra** | A playable zebra-stripe keyboard (mouse, touch drag, or keys `A`–`K`) with three sounds and a built-in drum beat. Runs on the Web Audio API with no audio files. |
+| **Play the Zebra** | At `/play/`: a playable zebra-stripe keyboard (mouse, touch drag, or keys `A`–`K`) with three sounds and a built-in drum beat. Runs on the Web Audio API with no audio files. |
+| **The Jukebox** | At `/jukebox/`: the full song list, grouped by decade, searchable, with a "Watch" button on every song we have a video of. |
+| **Press kit** | At `/press/`: bio, quick facts, venues, live videos, downloadable photo and logo. Prints cleanly to PDF. |
+| **Mailing list** | "Get first dibs on show tickets" signup on the homepage and in the footer. Each signup lands in the booking inbox. |
 | **Gig Builder** | The booking form prints a live ticket as you fill it in, then sends itself to the band's inbox and stamps the ticket "SENT". If sending ever fails, it offers a pre-written email instead. |
 | **Shows** | Upcoming gigs come from one list, and past dates drop off on their own. Sits right under the hero, and the next show's poster pops up with a ticket button. |
 | **Watch** | YouTube clips on the homepage in a "theater" with a film-strip picker, Shorts in a phone-sized player, and a searchable `/videos/` page. Nothing from YouTube loads until someone presses play. |
@@ -35,6 +38,20 @@ Every change below can be made on github.com: open the file or folder, use the p
   ```
   Add `flyer: "/assets/shows/your-flyer.jpg"` (put the image in `assets/shows/`) and the show gets a big featured card with the flyer. Optional extras: `title`, `with` (other bands), `doors`, `end`, `price`, `address`. Put a ticket URL in `link` and a **Get tickets** button appears.
 - **Pop-up:** the next show with both a `flyer` and a ticket `link` pops up on the homepage (once per visit) with its poster and a **Buy tickets** button. Add `popup: false` to a show to skip it, or set `popup: false` near the top of the shows list to turn the pop-up off.
+
+### Homepage video: `_config.yml` + `assets/video/`
+
+1. Upload a 10–15 second muted loop (MP4, landscape, 1920×1080 or larger, ideally under 8 MB) to `assets/video/`, for example `hero.mp4`.
+2. In `_config.yml`, set `hero_video: /assets/video/hero.mp4`. Optionally set `hero_poster:` to a still image shown while it loads.
+3. The video fills the top of the homepage behind the logo. Clear `hero_video` to bring the zebra stripes back.
+
+### Song list: `_data/songs.yml`
+
+One line per song, grouped by decade. Add `yt:` with a YouTube ID to show a **Watch** button, or `show: false` to hide a song.
+
+### Venues we've played: `_data/venues.yml`
+
+One venue per line. Shows up in the "Spotted at" strip on the homepage and on the press kit.
 
 ### Videos: `_data/videos.yml`
 
@@ -120,22 +137,22 @@ The things that move rankings most happen off the site:
 5. **Keep it fresh:** add every show with its venue's street address, and post on the blog after gigs. Name the venue and neighborhood in each post.
 6. **Get listed:** ask venues you play to link to the site from their event pages. Add the band to local directories, such as wedding vendor sites (The Knot, WeddingWire), GigSalad, and Seattle music calendars.
 
-## Email: booking@spottedzebra.party
+## Email: contact@spottedzebra.party
 
-The site's address is **booking@spottedzebra.party**. Cloudflare Email Routing (free) forwards it to the band's Gmail.
+The site shows **contact@spottedzebra.party** everywhere (links, booking section, press kit, Google data). Cloudflare Email Routing (free) forwards it to **SpottedZebraMusic@gmail.com**, so the Gmail address never appears on the site. To change the address shown, edit `email` in `js/data.js` (and the `mailto:` links in `index.html` and `press.html`).
 
 **Receiving (Cloudflare):**
-1. In Cloudflare, open **spottedzebra.party → Email → Email Routing** and click **Get started** / **Enable**. Let it add the MX and TXT records it asks for.
-2. Under **Destination addresses**, add `SpottedZebraMusic@gmail.com` and click the verification link Cloudflare emails there.
-3. Under **Routing rules → Custom addresses**, create `booking` → *Send to an email* → `SpottedZebraMusic@gmail.com`. Optionally turn on **Catch-all** so anything@spottedzebra.party also arrives.
+1. In Cloudflare, open **spottedzebra.party → Email → Email Routing**. (It's already enabled: the MX and SPF records are in place.)
+2. Under **Destination addresses**, make sure `SpottedZebraMusic@gmail.com` is listed and verified.
+3. Under **Routing rules → Custom addresses**, create `contact` → *Send to an email* → `SpottedZebraMusic@gmail.com`. Keep the existing `booking` rule too: the booking form and mailing list still deliver through booking@. Or turn on **Catch-all** → `SpottedZebraMusic@gmail.com` so anything@spottedzebra.party arrives.
 
-**Replying as booking@ from Gmail (optional):**
+**Replying as contact@ from Gmail (optional):**
 1. Turn on 2-Step Verification for the Gmail account, then create an **App password** (Google Account → Security → App passwords).
-2. In Gmail: **Settings → Accounts and Import → Send mail as → Add another email address**. Name: *Spotted Zebra*, address `booking@spottedzebra.party`, untick "Treat as an alias".
+2. In Gmail: **Settings → Accounts and Import → Send mail as → Add another email address**. Name: *Spotted Zebra*, address `contact@spottedzebra.party`, untick "Treat as an alias". Then set it as the default "send as" address.
 3. SMTP server `smtp.gmail.com`, port `587`, username = the full Gmail address, password = the app password, TLS. Confirm with the code Gmail sends (it arrives through the routing above).
 4. Back in Cloudflare DNS, edit the TXT record that starts with `v=spf1` so it includes Google: `v=spf1 include:_spf.mx.cloudflare.net include:_spf.google.com ~all`.
 
-**Booking form:** it posts to FormSubmit (`formEndpoint` in `js/data.js`), which emails each booking to booking@spottedzebra.party. The **first** booking ever sent triggers an "Activate form" email from FormSubmit instead. Click **Activate Form** in that email once, and every booking after that arrives normally. Spam bots are filtered out by a hidden "honeypot" field.
+**Booking form and mailing list:** both post to FormSubmit (`formEndpoint` in `js/data.js`), which emails each one to booking@spottedzebra.party (already activated, and never shown to visitors). If you ever change that address, the **first** submission sends an "Activate form" email instead; click **Activate Form** once and everything after arrives normally. Spam bots are filtered out by a hidden "honeypot" field.
 
 ## Hosting on GitHub Pages + spottedzebra.party
 

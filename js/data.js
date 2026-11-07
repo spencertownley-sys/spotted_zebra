@@ -33,7 +33,14 @@ window.SZ = {
    *   title: event name · with: other bands on the bill · doors: door time
    *   end: end time · price: ticket line · flyer: image path (full size)
    *   flyerSmall: smaller copy for the page (falls back to flyer)
+   *
+   * Pop-up: the next show that has both a flyer and a ticket link pops up
+   * on the homepage (once per visit) with a "Buy tickets" button.
+   * Add popup: false to a show to skip it, or set popup: false below to
+   * turn the pop-up off entirely.
    */
+  popup: true,
+
   shows: [
     {
       date: "2026-11-28",

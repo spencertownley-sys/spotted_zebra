@@ -5,6 +5,7 @@
   <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="navMenu"><span></span><span></span><span class="sr">Menu</span></button>
   <nav aria-label="Main" id="navMenu">
     <ul>
+      <li><a href="/#shows">Shows</a></li>
       <li><a href="/#about">About</a></li>
       {%- assign live_songs = site.data.music.songs | where: "show", true -%}
       {%- if site.data.music.enabled and live_songs.size > 0 %}
@@ -16,7 +17,6 @@
       {%- endif %}
       <li><a href="/#jukebox">Jukebox</a></li>
       <li><a href="/photos/"{% if page.url == "/photos/" %} aria-current="page"{% endif %}>Photos</a></li>
-      <li><a href="/#shows">Shows</a></li>
       <li><a href="/blog/"{% if page.url contains "/blog/" %} aria-current="page"{% endif %}>Blog</a></li>
       <li><a href="/#book" class="nav__cta">Book us</a></li>
     </ul>

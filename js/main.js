@@ -512,6 +512,47 @@
       url: s.link || "https://spottedzebra.party/#shows",
     })));
     document.head.appendChild(ld);
+
+    /* Pop-up poster for the next show (once per visit). */
+    const next = upcoming.find((s) => s.flyer && s.link && s.popup !== false);
+    const seenKey = "sz-popup-" + (next && next.date);
+    let seen = false;
+    try { seen = sessionStorage.getItem(seenKey) === "1"; } catch (e) {}
+    if (next && SZ.popup !== false && !seen && window.HTMLDialogElement) {
+      const esc = (v) => String(v ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+      const full = next.d.toLocaleString("en-US", { weekday: "long", month: "long", day: "numeric" });
+      const dlg = document.createElement("dialog");
+      dlg.className = "showpop";
+      dlg.setAttribute("aria-labelledby", "showpopTitle");
+      dlg.innerHTML = `
+        <button type="button" class="showpop__close" aria-label="Close">&times;</button>
+        <img class="showpop__flyer" src="${esc(next.flyerSmall || next.flyer)}" alt="Flyer: ${esc(next.title || "Spotted Zebra live")} at ${esc(next.venue)}, ${esc(full)}" width="800" height="1035" decoding="async">
+        <div class="showpop__body">
+          <p class="showpop__tag">Next show</p>
+          <p class="showpop__title" id="showpopTitle">${esc(next.title || "Spotted Zebra live")}</p>
+          <p class="showpop__meta">${esc(full)}${next.time ? " · " + esc(next.time) : ""} · ${esc(next.venue)}</p>
+          ${next.price ? `<p class="showpop__price">${esc(next.price)}</p>` : ""}
+          <div class="showpop__actions">
+            <a class="btn btn--spot" href="${esc(next.link)}" target="_blank" rel="noopener">Buy tickets</a>
+            <a class="btn btn--ghost" href="#shows" data-close>Details</a>
+          </div>
+        </div>`;
+      document.body.appendChild(dlg);
+      const close = () => dlg.close();
+      $(".showpop__close", dlg).addEventListener("click", close);
+      $("[data-close]", dlg).addEventListener("click", close);
+      $(".btn--spot", dlg).addEventListener("click", close);
+      // click on the dark backdrop (outside the card) closes it
+      dlg.addEventListener("click", (e) => { if (e.target === dlg) close(); });
+      dlg.addEventListener("close", () => document.documentElement.classList.remove("has-pop"));
+      setTimeout(() => {
+        if (document.querySelector("dialog[open], .lightbox:not([hidden]), .vmodal:not([hidden])")) return;
+        try { sessionStorage.setItem(seenKey, "1"); } catch (e) {}
+        document.documentElement.classList.add("has-pop");
+        dlg.showModal();
+        $(".btn--spot", dlg).focus();
+      }, 1200);
+    }
   }
 
   /* ── Gig builder + live ticket ──────────────────────────────────────── */

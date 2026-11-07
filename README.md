@@ -14,7 +14,7 @@ It's a static site built by GitHub Pages' built-in Jekyll. There's nothing to in
 | **The Jukebox** | Choose a decade (80s, 90s, 2000s, Now), tick songs, and send them to the band as requests. "Shuffle" spins the record and picks a random song. |
 | **Play the Zebra** | A playable zebra-stripe keyboard (mouse, touch drag, or keys `A`–`K`) with three sounds and a built-in drum beat. Runs on the Web Audio API with no audio files. |
 | **Gig Builder** | The booking form prints a live ticket as you fill it in, then sends itself to the band's inbox (with any jukebox requests) and stamps the ticket "SENT". If sending ever fails, it offers a pre-written email instead. |
-| **Shows** | Upcoming gigs come from one list, and past dates drop off on their own. |
+| **Shows** | Upcoming gigs come from one list, and past dates drop off on their own. Sits right under the hero, and the next show's poster pops up with a ticket button. |
 | **Watch** | YouTube clips on the homepage in a "theater" with a film-strip picker, Shorts in a phone-sized player, and a searchable `/videos/` page. Nothing from YouTube loads until someone presses play. |
 | **Listen** | A music player for your own recordings, with a zebra-stripe visualizer that moves with the music and controls on the phone lock screen. Originals and covers are labeled, and each song can be shown or hidden. |
 | **Photos** | A gallery on the homepage plus a full `/photos/` page with a swipeable lightbox. Fills itself from a folder. |
@@ -35,6 +35,7 @@ Every change below can be made on github.com: open the file or folder, use the p
   ],
   ```
   Add `flyer: "/assets/shows/your-flyer.jpg"` (put the image in `assets/shows/`) and the show gets a big featured card with the flyer. Optional extras: `title`, `with` (other bands), `doors`, `end`, `price`, `address`. Put a ticket URL in `link` and a **Get tickets** button appears.
+- **Pop-up:** the next show with both a `flyer` and a ticket `link` pops up on the homepage (once per visit) with its poster and a **Buy tickets** button. Add `popup: false` to a show to skip it, or set `popup: false` near the top of the shows list to turn the pop-up off.
 - **Set list:** the jukebox songs are **samples**. Replace them with your real set list.
 
 ### Videos: `_data/videos.yml`

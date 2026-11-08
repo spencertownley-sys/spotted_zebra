@@ -42,7 +42,7 @@ Every change below can be made on github.com: open the file or folder, use the p
 ### Homepage video: `_config.yml` + `assets/video/`
 
 1. Upload a 10–15 second muted loop (MP4, landscape, 1920×1080 or larger, ideally under 8 MB) to `assets/video/`, for example `hero.mp4`.
-2. In `_config.yml`, set `hero_video: /assets/video/hero.mp4`. Optionally set `hero_poster:` to a still image shown while it loads.
+2. In `_config.yml`, set `hero_video: /assets/video/hero.mp4`. Optionally set `hero_video_small:` to a smaller copy for phones and `hero_poster:` to a still image shown while it loads.
 3. The video fills the top of the homepage behind the logo. Clear `hero_video` to bring the zebra stripes back.
 
 ### Song list: `_data/songs.yml`

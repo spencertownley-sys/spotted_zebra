@@ -14,9 +14,11 @@ author: Spotted Zebra
 # Homepage hero video (full screen, behind the logo).
 # Upload a 10-15 second muted loop to assets/video/ and put its path here,
 # e.g. /assets/video/hero.mp4. Leave it empty to show the zebra stripes.
+# hero_video_small: optional smaller copy for phones (served under 700px wide).
 # hero_poster: a still frame (jpg/webp) shown while the video loads.
-hero_video: ""
-hero_poster: ""
+hero_video: /assets/video/hero.mp4
+hero_video_small: /assets/video/hero-480.mp4
+hero_poster: /assets/video/hero-poster.jpg
 
 social:
   name: Spotted Zebra

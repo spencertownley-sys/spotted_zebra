@@ -60,6 +60,9 @@ layout: null
     <section class="hero{% if hero_video != "" %} hero--video{% endif %}" id="top">
       {%- if hero_video != "" %}
       <video class="hero__video" autoplay muted loop playsinline preload="auto"{% if site.hero_poster != "" %} poster="{{ site.hero_poster }}"{% endif %} aria-hidden="true" tabindex="-1">
+        {%- if site.hero_video_small and site.hero_video_small != "" %}
+        <source src="{{ site.hero_video_small }}" type="video/mp4" media="(max-width: 700px)">
+        {%- endif %}
         <source src="{{ hero_video }}" type="{% if hero_video contains '.webm' %}video/webm{% else %}video/mp4{% endif %}">
       </video>
       {%- endif %}

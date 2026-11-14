@@ -59,7 +59,7 @@ layout: null
     {%- assign hero_video = site.hero_video | strip %}
     <section class="hero{% if hero_video != "" %} hero--video{% endif %}" id="top">
       {%- if hero_video != "" %}
-      <video class="hero__video" autoplay muted loop playsinline preload="auto"{% if site.hero_poster != "" %} poster="{{ site.hero_poster }}"{% endif %} aria-hidden="true" tabindex="-1">
+      <video class="hero__video" autoplay muted loop playsinline preload="metadata"{% if site.hero_poster != "" %} poster="{{ site.hero_poster }}"{% endif %} aria-hidden="true" tabindex="-1">
         {%- if site.hero_video_small and site.hero_video_small != "" %}
         <source src="{{ site.hero_video_small }}" type="video/mp4" media="(max-width: 700px)">
         {%- endif %}
@@ -68,7 +68,7 @@ layout: null
       {%- endif %}
       <canvas id="stripes" aria-hidden="true"></canvas>
       <div class="hero__inner">
-        <img class="hero__logo" src="/assets/img/logo.png" alt="Spotted Zebra" width="420" height="420">
+        <img class="hero__logo" src="/assets/img/logo-420.webp" alt="Spotted Zebra" width="420" height="420">
         <h1 class="hero__title"><span class="hero__kicker">Spotted Zebra &middot; Seattle cover band</span>Playing <span>all</span> the hits</h1>
         <p class="hero__sub">80s hits, 90s rock, 2000s alternative &amp; today&rsquo;s bangers for bars, parties and weddings across the greater Seattle area</p>
         <div class="hero__btns">
@@ -292,7 +292,7 @@ layout: null
 
         <div class="ticket" id="ticket" aria-hidden="true">
           <div class="ticket__main">
-            <img src="/assets/img/logo.png" alt="" width="64" height="64">
+            <img src="/assets/img/logo-160.webp" alt="" width="64" height="64">
             <p class="ticket__admit">Admit everyone</p>
             <p class="ticket__band">Spotted Zebra</p>
             <p class="ticket__event" data-t="event">Your event</p>

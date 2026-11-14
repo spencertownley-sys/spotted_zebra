@@ -236,47 +236,32 @@
     })));
     document.head.appendChild(ld);
 
-    /* Pop-up poster for the next show (once per visit). */
+    /* Next-show bar: a slim, fixed-height, dismissible notice at the top of #shows.
+       (It used to be a full-screen pop-up, which covered phones and shifted the layout.) */
     const next = upcoming.find((s) => s.flyer && s.link && s.popup !== false);
     const seenKey = "sz-popup-" + (next && next.date);
     let seen = false;
     try { seen = sessionStorage.getItem(seenKey) === "1"; } catch (e) {}
-    if (next && SZ.popup !== false && !seen && window.HTMLDialogElement) {
+    const bar = $("#showNext");
+    if (bar && next && SZ.popup !== false && !seen) {
       const esc = (v) => String(v ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
-      const full = next.d.toLocaleString("en-US", { weekday: "long", month: "long", day: "numeric" });
-      const dlg = document.createElement("dialog");
-      dlg.className = "showpop";
-      dlg.setAttribute("aria-labelledby", "showpopTitle");
-      dlg.innerHTML = `
-        <button type="button" class="showpop__close" aria-label="Close">&times;</button>
-        <img class="showpop__flyer" src="${esc(next.flyerSmall || next.flyer)}" alt="Flyer: ${esc(next.title || "Spotted Zebra live")} at ${esc(next.venue)}, ${esc(full)}" width="800" height="1035" decoding="async">
-        <div class="showpop__body">
-          <p class="showpop__tag">Next show</p>
-          <p class="showpop__title" id="showpopTitle">${esc(next.title || "Spotted Zebra live")}</p>
-          <p class="showpop__meta">${esc(full)}${next.time ? " · " + esc(next.time) : ""} · ${esc(next.venue)}</p>
-          ${next.price ? `<p class="showpop__price">${esc(next.price)}</p>` : ""}
-          <div class="showpop__actions">
-            <a class="btn btn--spot" href="${esc(next.link)}" target="_blank" rel="noopener">Buy tickets</a>
-            <a class="btn btn--ghost" href="#shows" data-close>Details</a>
-          </div>
-        </div>`;
-      document.body.appendChild(dlg);
-      const close = () => dlg.close();
-      $(".showpop__close", dlg).addEventListener("click", close);
-      $("[data-close]", dlg).addEventListener("click", close);
-      $(".btn--spot", dlg).addEventListener("click", close);
-      // click on the dark backdrop (outside the card) closes it
-      dlg.addEventListener("click", (e) => { if (e.target === dlg) close(); });
-      dlg.addEventListener("close", () => document.documentElement.classList.remove("has-pop"));
-      setTimeout(() => {
-        if (document.querySelector("dialog[open], .lightbox:not([hidden]), .vmodal:not([hidden])")) return;
+      const full = next.d.toLocaleString("en-US", { weekday: "short", month: "short", day: "numeric" });
+      bar.innerHTML = `
+        <p class="shownext__text"><span class="shownext__tag">Next show</span> <b>${esc(next.title || "Spotted Zebra live")}</b> <span class="shownext__meta">${esc(full)}${next.time ? " · " + esc(next.time) : ""} · ${esc(next.venue)}</span></p>
+        <a class="btn btn--spot shownext__cta" href="${esc(next.link)}" target="_blank" rel="noopener">Buy tickets</a>
+        <button type="button" class="shownext__close" aria-label="Dismiss next show notice">&times;</button>`;
+      bar.hidden = false;
+      $(".shownext__close", bar).addEventListener("click", () => {
         try { sessionStorage.setItem(seenKey, "1"); } catch (e) {}
-        document.documentElement.classList.add("has-pop");
-        dlg.showModal();
-        $(".btn--spot", dlg).focus();
-      }, 1200);
+        bar.hidden = true;
+      });
     }
   }
+
+  /* Open the pricing FAQ item when it is linked to (from the booking form or a URL). */
+  const openPricing = () => { const d = $("#pricing"); if (d) d.open = true; };
+  $$("[data-open-pricing]").forEach((a) => a.addEventListener("click", openPricing));
+  if (location.hash === "#pricing") openPricing();
 
   /* ── Gig builder + live ticket ──────────────────────────────────────── */
   const form = $("#gig");

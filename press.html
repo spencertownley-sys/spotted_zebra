@@ -10,7 +10,7 @@ permalink: /press/
 <section class="page-head">
   <p class="eyebrow">Press kit</p>
   <h1>Spotted Zebra EPK</h1>
-  <p>Everything a venue, planner or promoter needs in one place. <button type="button" class="linkish" onclick="print()">Print or save it as a PDF</button>.</p>
+  <p>Everything a venue, planner or promoter needs in one place. <button type="button" class="linkish" data-print>Print or save it as a PDF</button>.</p>
 </section>
 
 <section class="page-body epk">
@@ -38,7 +38,7 @@ permalink: /press/
   <ul class="epk__vids">
     {%- for v in vids limit: 4 %}
     <li><button type="button" class="vcard" data-yt-modal="{{ v.id }}" aria-label="Play {{ v.song | escape }}">
-      <span class="vcard__thumb"><img src="https://i.ytimg.com/vi/{{ v.id }}/hqdefault.jpg" alt="" loading="lazy" width="480" height="360"><span class="yt__play" aria-hidden="true"></span></span>
+      <span class="vcard__thumb"><img src="/assets/img/thumbs/{{ v.id }}.jpg" alt="" loading="lazy" width="480" height="360"><span class="yt__play" aria-hidden="true"></span></span>
       <span class="vcard__title">{{ v.song }}</span>
       {% if v.artist %}<span class="vcard__artist">{{ v.artist }}</span>{% endif %}
     </button></li>

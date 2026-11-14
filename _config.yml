@@ -9,7 +9,10 @@ url: https://spottedzebra.party
 lang: en_US
 timezone: America/Los_Angeles
 logo: /assets/img/icon.png
-author: Spotted Zebra
+author:
+  name: Spotted Zebra
+  type: Organization
+  url: https://spottedzebra.party
 
 # Homepage hero video (full screen, behind the logo).
 # Upload a 10-15 second muted loop to assets/video/ and put its path here,
@@ -43,8 +46,12 @@ plugins:
 feed:
   path: blog/feed.xml
 
+include:
+  - ".well-known"
+
 exclude:
   - README.md
   - Gemfile
+  - scripts
   - Gemfile.lock
   - vendor

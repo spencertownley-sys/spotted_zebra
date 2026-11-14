@@ -6,7 +6,7 @@ layout: null
 <head>
   {% include head-common.html %}
   <title>Spotted Zebra | Seattle Cover Band for Parties, Bars &amp; Weddings</title>
-  <meta name="description" content="Spotted Zebra is a five-piece Seattle cover band playing 80s hits, 90s rock, 2000s alternative and today's bangers. Book us for your bar, private party, wedding or event in the greater Seattle area.">
+  <meta name="description" content="Spotted Zebra is a Seattle cover band playing 80s, 90s, 2000s and today's hits for bars, parties and weddings. Book us.">
   <link rel="canonical" href="https://spottedzebra.party/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Spotted Zebra">
@@ -59,7 +59,7 @@ layout: null
     {%- assign hero_video = site.hero_video | strip %}
     <section class="hero{% if hero_video != "" %} hero--video{% endif %}" id="top">
       {%- if hero_video != "" %}
-      <video class="hero__video" autoplay muted loop playsinline preload="auto"{% if site.hero_poster != "" %} poster="{{ site.hero_poster }}"{% endif %} aria-hidden="true" tabindex="-1">
+      <video class="hero__video" autoplay muted loop playsinline preload="metadata"{% if site.hero_poster != "" %} poster="{{ site.hero_poster }}"{% endif %} aria-hidden="true" tabindex="-1">
         {%- if site.hero_video_small and site.hero_video_small != "" %}
         <source src="{{ site.hero_video_small }}" type="video/mp4" media="(max-width: 700px)">
         {%- endif %}
@@ -68,7 +68,7 @@ layout: null
       {%- endif %}
       <canvas id="stripes" aria-hidden="true"></canvas>
       <div class="hero__inner">
-        <img class="hero__logo" src="/assets/img/logo.png" alt="Spotted Zebra" width="420" height="420">
+        <img class="hero__logo" src="/assets/img/logo-420.webp" alt="Spotted Zebra" width="420" height="420">
         <h1 class="hero__title"><span class="hero__kicker">Spotted Zebra &middot; Seattle cover band</span>Playing <span>all</span> the hits</h1>
         <p class="hero__sub">80s hits, 90s rock, 2000s alternative &amp; today&rsquo;s bangers for bars, parties and weddings across the greater Seattle area</p>
         <div class="hero__btns">
@@ -87,6 +87,7 @@ layout: null
 
     <!-- SHOWS -->
     <section class="shows" id="shows">
+      <div class="shownext" id="showNext" role="region" aria-label="Next show" hidden></div>
       <div class="section-head">
         <p class="eyebrow">Shows</p>
         <h2>Catch us live.</h2>
@@ -175,7 +176,6 @@ layout: null
           <p class="eyebrow">Photos</p>
           <h2>Spotted in the wild.</h2>
         </div>
-        <a href="/photos/" class="btn btn--ghost">See all photos</a>
       </div>
       {% include photo-grid.html limit=8 compact=true %}
     </section>
@@ -229,12 +229,16 @@ layout: null
           <summary><h3>How do we book Spotted Zebra?</h3></summary>
           <p>Fill in the <a href="#book">Gig Builder</a> below and it lands straight in our inbox, or email <a data-email href="mailto:contact@spottedzebra.party">contact@spottedzebra.party</a>. Tell us the date, the venue and roughly how many people are coming.</p>
         </details>
+        <details id="pricing">
+          <summary><h3>How much does it cost and how do deposits work?</h3></summary>
+          <p>Private parties start from about $400 and corporate or holiday parties from about $750, for up to three 40-minute sets. The final price depends on the date, how long you want music, travel and whether we bring the sound system. We take a 25% deposit to lock in your date, with the rest due closer to the event. Cancellations: [PLACEHOLDER: owner to state the cancellation and deposit refund rule]. <a href="/blog/how-much-does-a-cover-band-cost-in-seattle/">More on what changes the price</a>.</p>
+        </details>
         <details>
           <summary><h3>Where can we see you play first?</h3></summary>
           <p>Check <a href="#shows">upcoming shows</a>, watch <a href="/videos/">our videos</a>, or follow us on <a href="https://www.instagram.com/spottedzebramusic" target="_blank" rel="noopener">Instagram</a> for the next gig.</p>
         </details>
       </div>
-      <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What kind of band is Spotted Zebra?", "acceptedAnswer": {"@type": "Answer", "text": "A five-piece cover band from Seattle. We play the songs people actually want to hear: 80s hits, 90s rock, 2000s alternative and today’s bangers, plus a few originals of our own."}}, {"@type": "Question", "name": "Where do you play?", "acceptedAnswer": {"@type": "Answer", "text": "Bars, private parties and events around the greater Seattle area and the Pacific Northwest. Planning something further away? Tell us about it."}}, {"@type": "Question", "name": "What kinds of events do you play?", "acceptedAnswer": {"@type": "Answer", "text": "Bar and venue gigs, private parties, weddings, corporate events and festivals. If there’s a dance floor (or there should be), we’re interested."}}, {"@type": "Question", "name": "Can we request songs?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. List your must-plays in the Gig Builder when you book and we’ll work them into the night."}}, {"@type": "Question", "name": "How do we book Spotted Zebra?", "acceptedAnswer": {"@type": "Answer", "text": "Fill in the Gig Builder below and it lands straight in our inbox, or email contact@spottedzebra.party. Tell us the date, the venue and roughly how many people are coming."}}, {"@type": "Question", "name": "Where can we see you play first?", "acceptedAnswer": {"@type": "Answer", "text": "Check upcoming shows, watch our videos, or follow us on Instagram for the next gig."}}]}</script>
+      <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What kind of band is Spotted Zebra?", "acceptedAnswer": {"@type": "Answer", "text": "A five-piece cover band from Seattle. We play the songs people actually want to hear: 80s hits, 90s rock, 2000s alternative and today’s bangers, plus a few originals of our own."}}, {"@type": "Question", "name": "Where do you play?", "acceptedAnswer": {"@type": "Answer", "text": "Bars, private parties and events around the greater Seattle area and the Pacific Northwest. Planning something further away? Tell us about it."}}, {"@type": "Question", "name": "What kinds of events do you play?", "acceptedAnswer": {"@type": "Answer", "text": "Bar and venue gigs, private parties, weddings, corporate events and festivals. If there’s a dance floor (or there should be), we’re interested."}}, {"@type": "Question", "name": "Can we request songs?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. List your must-plays in the Gig Builder when you book and we’ll work them into the night."}}, {"@type": "Question", "name": "How do we book Spotted Zebra?", "acceptedAnswer": {"@type": "Answer", "text": "Fill in the Gig Builder below and it lands straight in our inbox, or email contact@spottedzebra.party. Tell us the date, the venue and roughly how many people are coming."}}, {"@type": "Question", "name": "How much does it cost and how do deposits work?", "acceptedAnswer": {"@type": "Answer", "text": "Private parties start from about $400 and corporate or holiday parties from about $750, for up to three 40-minute sets. The final price depends on the date, how long you want music, travel and whether we bring the sound system. We take a 25% deposit to lock in your date, with the rest due closer to the event."}}, {"@type": "Question", "name": "Where can we see you play first?", "acceptedAnswer": {"@type": "Answer", "text": "Check upcoming shows, watch our videos, or follow us on Instagram for the next gig."}}]}</script>
     </section>
 
     <!-- BOOKING / GIG BUILDER -->
@@ -276,7 +280,9 @@ layout: null
           <label>Anything else?<textarea name="message" rows="3" placeholder="Venue, city, set length&hellip; Song requests? e.g. &ldquo;Sex on Fire&rdquo;, &ldquo;Zombie&rdquo;, &ldquo;Valerie&rdquo;"></textarea></label>
           <label class="hp" aria-hidden="true">Leave this empty<input type="text" name="_honey" tabindex="-1" autocomplete="off"></label>
           <p class="form-error" id="formError" role="alert"></p>
+          <p class="form-legal">Prices, the 25% deposit and cancellations are in <a href="#pricing" data-open-pricing>our FAQ</a>.</p>
           <button type="submit" class="btn btn--spot" id="gigSend">Send it</button>
+          <p class="form-legal">By sending this you agree to our <a href="/privacy/">privacy notice</a>.</p>
         </form>
         <div class="gig-done" id="gigDone" hidden tabindex="-1">
           <p class="gig-done__big">Ticket sent!</p>
@@ -286,7 +292,7 @@ layout: null
 
         <div class="ticket" id="ticket" aria-hidden="true">
           <div class="ticket__main">
-            <img src="/assets/img/logo.png" alt="" width="64" height="64">
+            <img src="/assets/img/logo-160.webp" alt="" width="64" height="64">
             <p class="ticket__admit">Admit everyone</p>
             <p class="ticket__band">Spotted Zebra</p>
             <p class="ticket__event" data-t="event">Your event</p>

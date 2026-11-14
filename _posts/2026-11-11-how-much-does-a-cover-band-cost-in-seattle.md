@@ -1,5 +1,5 @@
 ---
-title: "How Much Does a Cover Band Cost in Seattle? (2027 Guide)"
+title: "How Much Does a Cover Band Cost in Seattle? (2026 to 2027 Guide)"
 description: "What it typically costs to hire a live cover band in Seattle for a private party or corporate event, what changes the price, and how to get an accurate quote."
 ---
 

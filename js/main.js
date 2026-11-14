@@ -278,6 +278,11 @@
     }
   }
 
+  /* Open the pricing FAQ item when it is linked to (from the booking form or a URL). */
+  const openPricing = () => { const d = $("#pricing"); if (d) d.open = true; };
+  $$("[data-open-pricing]").forEach((a) => a.addEventListener("click", openPricing));
+  if (location.hash === "#pricing") openPricing();
+
   /* ── Gig builder + live ticket ──────────────────────────────────────── */
   const form = $("#gig");
   const ticket = $("#ticket");

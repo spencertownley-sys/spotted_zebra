@@ -1,3 +1,8 @@
+/* Self-hosted fonts (SIL Open Font License), so visitors' browsers do not contact Google. */
+@font-face { font-family: "Anton"; font-style: normal; font-weight: 400; font-display: swap; src: url(/assets/fonts/anton.woff2) format("woff2"); }
+@font-face { font-family: "Permanent Marker"; font-style: normal; font-weight: 400; font-display: swap; src: url(/assets/fonts/permanent-marker.woff2) format("woff2"); }
+@font-face { font-family: "Space Grotesk"; font-style: normal; font-weight: 300 700; font-display: swap; src: url(/assets/fonts/space-grotesk.woff2) format("woff2"); }
+
 :root {
   --ink: #0a0a0a;
   --ink-2: #151515;

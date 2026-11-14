@@ -492,6 +492,9 @@ html.has-pop { overflow: hidden; }
 .signup input[type="email"]:focus { border-color: var(--spot); outline: none; }
 .signup__msg { grid-column: 1 / -1; color: var(--spot-2); min-height: 0; }
 .signup__msg:empty { display: none; }
+.signup__legal, .form-legal { grid-column: 1 / -1; font-size: .85rem; color: var(--muted); }
+.signup__legal a, .form-legal a { color: var(--bone); }
+.form-legal { margin: 0; }
 .signup.is-done .signup__row { display: none; }
 .foot .signup { max-width: 900px; margin: 0 0 16px; }
 @media (max-width: 760px) { .signup { grid-template-columns: 1fr; } }

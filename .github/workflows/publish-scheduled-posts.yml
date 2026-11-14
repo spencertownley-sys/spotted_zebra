@@ -7,8 +7,12 @@
 name: Publish scheduled posts
 
 on:
+  # GitHub often runs scheduled jobs hours late, so there are backup runs
+  # later in the day. Extra rebuilds are harmless.
   schedule:
-    - cron: "17 15 * * *" # every day at 15:17 UTC (7:17 AM Pacific in winter, 8:17 in summer)
+    - cron: "17 15 * * *" # 7:17 AM Pacific (winter) / 8:17 AM (summer)
+    - cron: "43 17 * * *" # 9:43 AM Pacific (winter) backup
+    - cron: "11 21 * * *" # 1:11 PM Pacific (winter) backup
   workflow_dispatch:
 
 permissions:

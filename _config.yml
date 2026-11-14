@@ -46,6 +46,9 @@ plugins:
 feed:
   path: blog/feed.xml
 
+include:
+  - ".well-known"
+
 exclude:
   - README.md
   - Gemfile

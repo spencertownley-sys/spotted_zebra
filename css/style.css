@@ -205,6 +205,11 @@ section:not(.hero) { padding: clamp(72px, 12vw, 140px) var(--pad); }
 .shownext__close:hover { background: var(--ink-3); }
 @media (max-width: 640px) { .shownext__meta { display: none; } .shownext { padding-left: 12px; } }
 
+/* cookie notice theme (html prefix so it wins over the kit defaults and its dark-mode rule) */
+html .cb { --cb-bg: #151515; --cb-fg: #f2efe8; --cb-muted: #a7a39a; --cb-border: rgba(242, 239, 232, 0.14); --cb-accent: #ffd23f; --cb-accent-fg: #0a0a0a; --cb-radius: 14px; --cb-font: "Space Grotesk", system-ui, sans-serif; }
+.linklike { background: none; border: 0; padding: 0; margin: 0; font: inherit; color: var(--bone); text-decoration: underline; cursor: pointer; }
+.linklike:hover { color: var(--spot-2); }
+
 /* booking */
 .book__grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: clamp(28px, 5vw, 64px); align-items: start; }
 .gig { display: grid; gap: 22px; }

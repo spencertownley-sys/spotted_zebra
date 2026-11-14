@@ -21,6 +21,9 @@
   $$("#navMenu a").forEach((a) => a.addEventListener("click", () => setMenu(false)));
   addEventListener("keydown", (e) => { if (e.key === "Escape") setMenu(false); });
 
+  /* Print buttons (no inline handlers, so the Content Security Policy can block them). */
+  $$("[data-print]").forEach((b) => b.addEventListener("click", () => window.print()));
+
   /* ── Mailing list signup (emails the band through the booking form service) ── */
   $$("[data-signup]").forEach((f) => f.addEventListener("submit", async (e) => {
     e.preventDefault();

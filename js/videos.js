@@ -31,7 +31,7 @@
       b.className = "yt";
       b.dataset.yt = id;
       b.setAttribute("aria-label", `Play ${label}`);
-      b.innerHTML = `<img src="https://i.ytimg.com/vi/${encodeURIComponent(id)}/hqdefault.jpg" alt=""><span class="yt__play" aria-hidden="true"></span>`;
+      b.innerHTML = `<img src="/assets/img/thumbs/${encodeURIComponent(id)}.jpg" alt=""><span class="yt__play" aria-hidden="true"></span>`;
       return b;
     };
 

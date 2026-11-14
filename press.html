@@ -38,7 +38,7 @@ permalink: /press/
   <ul class="epk__vids">
     {%- for v in vids limit: 4 %}
     <li><button type="button" class="vcard" data-yt-modal="{{ v.id }}" aria-label="Play {{ v.song | escape }}">
-      <span class="vcard__thumb"><img src="https://i.ytimg.com/vi/{{ v.id }}/hqdefault.jpg" alt="" loading="lazy" width="480" height="360"><span class="yt__play" aria-hidden="true"></span></span>
+      <span class="vcard__thumb"><img src="/assets/img/thumbs/{{ v.id }}.jpg" alt="" loading="lazy" width="480" height="360"><span class="yt__play" aria-hidden="true"></span></span>
       <span class="vcard__title">{{ v.song }}</span>
       {% if v.artist %}<span class="vcard__artist">{{ v.artist }}</span>{% endif %}
     </button></li>

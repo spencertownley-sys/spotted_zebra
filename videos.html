@@ -21,7 +21,7 @@ permalink: /videos/
     {%- for v in vids %}
     <li data-search="{{ v.song | downcase | escape }} {{ v.artist | downcase | escape }}">
       <button type="button" class="vcard" data-yt-modal="{{ v.id }}" aria-label="Play {{ v.song | escape }}">
-        <span class="vcard__thumb"><img src="https://i.ytimg.com/vi/{{ v.id }}/hqdefault.jpg" alt="" loading="lazy"><span class="yt__play" aria-hidden="true"></span></span>
+        <span class="vcard__thumb"><img src="/assets/img/thumbs/{{ v.id }}.jpg" alt="" loading="lazy"><span class="yt__play" aria-hidden="true"></span></span>
         <span class="vcard__title">{% include yt-label.html v=v %}</span>
       </button>
     </li>
@@ -34,7 +34,7 @@ permalink: /videos/
   <ul class="shorts shorts--wrap">
     {%- for s in shorts %}
     <li><button type="button" class="short" data-yt-modal="{{ s.id }}" data-vertical aria-label="Play short: {{ s.title | escape }}">
-      <img src="https://i.ytimg.com/vi/{{ s.id }}/hqdefault.jpg" alt="" loading="lazy">
+      <img src="/assets/img/thumbs/{{ s.id }}.jpg" alt="" loading="lazy">
       <span class="yt__play" aria-hidden="true"></span>
       <span class="short__title">{{ s.title }}</span>
     </button></li>
